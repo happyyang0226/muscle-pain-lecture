@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html data-mod="ch7" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7장 안정화 운동(신경근조절훈련)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>@@C:deck.css@@</style>
+</head>
+<body>
+<header class="bar">
+  <h1><span class="chap">7장</span> 안정화 운동(신경근조절훈련)</h1>
+  <span class="spacer"></span>
+  <label for="toc" class="qlabel" style="font-size:13px">목차</label>
+  <select id="toc" aria-label="슬라이드 목차"></select>
+  <button id="srchBtn" class="xbtn" type="button" aria-label="슬라이드 검색">검색</button><button id="myVidBtn" class="xbtn" type="button" hidden>＋ 내 영상</button><button id="myPicBtn" class="xbtn" type="button" hidden>＋ 내 사진</button><button id="anaBtn" class="xbtn" type="button" hidden>수업 분석</button><button id="noteBtn" type="button" aria-pressed="false">발표자 노트</button>
+</header>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<main class="stage" id="stage">
+
+<!-- 1 표지 -->
+<section class="slide" data-title="표지" data-group="도입">
+ <div class="in">
+  <div class="eyebrow">근육 기원 통증의 원인·증상·중재 · 7장</div>
+  <div class="cols">
+   <div style="display:flex;flex-direction:column;gap:1em">
+    <h2 style="font-size:2.6em">힘보다 '타이밍'<br>안정화 운동과 신경근조절훈련</h2>
+    <p class="lead">허리가 아픈 사람은 팔을 들기 직전에 켜져야 할 배가로근이 늦게 켜집니다. 목이 아픈 사람은 깊은목굽힘근 대신 목빗근을 씁니다. 이 장에서는 안정성 체계, 국소·전체 근육, 고유감각과 균형, 단계적 안정화 운동과 그 근거를 다룹니다.</p>
+    <div class="media"><a href="https://www.youtube.com/watch?v=DndzRZaZpQ0" target="_blank" rel="noopener">도입 영상: 운동조절 운동</a></div>
+   </div>
+   <div data-anat='{"view":"front","hl":["oblique","rectus"],"deep":["oblique"],"labels":[[120,250,"배가로근(깊은층)",-85,230],[150,220,"배곧은근(표층)",385,210]],"label":"배가로근과 배곧은근을 표시한 앞에서 본 몸통","viewBox":"-90 120 480 260"}'></div>
+  </div>
+  <div class="src"><span>강의 구성: 학습목표 6 → 인포그래픽 → 핵심 강의 18장 → 퀴즈 20문항 → 오답 심화</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 2 학습목표 -->
+<section class="slide" data-title="학습목표" data-group="도입">
+ <div class="in">
+  <div class="eyebrow">학습목표</div>
+  <h2>이 장을 마치면 할 수 있는 것</h2>
+  <div class="los">
+   <div class="lo-card"><b>LO1</b><span class="verb">설명한다</span><span>Panjabi의 척추 안정성 체계(수동·능동·신경 조절)와 중립 영역 개념을 설명할 수 있다.</span></div>
+   <div class="lo-card"><b>LO2</b><span class="verb">구분한다</span><span>국소 안정근(배가로근, 뭇갈래근, 깊은목굽힘근)과 전체 근육의 역할을 구분할 수 있다.</span></div>
+   <div class="lo-card"><b>LO3</b><span class="verb">해석한다</span><span>통증 환자의 운동조절 변화(배가로근 지연, 목빗근 대상작용) 연구를 해석할 수 있다.</span></div>
+   <div class="lo-card"><b>LO4</b><span class="verb">평가한다</span><span>머리목굽힘검사(CCFT), 관절위치오차(JPE), 한발서기 등으로 운동조절과 고유감각을 평가할 수 있다.</span></div>
+   <div class="lo-card"><b>LO5</b><span class="verb">해석한다</span><span>운동조절 운동의 근거(코크란, 네트워크 메타분석, RCT)를 해석할 수 있다.</span></div>
+   <div class="lo-card"><b>LO6</b><span class="verb">설계한다</span><span>지지면, 부하, 속도, 이중 과제를 조절해 단계적 안정화 프로그램을 설계할 수 있다.</span></div>
+  </div>
+  <div class="src"><span>6장 연결: 근력(얼마나 세게) → 7장 운동조절(언제·어떻게 켜지는가)</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 3 인포그래픽 -->
+<section class="slide" data-title="인포그래픽: 한 장 요약" data-group="도입">
+ <div class="in" style="gap:.6em">
+  <div class="eyebrow">인포그래픽 · 학습 지도</div>
+  <h2 style="font-size:1.6em">세 하위체계 → 평가 → 4단계 진행</h2>
+  <svg class="fig" viewBox="0 0 960 400" role="img" aria-label="Panjabi의 세 하위체계 삼각형, 평가 도구, 인지·연합·자동 단계의 안정화 운동 진행" style="flex:1;min-height:0">
+   <g font-size="14" text-anchor="middle" font-weight="700">
+    <circle cx="150" cy="110" r="62" fill="var(--nerve-soft)" stroke="var(--nerve)" stroke-width="2"/><text x="150" y="106" fill="var(--nerve)">신경 조절</text><text x="150" y="126" font-size="12" font-weight="400" fill="var(--ink)">타이밍·협응</text>
+    <circle cx="80" cy="240" r="62" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="2"/><text x="80" y="236" fill="var(--warn)">수동</text><text x="80" y="256" font-size="12" font-weight="400" fill="var(--ink)">뼈·인대·원반</text>
+    <circle cx="220" cy="240" r="62" fill="var(--muscle-soft)" stroke="var(--muscle)" stroke-width="2"/><text x="220" y="236" fill="var(--muscle)">능동</text><text x="220" y="256" font-size="12" font-weight="400" fill="var(--ink)">근육·힘줄</text>
+    <text x="150" y="340" fill="var(--ink)">LO1 안정성 체계</text>
+   </g>
+   <g font-size="14">
+    <rect x="320" y="50" width="250" height="300" rx="14" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/>
+    <text x="340" y="84" font-weight="700" fill="var(--ink)">LO2·LO3·LO4 평가</text>
+    <text x="340" y="120" fill="var(--ink)">• 배가로근 끌어당기기</text>
+    <text x="340" y="150" fill="var(--ink)">  (압력 바이오피드백)</text>
+    <text x="340" y="184" fill="var(--ink)">• CCFT 22→30 mmHg</text>
+    <text x="340" y="218" fill="var(--ink)">• 목 JPE &gt; 4.5° = 손상</text>
+    <text x="340" y="252" fill="var(--ink)">• 한발서기·Y-균형</text>
+    <text x="340" y="300" font-weight="700" fill="var(--muscle)">LO5: 최소 중재보다 우월,</text>
+    <text x="340" y="322" font-weight="700" fill="var(--muscle)">다른 운동과는 비슷</text>
+   </g>
+   <g font-size="13" text-anchor="middle" font-weight="700">
+    <rect x="610" y="60" width="320" height="56" rx="10" fill="var(--nerve-soft)" stroke="var(--nerve)"/><text x="770" y="93" fill="var(--nerve)">1 인지: 고립 활성(끌어당기기·CCFT)</text>
+    <rect x="610" y="130" width="320" height="56" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/><text x="770" y="163" fill="var(--ok)">2 연합: 데드버그·버드독·브리지</text>
+    <rect x="610" y="200" width="320" height="56" rx="10" fill="var(--warn-soft)" stroke="var(--warn)"/><text x="770" y="233" fill="var(--warn)">3 불안정 지지면·부하·속도</text>
+    <rect x="610" y="270" width="320" height="56" rx="10" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="770" y="303" fill="var(--muscle)">4 자동: 이중 과제·기능 동작(8장)</text>
+    <text x="770" y="350" fill="var(--ink)">LO6 단계적 진행</text>
+   </g>
+  </svg>
+  <div class="src"><span class="badge">모델</span><a href="https://pubmed.ncbi.nlm.nih.gov/1490034/" target="_blank" rel="noopener">Panjabi 1992</a><span class="badge g">코크란</span><a href="https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/" target="_blank" rel="noopener">Saragiotto 2016</a><span class="badge g">RCT</span><a href="https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/" target="_blank" rel="noopener">Jull 2002</a><a href="https://search.pedro.org.au/search-results/record-detail/23915" target="_blank" rel="noopener">Hupperets 2009</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO1 -->
+<section class="slide" data-title="LO1-1 세 하위체계" data-group="LO1" id="lo1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>안정성 체계</div>
+  <h2>뼈·인대, 근육, 신경이 함께 척추를 지킨다</h2>
+  <div class="grid3">
+   <div class="card" style="border-color:var(--warn)"><h3 style="color:var(--warn)">수동 하위체계</h3><p>척추뼈, 원반, 인대, 관절주머니. 끝 범위에서 저항하고 위치 정보를 보낸다.</p></div>
+   <div class="card" style="border-color:var(--muscle)"><h3 style="color:var(--muscle)">능동 하위체계</h3><p>척추 주위 근육과 힘줄. 강성을 만들어 움직임을 조절한다.</p></div>
+   <div class="card" style="border-color:var(--nerve)"><h3 style="color:var(--nerve)">신경 조절 하위체계</h3><p>감각 정보를 받아 어떤 근육을 언제, 얼마나 켤지 정한다.</p></div>
+  </div>
+  <div class="key">한 하위체계가 약해지면 다른 체계가 보상한다. 보상이 부족하거나 과하면 통증·기능 장애로 이어질 수 있다는 것이 Panjabi 모델의 요지이다.</div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=hplw6Lg95SY" target="_blank" rel="noopener">영상: Panjabi 안정성 모델</a></div>
+  <div class="src"><span class="badge">모델</span><a href="https://pubmed.ncbi.nlm.nih.gov/1490034/" target="_blank" rel="noopener">Panjabi MM. J Spinal Disord 1992;5(4):383–9 (I)</a><a href="https://pubmed.ncbi.nlm.nih.gov/1490035/" target="_blank" rel="noopener">390–7 (II)</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO1-2 중립 영역" data-group="LO1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>중립 영역</div>
+  <h2>저항이 거의 없는 '중립 영역'을 근육이 조절한다</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 240" role="img" aria-label="부하-변위 곡선에서 저항이 적은 중립 영역과 탄성 영역, 공과 그릇 비유">
+    <line x1="40" y1="120" x2="400" y2="120" stroke="var(--line)" stroke-width="2"/><line x1="220" y1="20" x2="220" y2="220" stroke="var(--line)" stroke-width="2"/>
+    <rect x="180" y="20" width="80" height="200" fill="var(--nerve-soft)"/>
+    <path d="M60 210 C120 190 170 135 200 125 C215 121 225 119 240 115 C270 105 320 50 380 30" fill="none" stroke="var(--muscle)" stroke-width="4"/>
+    <text x="220" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="var(--nerve)">중립 영역</text>
+    <text x="340" y="80" font-size="12" fill="var(--muted)">탄성 영역</text>
+    <text x="400" y="138" text-anchor="end" font-size="12" fill="var(--muted)">변위</text>
+    <text x="226" y="214" font-size="12" fill="var(--muted)">부하</text>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>중립 영역: 척추 마디가 거의 저항 없이 움직이는 중립 자세 주변 범위</li><li>그릇 속 공 비유: 그릇이 깊을수록 안정, 얕을수록 불안정</li><li>근육 활동은 중립 영역을 줄여 안정성을 높인다</li></ul>
+    <div class="key">가설 수준의 모델이다. '불안정성이 통증의 원인'이라는 단순화는 피하고, 운동조절을 바꾸는 개념 틀로 쓴다.</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge">모델</span><a href="https://pubmed.ncbi.nlm.nih.gov/1490035/" target="_blank" rel="noopener">Panjabi MM. Neutral zone and instability hypothesis. J Spinal Disord 1992;5(4):390–7</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO1-3 신경근조절" data-group="LO1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>신경근조절</div>
+  <h2>신경근조절 = 감각 정보 + 예측 + 근육 반응</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 220" role="img" aria-label="감각 수용기, 중추신경계, 근육, 움직임으로 이어지는 되먹임과 앞먹임 고리">
+    <g font-size="13" text-anchor="middle" font-weight="700">
+     <rect x="20" y="90" width="100" height="44" rx="8" fill="var(--warn-soft)" stroke="var(--warn)"/><text x="70" y="117" fill="var(--warn)">감각 수용기</text>
+     <rect x="160" y="20" width="100" height="44" rx="8" fill="var(--nerve-soft)" stroke="var(--nerve)"/><text x="210" y="47" fill="var(--nerve)">중추신경계</text>
+     <rect x="300" y="90" width="100" height="44" rx="8" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="350" y="117" fill="var(--muscle)">근육</text>
+     <rect x="160" y="160" width="100" height="44" rx="8" fill="var(--ok-soft)" stroke="var(--ok)"/><text x="210" y="187" fill="var(--ok)">움직임·자세</text>
+    </g>
+    <g stroke="var(--ink)" stroke-width="2" fill="none" marker-end="url(#ar7)"><path d="M90 90 L170 64"/><path d="M250 64 L330 90"/><path d="M330 134 L250 170"/><path d="M170 170 L90 134"/></g>
+    <defs><marker id="ar7" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="var(--ink)"/></marker></defs>
+    <text x="300" y="40" font-size="11" fill="var(--muted)">앞먹임: 미리 켜기</text>
+    <text x="20" y="160" font-size="11" fill="var(--muted)">되먹임: 교정</text>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li><b>앞먹임(feedforward)</b>: 팔을 들기 전 몸통 근육을 미리 켠다</li><li><b>되먹임(feedback)</b>: 흔들림을 감지해 교정한다</li><li>통증은 두 고리를 모두 바꿀 수 있다(LO3)</li></ul>
+    <div class="key">신경근조절훈련 = 정확한 근육을, 정확한 시점에, 필요한 만큼 켜는 능력의 재학습.</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge">연구</span><a href="https://springerlink.bibliotecabuap.elogim.com/content/pdf/10.1007/s002210100873.pdf" target="_blank" rel="noopener">Hodges 2001 앞먹임 자세 반응</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO2 -->
+<section class="slide" data-title="LO2-1 국소 vs 전체 근육" data-group="LO2" id="lo2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>근육 분류</div>
+  <h2>국소 안정근은 마디를, 전체 근육은 몸통을 움직인다</h2>
+  <div class="cols">
+   <div class="tw"><table class="t">
+    <tr><th></th><th>국소(local) 근육</th><th>전체(global) 근육</th></tr>
+    <tr><td>위치</td><td>깊다, 척추뼈에 직접 붙음</td><td>얕다, 골반·가슴우리에 붙음</td></tr>
+    <tr><td>예(허리)</td><td>배가로근, 뭇갈래근(깊은 섬유)</td><td>배곧은근, 배바깥빗근, 척추세움근</td></tr>
+    <tr><td>예(목)</td><td>깊은목굽힘근(긴목근·긴머리근)</td><td>목빗근, 앞목갈비근</td></tr>
+    <tr><td>역할</td><td>마디 강성 조절, 방향과 무관하게 활성</td><td>토크 생성, 큰 부하 조절</td></tr>
+   </table></div>
+   <div data-anat='{"view":"back","hl":["erector","tlf"],"deep":["erector"],"labels":[[120,250,"뭇갈래근(깊은층)",-85,240],[128,290,"등허리근막",385,290]],"label":"뭇갈래근과 등허리근막","viewBox":"-90 180 480 180"}'></div>
+  </div>
+  <div class="key">Bergmark(1989)의 분류. 두 체계 모두 필요하며, 국소 근육만 '좋은 근육'이라는 이분법은 피한다.</div>
+  <div class="src"><span class="badge">모델</span><a href="https://pubmed.ncbi.nlm.nih.gov/2658468/" target="_blank" rel="noopener">Bergmark A. Acta Orthop Scand Suppl 1989;230:1–54</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO2-2 배가로근과 뭇갈래근" data-group="LO2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>허리 국소 근육</div>
+  <h2>배가로근은 '코르셋', 뭇갈래근은 '마디 고정 끈'</h2>
+  <div class="cols">
+   <div data-anat='{"view":"front","hl":["oblique"],"deep":["oblique"],"labels":[[110,250,"배가로근: 가로 섬유",-85,250]],"fiber":0,"label":"가로 섬유 방향의 배가로근","viewBox":"-90 170 480 160"}'></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li><b>배가로근</b>: 섬유가 가로로 달려 등허리근막을 당기고 복강 내압을 높여 허리 마디 강성에 기여</li><li><b>뭇갈래근</b>: 척추뼈 사이를 짧게 잇는 깊은 섬유가 마디 움직임을 조절</li><li>골반바닥근·가로막과 함께 '복강 원통'을 이룬다</li></ul>
+    <div class="key">초음파 영상은 배가로근 두께 변화와 뭇갈래근 수축을 눈으로 보여 주는 바이오피드백이다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=9oxIw6hiLBc" target="_blank" rel="noopener">영상: 초음파 배가로근 바이오피드백</a><a href="https://www.youtube.com/watch?v=EEJ1MgJA7Fk" target="_blank" rel="noopener">영상: 뭇갈래근 활성</a></div>
+  <div class="src"><span class="badge">리뷰</span><a href="https://brookbushinstitute.com/articles/decreased-recruitment-of-the-transverse-abdominis-in-individuals-with-low-back-pain" target="_blank" rel="noopener">배가로근 역할 요약</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO2-3 깊은목굽힘근" data-group="LO2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>목 국소 근육</div>
+  <h2>깊은목굽힘근은 머리를 '끄덕이고', 목빗근은 머리를 '내민다'</h2>
+  <div class="cols">
+   <div data-anat='{"view":"front","hl":["scm"],"ref":[[150,92,10,22]],"labels":[[150,92,"깊은목굽힘근(긴목근·긴머리근)",385,80],[136,100,"목빗근(표층)",-85,120]],"label":"깊은목굽힘근 위치와 목빗근","viewBox":"-90 20 480 150"}'></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>깊은목굽힘근: 목뼈 앞면에 붙어 목뼈 곡선을 유지하며 머리목 굽힘(끄덕임)을 만든다</li><li>목빗근·앞목갈비근: 큰 힘, 머리 내밀기 경향</li><li>목통증에서는 표층 근육이 과도하게 대신한다(LO3)</li></ul>
+    <div class="key">끄덕임 동작을 '턱을 당기기'로 가르치면 머리 뒤당김이 섞이기 쉽다. "뒤통수가 바닥을 미끄러져 올라가듯"이라고 지시한다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=p0PcmXJai2A" target="_blank" rel="noopener">영상: 깊은목굽힘근 훈련</a></div>
+  <div class="src"><span class="badge">평가</span><a href="https://book.physiotutors.com/?p=2265" target="_blank" rel="noopener">CCFT 절차</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO3 -->
+<section class="slide" data-title="LO3-1 배가로근 지연" data-group="LO3" id="lo3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>Hodges 1996</div>
+  <h2>요통 환자는 팔을 들 때 배가로근이 늦게 켜졌다</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 220" role="img" aria-label="건강인은 어깨세모근보다 배가로근이 먼저, 요통 환자는 늦게 켜지는 근전도 시간축">
+    <line x1="40" y1="180" x2="400" y2="180" stroke="var(--line)" stroke-width="2"/>
+    <line x1="200" y1="30" x2="200" y2="185" stroke="var(--muted)" stroke-dasharray="4 4"/>
+    <text x="200" y="200" text-anchor="middle" font-size="12" fill="var(--muted)">어깨세모근 시작(0 ms)</text>
+    <g font-size="13" font-weight="700">
+     <text x="40" y="60" fill="var(--ink)">건강인</text><rect x="170" y="48" width="200" height="16" rx="4" fill="var(--ok)"/><text x="160" y="92" fill="var(--ok)" text-anchor="end">배가로근 먼저</text>
+     <text x="40" y="130" fill="var(--ink)">요통</text><rect x="250" y="118" width="120" height="16" rx="4" fill="var(--muscle)"/><text x="245" y="162" fill="var(--muscle)">배가로근 지연</text>
+    </g>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>요통 15명과 대조군 15명이 서서 시각 신호에 따라 빠르게 어깨를 굽힘·벌림·폄</li><li>건강인: 배가로근이 늘 가장 먼저 켜졌고 움직임 방향과 무관</li><li>요통 환자: 모든 움직임에서 배가로근 수축이 유의하게 늦었다</li></ul>
+    <div class="key">해석: 운동조절 결함의 표지로, 비효율적 근육 안정화로 이어진다는 '가설'을 세웠다. 원인-결과를 증명한 연구는 아니다(단면 비교).</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge">비교 연구</span><a href="https://pubmed.ncbi.nlm.nih.gov/8961451/" target="_blank" rel="noopener">Hodges PW, Richardson CA. Spine 1996;21:2640–50</a><a href="https://pubmed.ncbi.nlm.nih.gov/9493770/" target="_blank" rel="noopener">다리 움직임 연구 1998</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO3-2 대뇌 운동겉질 재구성" data-group="LO3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>중추 변화</div>
+  <h2>통증은 근육만이 아니라 '뇌 지도'도 바꾼다</h2>
+  <div class="grid2">
+   <div class="card"><h3>깊은 근육 지연, 표층 근육 증가</h3><p>재발성 요통에서 깊은 배·허리 근육의 활성 지연과 표층 몸통 근육의 활동 증가가 함께 보고되었다.</p></div>
+   <div class="card"><h3>운동겉질 재구성</h3><p>경두개자기자극 연구에서 배가로근의 운동겉질 표상이 바뀌었고, 이는 자세 조절 결함과 연관되었다.</p></div>
+  </div>
+  <div class="key">변화는 통증이 사라진 뒤에도 남을 수 있어 재발 위험과 연결된다. 그래서 '통증 소실 = 치료 종료'가 아니라 운동조절 회복까지 확인한다.</div>
+  <div class="src"><span class="badge">연구</span><a href="https://intranet.cnap.hst.aau.dk/digitalAssets/267/267827_nr-2-tsao_2008_brain.pdf" target="_blank" rel="noopener">Tsao H, Galea MP, Hodges PW. Brain 2008</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO3-3 목: 대상작용" data-group="LO3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>목통증</div>
+  <h2>목통증 환자는 깊은목굽힘근 대신 목빗근을 쓴다</h2>
+  <div class="cols">
+   <div class="grid2">
+    <div class="card"><div class="big">28–30<small>mmHg</small></div><p>건강 성인 대부분이 깨끗한 끄덕임으로 유지하는 압력</p></div>
+    <div class="card"><div class="big" style="color:var(--muscle)">22–24<small>mmHg</small></div><p>목 기능 장애 환자가 흔히 멈추는 단계</p></div>
+   </div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>높은 단계로 갈수록 목빗근·앞목갈비근이 대신 켜지거나 머리를 뒤로 당기는 대상 움직임이 나타난다</li><li>고유감각: 목통증(특히 외상성)에서 머리 재위치 오차가 크다</li></ul>
+    <div class="key">통증 → 깊은 근육 억제·지연 → 표층 근육 과활성. 허리와 목에서 같은 패턴이 반복된다.</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge">평가</span><a href="https://pabau.com/templates/cranio-cervical-flexion-test/" target="_blank" rel="noopener">CCFT 기준값 요약(Jull 2008 프로토콜)</a><span class="badge g">SR</span><a href="https://atlas.chiro.org/?p=26964" target="_blank" rel="noopener">de Vries 2015 JPE 고찰</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO4 -->
+<section class="slide" data-title="LO4-1 CCFT" data-group="LO4" id="lo4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>머리목굽힘검사</div>
+  <h2>20 mmHg에서 시작해 2 mmHg씩, 30까지 5단계</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 220" role="img" aria-label="압력 바이오피드백 20에서 30 mmHg까지 5단계 계단">
+    <g fill="var(--nerve-soft)" stroke="var(--nerve)"><rect x="40" y="160" width="60" height="30"/><rect x="110" y="135" width="60" height="55"/><rect x="180" y="110" width="60" height="80"/><rect x="250" y="85" width="60" height="105"/><rect x="320" y="60" width="60" height="130"/></g>
+    <g font-size="13" font-weight="700" text-anchor="middle" fill="var(--ink)"><text x="70" y="152">22</text><text x="140" y="127">24</text><text x="210" y="102">26</text><text x="280" y="77">28</text><text x="350" y="52">30</text></g>
+    <text x="210" y="212" text-anchor="middle" font-size="12" fill="var(--muted)">기준 20 mmHg · 바로누워 무릎 굽힘</text>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li><b>1단계</b>: 각 단계 2–3초 유지, 대상작용 없이 도달한 최고 단계 = 활성 점수</li><li><b>2단계</b>: 도달 단계에서 10초 × 10회 유지 능력(수행 지수)</li><li>관찰: 목빗근·앞목갈비근 촉지, 머리 뒤당김, 압력 흔들림, 기준선 복귀</li></ul>
+    <div class="key">검사가 곧 훈련이다. 도달 단계에서 10초 × 10회부터 훈련하고 다음 단계로 올린다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=cAfcQIRm9Ew" target="_blank" rel="noopener">영상: CCFT 시행</a></div>
+  <div class="src"><span class="badge">평가</span><a href="https://book.physiotutors.com/?p=2265" target="_blank" rel="noopener">Physiotutors CCFT</a><a href="https://carepatron.com/files/cranio-cervical-flexion-test.pdf" target="_blank" rel="noopener">CCFT 서식</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO4-2 관절위치오차" data-group="LO4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>고유감각</div>
+  <h2>눈 감고 머리 제자리 찾기: 평균 오차 4.5° 넘으면 손상</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 220" role="img" aria-label="90센티미터 거리의 과녁, 중심에서 6센티미터 반경이 4.5도에 해당">
+    <circle cx="300" cy="110" r="90" fill="none" stroke="var(--line)" stroke-width="2"/><circle cx="300" cy="110" r="55" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="2"/><circle cx="300" cy="110" r="6" fill="var(--muscle)"/>
+    <circle cx="90" cy="110" r="22" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><line x1="112" y1="110" x2="294" y2="110" stroke="var(--muscle)" stroke-dasharray="5 4"/>
+    <text x="200" y="100" text-anchor="middle" font-size="12" fill="var(--muted)">90 cm</text>
+    <text x="300" y="186" text-anchor="middle" font-size="12" font-weight="700" fill="var(--warn)">반경 약 6 cm ≈ 4.5°</text>
+    <text x="90" y="150" text-anchor="middle" font-size="12" fill="var(--ink)">머리 레이저</text>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>앉아서 눈 감고 목을 돌렸다가 중립으로 되돌아온다(6회 이상)</li><li>각도 = tan⁻¹(오차 거리 ÷ 90 cm)</li><li>어지럼·불안정감이 함께 있으면 오차가 더 크다</li></ul>
+    <div class="key">경도 목 장애에서는 유용성이 낮을 수 있다. 외상성·어지럼 동반 목통증에서 우선 쓴다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=eL-mCFdJzPs" target="_blank" rel="noopener">영상: 목 관절위치오차 검사</a></div>
+  <div class="src"><span class="badge">평가</span><a href="https://www.physiotutors.com/?p=12304" target="_blank" rel="noopener">JPSE 기준 4.5°</a><span class="badge g">SR</span><a href="https://searchworks.jioinstitute.edu.in/articles/cmedm__36270904" target="_blank" rel="noopener">측정 특성 고찰 2022</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO4-3 허리·다리 평가" data-group="LO4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>허리·다리</div>
+  <h2>배가로근 끌어당기기, 한발서기, 움직임 조절 검사</h2>
+  <div class="grid3">
+   <div class="card"><h3>엎드려 끌어당기기</h3><p>배 밑 압력 바이오피드백 70 mmHg에서 배꼽을 당겨 6–10 mmHg 낮추고 10초 유지. 골반·척추 움직임 없이.</p></div>
+   <div class="card"><h3>한발서기·Y-균형</h3><p>눈 뜨고/감고 한발서기 시간, 방향별 뻗기 거리의 좌우 차이. 발목·무릎·엉덩관절 조절.</p></div>
+   <div class="card"><h3>움직임 조절 검사</h3><p>허리 중립을 유지하며 엉덩관절만 굽히기(웨이터 인사), 네발기기 흔들기. 허리가 따라 움직이면 조절 결함.</p></div>
+  </div>
+  <div data-anat='{"view":"back","hl":["gmed","gastroc","soleus"],"labels":[[110,312,"중간볼기근: 골반 수평",-85,320],[122,490,"장딴지근·가자미근: 발목 전략",385,500]],"label":"한발서기에서 쓰이는 중간볼기근과 종아리 근육","viewBox":"-90 280 480 260"}'></div>
+  <div class="src"><span class="badge">평가</span><a href="https://www.youtube.com/watch?v=1W8MoPtGvYc" target="_blank" rel="noopener">엎드려 끌어당기기 검사 영상</a><a href="https://www.youtube.com/watch?v=KJM_sXb_4CU" target="_blank" rel="noopener">Y-균형 검사 영상</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO5 -->
+<section class="slide" data-title="LO5-1 운동조절 코크란" data-group="LO5" id="lo5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>코크란 고찰</div>
+  <h2>최소 중재보다 낫지만, 다른 운동보다 낫지는 않다</h2>
+  <div class="tw"><table class="t">
+   <tr><th>비교(만성 요통)</th><th>결과</th><th>근거 질</th></tr>
+   <tr><td>최소 중재</td><td>통증 개선, 중간 효과크기(장기 평균차 −12.97/100)</td><td>낮음–중간</td></tr>
+   <tr><td>운동+물리적인자</td><td>약간 더 좋음(단기·중기)</td><td>매우 낮음–낮음</td></tr>
+   <tr><td>다른 운동</td><td>임상적으로 중요한 차이 없음</td><td>낮음–높음</td></tr>
+   <tr><td>도수치료</td><td>임상적으로 중요한 차이 없음</td><td>낮음–높음</td></tr>
+  </table></div>
+  <div class="key">운동조절 운동은 '여러 좋은 운동 중 하나'이다. 환자 선호, 치료자 숙련, 비용을 고려해 고른다.</div>
+  <div class="src"><span class="badge g">코크란 SR</span><a href="https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/" target="_blank" rel="noopener">Saragiotto BT 등. Cochrane 2016;CD012004</a><a href="https://search.pedro.org.au/search-results/record-detail/47572" target="_blank" rel="noopener">Spine 2016 요약(32편, 2628명)</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO5-2 네트워크 메타분석" data-group="LO5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>운동 유형 비교</div>
+  <h2>217편 네트워크 메타분석: 대부분의 운동이 효과, 일부가 더 크다</h2>
+  <div class="grid2">
+   <div class="card"><h3>결과</h3><ul class="k"><li>217편 RCT, 20,969명, 11개 운동 유형</li><li>대부분의 운동이 최소 치료보다 통증·기능에 효과적</li><li>필라테스, 맥켄지, 기능 회복 운동이 중간–임상적으로 중요한 효과와 양립</li></ul></div>
+   <div class="card"><h3>해석</h3><ul class="k"><li>운동조절(코어 강화)도 효과적인 유형에 속한다</li><li>유형 간 차이는 불확실성이 크다</li><li>저자 결론: 환자가 즐기는 운동을 권해 순응도를 높인다</li></ul></div>
+  </div>
+  <div class="key">필라테스의 핵심 요소(호흡, 몸통 조절, 정렬)는 운동조절 원리와 겹친다.</div>
+  <div class="src"><span class="badge g">NMA</span><a href="https://bv.fapesp.br/en/publicacao/205548/some-types-of-exercise-are-more-effective-than-others-in-peo" target="_blank" rel="noopener">Hayden JA 등. J Physiother 2021;67:252–62</a><a href="https://pedro.org.au/?p=21068" target="_blank" rel="noopener">PEDro 요약</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO5-3 목·발목 RCT" data-group="LO5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>목과 발목</div>
+  <h2>목: 저부하 운동이 12개월 효과, 발목: 고유감각 훈련이 재발 감소</h2>
+  <div class="grid2">
+   <div class="card"><h3>목뼈성 두통 RCT(200명)</h3><p>도수치료, 저부하 운동(깊은목굽힘근·어깨뼈 조절), 병용, 대조의 4군. 12개월 뒤 도수치료와 운동 모두 두통 빈도·강도를 유의하게 줄였고 효과가 유지되었다.</p></div>
+   <div class="card"><h3>발목 염좌 재발 RCT(522명)</h3><p>8주 가정 고유감각 훈련(균형판, 한발서기). 1년 재발률 22% 대 33%, 9명 치료로 1명 재발 예방(상대위험 0.63).</p></div>
+  </div>
+  <div class="key">가정 프로그램의 완전 순응은 23%뿐이었는데도 효과가 있었다. 순응도를 높이면 효과는 더 클 수 있다(8장).</div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=itnkeBmuXho" target="_blank" rel="noopener">영상: 발목 고유감각 훈련</a></div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/" target="_blank" rel="noopener">Jull G 등. Spine 2002;27:1835–43</a><a href="https://search.pedro.org.au/search-results/record-detail/23915" target="_blank" rel="noopener">Hupperets MD 등. BMJ 2009;339:b2684</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO6 -->
+<section class="slide" data-title="LO6-1 4단계 진행" data-group="LO6" id="lo6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>운동 학습 단계</div>
+  <h2>인지 → 연합 → 자동: 생각해서 켜다가, 생각 없이 켜지게</h2>
+  <div class="tw"><table class="t">
+   <tr><th>단계</th><th>허리 예</th><th>목 예</th><th>진행 기준</th></tr>
+   <tr><td>1 고립 활성</td><td>누워 끌어당기기(배가로근·뭇갈래근 공동 수축)</td><td>CCFT 단계 훈련</td><td>10초 × 10회, 대상작용 없음</td></tr>
+   <tr><td>2 사지 부하</td><td>데드버그, 버드독, 브리지</td><td>앉아서 끄덕임 유지 + 팔 들기</td><td>중립 유지하며 정상 호흡</td></tr>
+   <tr><td>3 불안정·속도</td><td>짐볼, 옆 플랭크, 밴드 저항</td><td>머리 고정 눈 움직임, 등척성 회전</td><td>속도·부하 증가에도 조절</td></tr>
+   <tr><td>4 기능·자동</td><td>들기, 걷기, 이중 과제</td><td>컴퓨터 작업 자세 유지</td><td>일상 과제에서 자동 유지</td></tr>
+  </table></div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=w2qcdzJBVB0" target="_blank" rel="noopener">영상: 데드버그·버드독 진행</a></div>
+  <div class="src"><span class="badge g">코크란</span><a href="https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/" target="_blank" rel="noopener">운동조절 운동 정의(Saragiotto 2016)</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO6-2 진행 변수" data-group="LO6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>난이도 조절</div>
+  <h2>한 번에 하나의 변수만 올린다</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 230" role="img" aria-label="지지면, 부하, 속도, 감각, 인지 과제 다섯 축의 난이도 조절 레이더">
+    <g fill="none" stroke="var(--line)"><polygon points="210,30 380,95 315,200 105,200 40,95"/><polygon points="210,80 295,112 263,165 157,165 125,112"/></g>
+    <polygon points="210,60 330,105 280,180 140,175 100,108" fill="var(--nerve-soft)" stroke="var(--nerve)" stroke-width="2"/>
+    <g font-size="13" font-weight="700" fill="var(--ink)" text-anchor="middle"><text x="210" y="22">지지면</text><text x="395" y="92" text-anchor="start">부하</text><text x="330" y="222">속도</text><text x="90" y="222">감각(눈 감기)</text><text x="30" y="92" text-anchor="end">이중 과제</text></g>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li><b>지지면</b>: 바닥 → 매트 → 짐볼·균형판</li><li><b>부하</b>: 사지 무게 → 아령·밴드</li><li><b>속도</b>: 느리게 → 빠르게, 예측 → 예측 불가 교란</li><li><b>감각</b>: 눈 뜨기 → 눈 감기, 머리 움직이기</li><li><b>이중 과제</b>: 숫자 세기, 공 받기</li></ul>
+   </div>
+  </div>
+  <div class="key">진행 기준은 '통증'보다 '질'이다. 중립 유지, 정상 호흡, 대상작용 없음이 지켜지면 올린다.</div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://search.pedro.org.au/search-results/record-detail/23915" target="_blank" rel="noopener">Hupperets 2009 단계적 균형 프로그램</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO6-3 프로그램 예" data-group="LO6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>설계</div>
+  <h2>재발성 요통 8주 안정화 프로그램 예</h2>
+  <div class="tw"><table class="t">
+   <tr><th>주</th><th>목표</th><th>운동</th><th>처방</th></tr>
+   <tr><td>1–2</td><td>인지·고립</td><td>누워·네발기기 끌어당기기, 초음파·압력 바이오피드백</td><td>10초 × 10회, 하루 2회</td></tr>
+   <tr><td>3–4</td><td>사지 부하</td><td>데드버그, 버드독, 브리지</td><td>중립 유지 8–10회 × 2–3세트</td></tr>
+   <tr><td>5–6</td><td>불안정·부하</td><td>짐볼 브리지, 옆 플랭크, 밴드 노젓기</td><td>시간 20–30초 또는 10–12회</td></tr>
+   <tr><td>7–8</td><td>기능·자동</td><td>들기, 스쿼트, 걷기 중 이중 과제</td><td>업무·스포츠 과제 반영(8장)</td></tr>
+  </table></div>
+  <div class="key">근력운동(6장)과 병행하고, 2주마다 움직임 조절 검사·한발서기로 재평가한다. 운동 유형보다 꾸준함이 중요하다.</div>
+  <div class="src"><span class="badge g">NMA</span><a href="https://pedro.org.au/?p=21068" target="_blank" rel="noopener">Hayden 2021</a><span class="badge">CPG</span><a href="https://www.orthopt.org/uploads/content_files/files/LBP_Revision_2021.pdf" target="_blank" rel="noopener">요통 지침 2021</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 정리 -->
+
+<section class="slide" data-title="근육 영상 1/4: 목·어깨" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>7장에 나온 근육</div>
+  <h2>목·어깨 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>위등세모근</b><small>Upper trapezius</small><p>어깨뼈 올림·위쪽돌림, 목 폄·가쪽굽힘. 목·어깨 근육통의 대표 근육</p><div class="media"><a href="https://www.youtube.com/watch?v=SjBceqTrVaE" target="_blank" rel="noopener">영상 1: 해부학I 승모근 – 기시·정지·기능·촉진</a><a href="https://www.youtube.com/watch?v=GXcJdGM56sE" target="_blank" rel="noopener">영상 2: 승모근 기능해부학의 이해(카데바)</a></div></div><div class="mcard"><b>어깨올림근</b><small>Levator scapulae</small><p>C1–C4 가로돌기→어깨뼈 위각. 어깨뼈 올림·아래쪽돌림, 목 뒤가쪽 통증</p><div class="media"><a href="https://www.youtube.com/watch?v=Mp_d7Uj7Lc0" target="_blank" rel="noopener">영상 1: 해부학II 견갑거근 – 기능해부학·통증 양상</a><a href="https://www.youtube.com/watch?v=DAADjMW12hg" target="_blank" rel="noopener">영상 2: 기능적 촉진 해부학 1강: 견갑거근과 승모근</a></div></div><div class="mcard"><b>목빗근</b><small>Sternocleidomastoid</small><p>양쪽: 목 굽힘, 한쪽: 같은쪽 가쪽굽힘·반대쪽 돌림. 머리 쪽 연관통</p><div class="media"><a href="https://www.youtube.com/watch?v=I2eFKEqH5Ic" target="_blank" rel="noopener">영상 1: [해부학-근육학] 목빗근(흉쇄유돌근)</a><a href="https://www.youtube.com/watch?v=OQA2faL2H5A" target="_blank" rel="noopener">영상 2: 이해 쏙쏙 해부학 – 흉쇄유돌근</a></div></div><div class="mcard"><b>앞목갈비근</b><small>Anterior scalene</small><p>C3–C6→첫째 갈비뼈. 목 가쪽굽힘·보조 들숨근, 팔신경얼기와 인접</p><div class="media"><a href="https://www.youtube.com/watch?v=VWo-a8v3SNs" target="_blank" rel="noopener">영상 1: 목 앞가쪽 깊은 근육(긴목근·목갈비근 등)</a><a href="https://www.youtube.com/watch?v=AwgJtYjyS6E" target="_blank" rel="noopener">영상 2: 경장근·두장근·사각근 이완 도수치료 테크닉</a></div></div><div class="mcard"><b>깊은목굽힘근</b><small>Deep neck flexors (긴목근·긴머리근)</small><p>위목뼈 굽힘과 목뼈 분절 안정. 머리-목 굽힘 검사·훈련의 표적</p><div class="media"><a href="https://www.youtube.com/watch?v=VWo-a8v3SNs" target="_blank" rel="noopener">영상 1: 목 앞가쪽 깊은 근육_긴목근(경장근)·긴머리근</a><a href="https://www.youtube.com/watch?v=8307gOFYfjs" target="_blank" rel="noopener">영상 2: 복근 운동 시 목이 아픈 해부학적 근거(심부경추굴곡근)</a></div></div><div class="mcard"><b>어깨세모근</b><small>Deltoid</small><p>앞·중간·뒤 섬유. 위팔 굽힘·벌림·폄</p><div class="media"><a href="https://www.youtube.com/watch?v=jXCt4HkgXHQ" target="_blank" rel="noopener">영상 1: [해부학-근육학] 어깨세모근(삼각근)</a><a href="https://www.youtube.com/watch?v=ySTDTpRXahM" target="_blank" rel="noopener">영상 2: 삼각근/어깨세모근 완전정복</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근육 영상 2/4: 목·어깨·허리·몸통" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>7장에 나온 근육</div>
+  <h2>목·어깨·허리·몸통 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>큰가슴근</b><small>Pectoralis major</small><p>위팔 모음·안쪽돌림·굽힘. 둥근 어깨 자세와 관련</p><div class="media"><a href="https://www.youtube.com/watch?v=lLVnzx7lE8Y" target="_blank" rel="noopener">영상 1: [해부학-근육학] 큰가슴근(대흉근)</a><a href="https://www.youtube.com/watch?v=9R832J-czHo" target="_blank" rel="noopener">영상 2: 이해 쏙쏙 해부학 – 대흉근</a></div></div><div class="mcard"><b>넓은등근</b><small>Latissimus dorsi</small><p>위팔 폄·모음·안쪽돌림. 등허리근막을 통해 몸통과 연결</p><div class="media"><a href="https://www.youtube.com/watch?v=kM3anrDykUQ" target="_blank" rel="noopener">영상 1: 이해 쏙쏙 해부학 – 광배근</a><a href="https://www.youtube.com/watch?v=ejssgnpOWS8" target="_blank" rel="noopener">영상 2: 겨드랑이를 알아보자(대원근과 광배근) – 오쌤인체해부학</a></div></div><div class="mcard"><b>척주세움근</b><small>Erector spinae</small><p>척주 폄·가쪽굽힘. 몸통 폄 지구력의 주동근</p><div class="media"><a href="https://www.youtube.com/watch?v=zUJ49aMcho8" target="_blank" rel="noopener">영상 1: 척추근육1 – 척주세움근(엉덩갈비근·가장긴근·가시근) VR</a><a href="https://www.youtube.com/watch?v=8nypWdQDW7k" target="_blank" rel="noopener">영상 2: 필라테스 기능해부학 2. 척추기립근</a></div></div><div class="mcard"><b>뭇갈래근</b><small>Multifidus</small><p>허리 분절 안정·폄. 요통에서 위축·지연 활성</p><div class="media"><a href="https://www.youtube.com/watch?v=_ZyM6C873Nc" target="_blank" rel="noopener">영상 1: 다열근/뭇갈래근 완전 정복</a><a href="https://www.youtube.com/watch?v=ySoufyXl03s" target="_blank" rel="noopener">영상 2: [해부학-근육학] 가로돌기가시근육(횡돌기극근)</a></div></div><div class="mcard"><b>배가로근</b><small>Transversus abdominis</small><p>복압을 높이는 코르셋 근육. 안정화 운동(드로인)의 핵심</p><div class="media"><a href="https://www.youtube.com/watch?v=MYh1TKeu6Fc" target="_blank" rel="noopener">영상 1: [해부학-근육학] 앞가쪽배근육(배가로근 포함)</a><a href="https://www.youtube.com/watch?v=PlKF6XKl4ng" target="_blank" rel="noopener">영상 2: 제대로 복횡근 사용하기</a></div></div><div class="mcard"><b>배곧은근</b><small>Rectus abdominis</small><p>몸통 굽힘. 표면 근육으로 과활성 보상에 주의</p><div class="media"><a href="https://www.youtube.com/watch?v=MYh1TKeu6Fc" target="_blank" rel="noopener">영상 1: [해부학-근육학] 앞가쪽배근육(배곧은근 포함)</a><a href="https://www.youtube.com/watch?v=HMzp9Ve9wwU" target="_blank" rel="noopener">영상 2: 복직근 케어 – 부위별 통증 양상</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근육 영상 3/4: 허리·몸통·엉덩관절·무릎" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>7장에 나온 근육</div>
+  <h2>허리·몸통·엉덩관절·무릎 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>배바깥빗근</b><small>External oblique</small><p>몸통 돌림·가쪽굽힘. 옆 플랭크의 주 표적</p><div class="media"><a href="https://www.youtube.com/watch?v=lDc47IYbWCg" target="_blank" rel="noopener">영상 1: 구조해부학: 배속빗근과 배바깥빗근</a><a href="https://www.youtube.com/watch?v=7UqXk01iJZk" target="_blank" rel="noopener">영상 2: 외복사근·내복사근·복횡근 – 근육학 마스터</a></div></div><div class="mcard"><b>골반바닥근</b><small>Pelvic floor</small><p>골반 장기 지지·배가로근·가로막과 함께 복압 조절</p><div class="media"><a href="https://www.youtube.com/watch?v=UHkdkQnB-Yg" target="_blank" rel="noopener">영상 1: 골반기저근의 해부학(힐링무브)</a><a href="https://www.youtube.com/watch?v=QLNK-MRnazA" target="_blank" rel="noopener">영상 2: 골반저근 약화에 따른 증상(대구MBC 메디컬약손)</a></div></div><div class="mcard"><b>가로막</b><small>Diaphragm</small><p>주 들숨근. 호흡과 몸통 안정의 지붕 역할</p><div class="media"><a href="https://www.youtube.com/watch?v=luk2iSmhq7Y" target="_blank" rel="noopener">영상 1: 구조해부학: 가로막(횡경막)과 호흡</a><a href="https://www.youtube.com/watch?v=RbZnClRBe_E" target="_blank" rel="noopener">영상 2: 횡격막(가로막) – 근육학 마스터</a></div></div><div class="mcard"><b>등허리근막</b><small>Thoracolumbar fascia</small><p>넓은등근·큰볼기근·배가로근의 힘을 전달하는 근막</p><div class="media"><a href="https://www.youtube.com/watch?v=HolT2T4pVi8" target="_blank" rel="noopener">영상 1: 근막이란 무엇인가(힐링무브)</a><a href="https://www.youtube.com/watch?v=ZOCkyT_go_4" target="_blank" rel="noopener">영상 2: 척추기립근·흉요근막 자가 근막이완</a></div></div><div class="mcard"><b>중간볼기근</b><small>Gluteus medius</small><p>엉덩관절 벌림·한발서기 골반 안정</p><div class="media"><a href="https://www.youtube.com/watch?v=Q4acomYqNBo" target="_blank" rel="noopener">영상 1: [해부학-근육학] 중간볼기근(중둔근)</a><a href="https://www.youtube.com/watch?v=7JMLQK44zNw" target="_blank" rel="noopener">영상 2: 대둔근·중둔근·소둔근의 기시와 정지</a></div></div><div class="mcard"><b>넙다리네갈래근</b><small>Quadriceps (넙다리곧은근·안쪽넓은근 포함)</small><p>무릎 폄. 넙다리곧은근은 엉덩관절 굽힘도 담당</p><div class="media"><a href="https://www.youtube.com/watch?v=CIRBfe-Nh-Q" target="_blank" rel="noopener">영상 1: 대퇴사두근/넙다리네갈래근 완전정복</a><a href="https://www.youtube.com/watch?v=yv_EQHlwBBE" target="_blank" rel="noopener">영상 2: 넙다리 앞쪽 근육 VR(넙다리네갈래근·넙다리빗근)</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근육 영상 4/4: 발목·발" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>7장에 나온 근육</div>
+  <h2>발목·발 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>장딴지근</b><small>Gastrocnemius</small><p>발바닥굽힘·무릎 굽힘 보조. 무릎 편 자세로 스트레칭</p><div class="media"><a href="https://www.youtube.com/watch?v=y66MA_BWOlY" target="_blank" rel="noopener">영상 1: 비복근(장딴지근)·가자미근 완전 정복</a><a href="https://www.youtube.com/watch?v=uPcnGwRpbKE" target="_blank" rel="noopener">영상 2: [힐링무브 근육학] 비복근(장딴지근) 해부학과 촉진</a></div></div><div class="mcard"><b>가자미근</b><small>Soleus</small><p>발바닥굽힘. 무릎 굽힌 자세로 스트레칭</p><div class="media"><a href="https://www.youtube.com/watch?v=y66MA_BWOlY" target="_blank" rel="noopener">영상 1: 비복근·가자미근 완전 정복</a><a href="https://www.youtube.com/watch?v=SRcU-M4UjTY" target="_blank" rel="noopener">영상 2: 종아리 뒤근육(장딴지근·가자미근) 기능해부학</a></div></div><div class="mcard"><b>종아리근</b><small>Fibularis (peroneus) longus·brevis</small><p>가쪽번짐·발목 가쪽 안정</p><div class="media"><a href="https://www.youtube.com/watch?v=z3QU0q7PYgA" target="_blank" rel="noopener">영상 1: [해부학-근육학] 긴종아리근(장비골근)</a><a href="https://www.youtube.com/watch?v=47sq_B45c5I" target="_blank" rel="noopener">영상 2: [힐링무브 근육학] 장비골근·단비골근 해부학과 촉진</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 1/7: 목·어깨" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">목·어깨 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>위등세모근</b><small>Upper trapezius</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["trapezius_u"], "marks": [[118, 110]], "ref": [[137, 82, 7, 13], [126, 54, 8, 10], [124, 34, 8, 9]], "viewBox": "78 9 100 133", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>위등세모근 중간, 어깨 위 자유모서리(수직 섬유)</dd><dt>연관통</dt><dd>목 뒤가쪽 → 귀 뒤·관자놀이·턱각(긴장형 두통 양상)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=vgA34wdmNqo" target="_blank" rel="noopener">TrP 영상: 해부학II 승모근 – 기능해부학과 통증유발점</a><a class="doc" href="https://learnmuscles.com/glossary/trapezius-trigger-point/" target="_blank" rel="noopener">그림: 등세모근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>어깨올림근</b><small>Levator scapulae</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["levator"], "marks": [[130, 108]], "ref": [[130, 104, 11, 9], [114, 150, 6, 18], [92, 132, 8, 8]], "viewBox": "68 68 110 116", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>목-어깨 모서리(어깨뼈 위각 위쪽)와 근육 중간</dd><dt>연관통</dt><dd>목-어깨 모서리 → 어깨뼈 안쪽모서리·어깨 뒤, 목 돌림 제한(뻣뻣한 목)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=iUC-lMXhULg" target="_blank" rel="noopener">TrP 영상: 견갑거근 트리거포인트 실습(동의과학대 김강훈 교수)</a><a class="doc" href="https://learnmuscles.com/glossary/levator-scapulae-trigger-point/" target="_blank" rel="noopener">그림: 어깨올림근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>목빗근</b><small>Sternocleidomastoid</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["scm"], "marks": [[143, 90], [141, 106]], "ref": [[150, 24, 13, 6], [135, 44, 8, 6], [131, 60, 7, 7], [123, 50, 5, 8]], "viewBox": "79 2 100 128", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>복장갈래·빗장갈래를 따라 여러 곳</dd><dt>연관통</dt><dd>복장갈래: 정수리·뒤통수·눈 주위·뺨 / 빗장갈래: 이마·귀 깊은 곳, 어지럼</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=sa4298zZQn0" target="_blank" rel="noopener">TrP 영상: 두통·관자놀이·눈 통증과 목빗근(흉쇄유돌근)</a><a class="doc" href="https://learnmuscles.com/glossary/sternocleidomastoid-trigger-point/" target="_blank" rel="noopener">그림: 목빗근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 2/7: 목·어깨" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">목·어깨 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>앞목갈비근</b><small>Anterior scalene</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": [], "marks": [[133, 102]], "ref": [[118, 142, 12, 12], [83, 182, 8, 20], [69, 292, 6, 22], [60, 372, 6, 12]], "viewBox": "38 86 118 314", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>목빗근 뒤가쪽, 빗장뼈 위 목갈비근 배</dd><dt>연관통</dt><dd>가슴 앞·어깨뼈 안쪽모서리 → 위팔 앞뒤·아래팔 노쪽·엄지·검지(팔신경얼기 증상과 감별)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=nJIoCXCEeaA" target="_blank" rel="noopener">TrP 영상: 사각근(목갈비근) – 근육학 마스터 referred pain/MPS</a><a class="doc" href="https://learnmuscles.com/glossary/scalene-group-trigger-point/" target="_blank" rel="noopener">그림: 목갈비근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>깊은목굽힘근</b><small>Deep neck flexors (긴목근·긴머리근)</small><div class="tbody"><div class="tfig none">정립된 연관통 지도가 없어 도해를 그리지 않았습니다.</div><dl><dt>통증유발점</dt><dd>목뼈 앞쪽(긴목근·긴머리근) — 촉진이 어렵고 고전적 TrP 지도는 정립되지 않음</dd><dt>연관통</dt><dd>주로 목 앞·인두 부위 불편감; 임상에서는 TrP보다 운동조절 결손(머리-목 굽힘 검사)이 핵심</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=c9fgxGLP61U" target="_blank" rel="noopener">TrP 영상: 심부 경추 굴곡근 근거 논문 소개(Jull·Falla·Hodges)</a><span class="noimg">표준 연관통 그림 없음</span></div></div><div class="mcard tcard"><b>어깨세모근</b><small>Deltoid</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["deltoid"], "marks": [[86, 142], [98, 128]], "ref": [[90, 142, 12, 22]], "viewBox": "56 92 100 110", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>앞·중간·뒤 섬유 각각의 근육 배</dd><dt>연관통</dt><dd>대부분 해당 섬유 위 어깨 국소 통증(멀리 퍼지지 않음); 돌림근띠·목갈비근 연관통과 감별</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=8uXznamxhwk" target="_blank" rel="noopener">TrP 영상: 삼각근(어깨세모근) – 근육학 마스터 referred pain/MPS</a><a class="doc" href="https://learnmuscles.com/glossary/deltoid-trigger-point/" target="_blank" rel="noopener">그림: 어깨세모근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 3/7: 목·어깨·허리·몸통" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">목·어깨·허리·몸통 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>큰가슴근</b><small>Pectoralis major</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["pec"], "marks": [[120, 128], [108, 150]], "ref": [[122, 140, 18, 16], [93, 200, 6, 22], [90, 245, 6, 8], [88, 290, 5, 20], [72, 372, 5, 12]], "viewBox": "51 100 115 300", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>빗장갈래·복장갈래·겨드랑 앞주름</dd><dt>연관통</dt><dd>앞가슴·어깨 앞 → 팔 안쪽·팔꿈치 안쪽·넷째·다섯째 손가락; 왼쪽은 심장통과 감별</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=oNWATjOhJCE" target="_blank" rel="noopener">TrP 영상: 대흉근(큰가슴근) – 근육학 마스터 referred pain/MPS</a><a class="doc" href="https://learnmuscles.com/glossary/pectoralis-major-trigger-point/" target="_blank" rel="noopener">그림: 큰가슴근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>넓은등근</b><small>Latissimus dorsi</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["latissimus"], "marks": [[106, 200]], "ref": [[124, 190, 10, 10], [88, 140, 6, 6], [93, 200, 6, 22], [88, 290, 5, 22], [70, 372, 5, 12]], "viewBox": "49 118 117 282", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>겨드랑 뒤주름 근처 근육 배</dd><dt>연관통</dt><dd>어깨뼈 아래각 주위 → 팔 뒤안쪽·넷째·다섯째 손가락</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=xkOKoLsGT8Y" target="_blank" rel="noopener">TrP 영상: 광배근(넓은등근) – 근육학 마스터 referred pain/MPS</a><a class="doc" href="https://learnmuscles.com/glossary/latissimus-dorsi-trigger-point/" target="_blank" rel="noopener">그림: 넓은등근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>척주세움근</b><small>Erector spinae</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["erector"], "marks": [[142, 205], [142, 282]], "ref": [[138, 302, 10, 12], [130, 342, 12, 14]], "viewBox": "66 154 100 218", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>등·허리 엉덩갈비근, 가장긴근 배</dd><dt>연관통</dt><dd>엉덩갈비근: 허리 아래·엉치·엉덩이 / 가장긴근: 엉덩이·엉치엉덩관절 부위</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=zBA6FKFf0OE" target="_blank" rel="noopener">TrP 영상: 척주기립근 – 연관통·TTP·치료 테크닉(PT LOG)</a><a class="doc" href="https://learnmuscles.com/glossary/iliocostalis-and-longissimus-trigger-point/" target="_blank" rel="noopener">그림: 엉덩갈비근·가장긴근 TrP 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 4/7: 허리·몸통" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">허리·몸통 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>뭇갈래근</b><small>Multifidus</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["erector"], "deep": ["erector"], "marks": [[146, 292]], "ref": [[148, 290, 6, 10], [150, 342, 8, 10], [150, 370, 5, 6]], "viewBox": "74 154 100 238", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>척추고랑 깊은 곳, 분절마다</dd><dt>연관통</dt><dd>해당 분절 가시돌기 주위 국소 통증, 아래 허리 분절은 엉치뼈·꼬리뼈·배 앞쪽</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=5jBc0ehdE-A" target="_blank" rel="noopener">TrP 영상: 기립근과 다열근 확인하고 운동하자(허리디스크 운동)</a><a class="doc" href="https://learnmuscles.com/glossary/lumbar-and-thoracic-transversospinalis-ts-group-trigger-point/" target="_blank" rel="noopener">그림: 가로돌기가시근(뭇갈래근) TrP 그림</a></div></div><div class="mcard tcard"><b>배가로근</b><small>Transversus abdominis</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": [], "marks": [[118, 176]], "ref": [[150, 180, 30, 8]], "viewBox": "96 125 100 110", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>갈비 아래모서리 근처 앞배벽</dd><dt>연관통</dt><dd>양쪽 갈비 아래모서리 사이 윗배를 가로지르는 통증</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=XiwYeLfOmQs" target="_blank" rel="noopener">TrP 영상: 복직근·외복사근·내복사근·복횡근 트리거포인트 촉진 실습</a><a class="doc" href="https://learnmuscles.com/glossary/transversus-abdominis-trigger-point/" target="_blank" rel="noopener">그림: 배가로근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>배곧은근</b><small>Rectus abdominis</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["rectus"], "marks": [[141, 190], [141, 288]], "ref": [[150, 176, 14, 8]], "viewBox": "80 152 100 168", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div><div class="tf"><div data-anat='{"view": "back", "hl": [], "marks": [], "ref": [[150, 246, 40, 7], [150, 322, 36, 7]], "viewBox": "94 223 112 122", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>배꼽 위·아래 근육 배, 두덩뼈 부착부</dd><dt>연관통</dt><dd>위쪽: 등 가슴허리 경계 가로띠·명치 / 아래쪽: 허리 아래·엉치 가로띠, 생리통 유사</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=XiwYeLfOmQs" target="_blank" rel="noopener">TrP 영상: 복직근·외복사근·내복사근·복횡근 트리거포인트 촉진 실습</a><a class="doc" href="https://learnmuscles.com/glossary/rectus-abdominis-trigger-point/" target="_blank" rel="noopener">그림: 배곧은근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 5/7: 허리·몸통" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">허리·몸통 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>배바깥빗근</b><small>External oblique</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["oblique"], "marks": [[112, 188]], "ref": [[146, 178, 12, 8], [136, 292, 12, 8], [128, 332, 8, 8]], "viewBox": "74 154 100 202", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>갈비 아래모서리·엉덩뼈능선 근처 가쪽 배벽</dd><dt>연관통</dt><dd>명치(속쓰림 유사)·아랫배·샅 — 내장 통증과 감별</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=XiwYeLfOmQs" target="_blank" rel="noopener">TrP 영상: 복직근·외복사근·내복사근·복횡근 트리거포인트 촉진 실습</a><a class="doc" href="https://learnmuscles.com/glossary/external-internal-abdominal-obliques-trigger-point/" target="_blank" rel="noopener">그림: 배빗근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>골반바닥근</b><small>Pelvic floor</small><div class="tbody"><div class="tfig none">골반 안쪽 근육이라 겉면 도해로 표시하지 않았습니다.</div><dl><dt>통증유발점</dt><dd>항문올림근·꼬리근(대개 골반 안쪽 촉진)</dd><dt>연관통</dt><dd>꼬리뼈·회음·항문·질/음경 부위, 앉을 때 통증(만성 골반통) — 전문 평가 필요</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=Z9icuDfJQ_c" target="_blank" rel="noopener">TrP 영상: 항문거근 증후군 원인과 치료(산부인과 전문의)</a><span class="noimg">표준 연관통 그림 없음</span></div></div><div class="mcard tcard"><b>가로막</b><small>Diaphragm</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": [], "marks": [[110, 172]], "ref": [[112, 178, 12, 8], [100, 114, 10, 6]], "viewBox": "56 92 100 110", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>갈비 아래모서리 안쪽 부착부</dd><dt>연관통</dt><dd>같은쪽 갈비 아래모서리, 어깨 위(가로막신경 경로) — 숨찰 때 옆구리 통증</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=U2ki2wAUT2I&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): Diaphragm Trigger Point (Richard Finn, CMTPT)</a><a class="doc" href="https://learnmuscles.com/glossary/diaphragm-trigger-point/" target="_blank" rel="noopener">그림: 가로막 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 6/7: 허리·몸통·엉덩관절·무릎" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">허리·몸통·엉덩관절·무릎 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>등허리근막</b><small>Thoracolumbar fascia</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["tlf"], "marks": [], "ref": [], "viewBox": "66 235 100 110", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>근막 자체는 통증유발점 대상이 아님 — 부착 근육(넓은등근·큰볼기근·배가로근)의 TrP를 확인</dd><dt>연관통</dt><dd>허리 국소 통증·뻣뻣함; 근막의 감각신경 분포와 미끄러짐 저하가 요통과 관련</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=dvy36qP26-0&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): Thoracolumbar fascia biomechanics</a><span class="noimg">표준 연관통 그림 없음</span></div></div><div class="mcard tcard"><b>중간볼기근</b><small>Gluteus medius</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["gmed"], "marks": [[110, 306], [124, 302]], "ref": [[130, 296, 16, 6], [146, 330, 7, 10], [116, 330, 12, 12], [102, 366, 6, 12]], "viewBox": "69 274 100 120", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>엉덩뼈능선 바로 아래 근육 배</dd><dt>연관통</dt><dd>엉덩뼈능선 따라 허리 아래·엉치, 엉덩이, 넙다리 위 가쪽</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=LCoMLUO-kC0&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): The Gluteus Medius Trigger Points (Dr. Perry)</a><a class="doc" href="https://learnmuscles.com/glossary/gluteus-medius-trigger-point/" target="_blank" rel="noopener">그림: 중간볼기근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>넙다리네갈래근</b><small>Quadriceps (넙다리곧은근·안쪽넓은근 포함)</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["quads"], "marks": [[124, 350], [134, 425], [104, 400]], "ref": [[122, 446, 10, 10], [133, 440, 6, 8], [102, 410, 6, 22]], "viewBox": "56 320 100 152", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>넙다리곧은근 위쪽(AIIS 아래), 안쪽넓은근 아래 안쪽, 가쪽넓은근 여러 곳</dd><dt>연관통</dt><dd>넙다리곧은근: 무릎뼈 주위·무릎 앞 깊은 곳(밤 통증) / 안쪽넓은근: 무릎 앞안쪽, 무릎 꺾임 / 가쪽넓은근: 넙다리·무릎 가쪽</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=clkJLVjORvs" target="_blank" rel="noopener">TrP 영상: 대퇴사두근 트리거포인트 촉진·허혈성 압박(강성규 근육연구소)</a><a class="doc" href="https://learnmuscles.com/glossary/vastus-medialis-trigger-point/" target="_blank" rel="noopener">그림: 안쪽넓은근 TrP 그림</a><a class="doc" href="https://learnmuscles.com/glossary/rectus-femoris-trigger-point/" target="_blank" rel="noopener">그림: 넙다리곧은근 TrP 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 7/7: 발목·발" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>7장에 나온 근육의 근막통증</div>
+  <h2 class="th">발목·발 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>장딴지근</b><small>Gastrocnemius</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["gastroc"], "marks": [[114, 472], [132, 472]], "ref": [[124, 456, 8, 6], [122, 492, 8, 20], [122, 588, 10, 5]], "viewBox": "56 434 100 175", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>안쪽·가쪽갈래 배 위쪽, 오금 아래</dd><dt>연관통</dt><dd>발바닥 안쪽 오목(발등 아치)·종아리 뒤·오금; 밤 종아리 경련</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=3q50mMUQg9c&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): Gastrocnemius Trigger Points</a><a class="doc" href="https://learnmuscles.com/glossary/gastrocnemius-lateral-head-trigger-point/" target="_blank" rel="noopener">그림: 장딴지근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>가자미근</b><small>Soleus</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["soleus"], "marks": [[122, 548]], "ref": [[118, 588, 8, 6], [122, 530, 6, 10], [138, 334, 6, 6]], "viewBox": "60 312 100 298", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>발꿈치힘줄 위 근육 배 아래쪽, 종아리 위 가쪽</dd><dt>연관통</dt><dd>발꿈치 뒤·발바닥 쪽(발꿈치 통증), 드물게 같은쪽 엉치엉덩관절</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=tYNderaJaCc&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): The Soleus Trigger Points (Dr. Perry)</a><a class="doc" href="https://learnmuscles.com/glossary/soleus-trigger-point/" target="_blank" rel="noopener">그림: 가자미근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>종아리근</b><small>Fibularis (peroneus) longus·brevis</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": [], "marks": [[106, 476], [106, 530]], "ref": [[106, 570, 6, 6], [104, 588, 6, 4]], "viewBox": "56 460 100 148", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>종아리뼈머리 아래(긴종아리근), 아래 1/3(짧은종아리근)</dd><dt>연관통</dt><dd>가쪽복사 주위·발 가쪽, 발목 불안정감</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=TQB5CA-YVkE" target="_blank" rel="noopener">TrP 영상: [힐링무브 근육학] 장비골근·단비골근 통증유발점과 관리방법</a><a class="doc" href="https://learnmuscles.com/glossary/fibularis-longus-brevis-trigger-point/" target="_blank" rel="noopener">그림: 종아리근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="정리" data-group="정리">
+ <div class="in">
+  <div class="eyebrow">정리</div>
+  <h2>7장 핵심 여섯 문장</h2>
+  <div class="los">
+   <div class="lo-card"><b>LO1</b><span>안정성 = 수동 + 능동 + 신경 조절. 중립 영역은 근육이 조절한다.</span></div>
+   <div class="lo-card"><b>LO2</b><span>국소 근육(배가로근·뭇갈래근·깊은목굽힘근)은 마디를, 전체 근육은 몸통을 조절한다.</span></div>
+   <div class="lo-card"><b>LO3</b><span>통증은 깊은 근육 지연과 표층 근육 대상작용, 뇌 지도 변화를 만든다.</span></div>
+   <div class="lo-card"><b>LO4</b><span>CCFT 22→30 mmHg, 목 JPE 4.5° 초과는 손상, 한발서기·Y-균형으로 다리 조절 평가.</span></div>
+   <div class="lo-card"><b>LO5</b><span>운동조절 운동은 최소 중재보다 낫고 다른 운동과 비슷하다. 발목 고유감각 훈련은 재발을 줄인다.</span></div>
+   <div class="lo-card"><b>LO6</b><span>고립 → 사지 부하 → 불안정·속도 → 기능·자동, 한 번에 한 변수.</span></div>
+  </div>
+  <p class="hand"><a class="fdl" href="https://claude.ai/artifact/P4JyzFpYrL5b1nczbKmhQ2" target="_blank" rel="noopener">→ 학생용 핵심 유인물(7장 탭, PDF 내려받기)</a></p>
+  <div class="src"><span>다음: 퀴즈 20문항(암기 4 · 해석 6 · 해결 6 · 사례 4)</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 퀴즈 -->
+<section class="slide" data-title="퀴즈 20문항" data-group="퀴즈" id="quiz">
+ <div class="in" id="quizIn"></div>
+ <div class="note"></div>
+</section>
+
+<!-- 결과 -->
+<section class="slide" data-title="결과와 오답 심화" data-group="퀴즈" id="result">
+ <div class="in" id="resultIn"></div>
+ <div class="note"></div>
+</section>
+
+</main>
+
+<nav class="nav" aria-label="슬라이드 이동">
+ <button id="prev" type="button">← 이전</button>
+ <span class="count" id="count">1 / 1</span>
+ <button id="next" type="button">다음 →</button>
+</nav>
+
+<script>@@C:anat.js@@</script>
+<script>
+(function(){
+"use strict";
+var slides=[].slice.call(document.querySelectorAll(".slide"));
+var cur=0;
+var toc=document.getElementById("toc");
+slides.forEach(function(s,i){
+  var o=document.createElement("option");
+  o.value=i; o.textContent=(i+1)+". "+(s.dataset.title.indexOf(s.dataset.group)===0||s.dataset.group===s.dataset.title?"":"["+s.dataset.group+"] ")+s.dataset.title;
+  toc.appendChild(o);
+});
+function idxOf(id){for(var i=0;i<slides.length;i++){if(slides[i].id===id)return i;}return -1;}
+function show(i,push){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[cur].classList.remove("on");
+  cur=i; slides[cur].classList.add("on");
+  document.getElementById("count").textContent=(cur+1)+" / "+slides.length;
+  document.getElementById("prev").disabled=cur===0;
+  document.getElementById("next").disabled=cur===slides.length-1;
+  document.getElementById("prog").style.width=((cur+1)/slides.length*100)+"%";
+  toc.value=cur;
+  if(push!==false){try{history.replaceState(null,"","#slide-"+(cur+1));}catch(e){}}
+  var st=document.getElementById("stage"); st.scrollTop=0; slides[cur].scrollTop=0;
+  if(slides[cur].id==="result") renderResult();
+}
+window.goSlide=function(id){var i=idxOf(id); if(i>=0) show(i);};
+document.getElementById("prev").onclick=function(){show(cur-1)};
+document.getElementById("next").onclick=function(){show(cur+1)};
+toc.onchange=function(){show(+toc.value)};
+document.getElementById("noteBtn").onclick=function(){
+  var on=document.body.classList.toggle("notes"); this.setAttribute("aria-pressed",on);
+};
+document.addEventListener("keydown",function(e){
+  var t=e.target.tagName; if(t==="SELECT"||t==="INPUT"||t==="TEXTAREA")return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"){show(cur+1);e.preventDefault();}
+  if(e.key==="ArrowLeft"||e.key==="PageUp"){show(cur-1);e.preventDefault();}
+});
+var tx=null,ty=null;
+document.getElementById("stage").addEventListener("touchstart",function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.getElementById("stage").addEventListener("touchend",function(e){
+  if(tx===null)return; var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(slides[cur].id!=="quiz") show(cur+(dx<0?1:-1)); }
+  tx=ty=null;
+},{passive:true});
+window.addEventListener("hashchange",function(){var m=location.hash.match(/^#slide-(\d+)$/); if(m) show(+m[1]-1,false);});
+
+/* ===== 퀴즈 데이터 ===== */
+var TYPES={mem:"암기형",int:"해석형",sol:"해결형",cas:"사례형"};
+var LOSLIDE={LO1:"lo1",LO2:"lo2",LO3:"lo3",LO4:"lo4",LO5:"lo5",LO6:"lo6"};
+var Q=[
+{t:"mem",lo:"LO1",s:"Panjabi(1992)의 척추 안정성 체계에서 근육과 힘줄이 속하는 하위체계는?",
+ o:["수동 하위체계","신경 조절 하위체계","능동 하위체계","심혈관 하위체계","내분비 하위체계"],a:2,
+ w:["뼈·인대·원반·관절주머니이다.","감각 정보를 받아 근육 활성을 정하는 체계이다.","근육·힘줄은 능동 하위체계이다.","Panjabi 모델의 하위체계가 아니다.","Panjabi 모델의 하위체계가 아니다."],
+ c:"수동(뼈·인대) + 능동(근육·힘줄) + 신경 조절.",
+ ev:[["모델","Panjabi 1992","https://www.youtube.com/watch?v=hplw6Lg95SY"]],
+ v:["Panjabi 모델","https://www.youtube.com/watch?v=hplw6Lg95SY"],
+ sim:{s:"신경 조절 하위체계의 역할은?",o:["뼈 형성","어떤 근육을 언제 얼마나 켤지 결정","혈압 조절","소화","체온 유지"],a:1,e:"감각 정보를 받아 근육 활성을 정한다."}},
+{t:"mem",lo:"LO2",s:"허리의 국소(local) 안정근으로 분류되는 근육은?",
+ o:["배가로근","배곧은근","배바깥빗근","넓은등근","척추세움근(표층)"],a:0,
+ w:["척추에 가깝고 마디 강성을 조절하는 국소 근육이다.","전체 근육이다.","전체 근육이다.","전체 근육(팔·몸통)이다.","표층 섬유는 전체 근육이다."],
+ c:"국소: 배가로근, 뭇갈래근 깊은 섬유 · 전체: 배곧은근, 배바깥빗근, 척추세움근.",
+ ev:[["모델","Bergmark 1989","https://www.youtube.com/watch?v=Lk3AT_KzqPk"]],
+ v:["국소·전체 근육","https://www.youtube.com/watch?v=Lk3AT_KzqPk"],
+ sim:{s:"목의 국소 안정근은?",o:["목빗근","앞목갈비근","긴목근","위등세모근","어깨올림근"],a:2,e:"긴목근·긴머리근(깊은목굽힘근)이다."}},
+{t:"mem",lo:"LO4",s:"머리목굽힘검사(CCFT)의 압력 바이오피드백 기준 압력과 최고 목표 압력은?",
+ o:["0과 10 mmHg","40과 70 mmHg","10과 20 mmHg","20과 30 mmHg","30과 50 mmHg"],a:3,
+ w:["틀린 수치이다.","엎드려 배 끌어당기기 검사 수치에 가깝다.","틀린 수치이다.","20 mmHg 기준에서 2 mmHg씩 30까지 5단계이다.","틀린 수치이다."],
+ c:"기준 20 → 22·24·26·28·30 mmHg.",
+ ev:[["평가","Physiotutors CCFT","https://book.physiotutors.com/?p=2265"]],
+ v:["CCFT 시행","https://www.youtube.com/watch?v=cAfcQIRm9Ew"],
+ sim:{s:"CCFT 2단계에서 평가하는 것은?",o:["최대 근력","도달 단계에서 10초 × 10회 유지 능력","목 회전 범위","통증 역치","반사"],a:1,e:"등척성 지구력(수행 지수)을 본다."}},
+{t:"mem",lo:"LO4",s:"목 관절위치오차(JPE) 검사에서 고유감각 손상을 시사하는 평균 오차 기준은?",
+ o:["0.5° 초과","1° 초과","2° 초과","3° 초과","4.5° 초과"],a:4,
+ w:["너무 작다.","너무 작다.","너무 작다.","기준보다 작다.","4.5°를 넘으면 손상으로 본다."],
+ c:"평균 오차 > 4.5°(90 cm 거리에서 약 6 cm).",
+ ev:[["평가","JPSE 4.5°","https://www.physiotutors.com/?p=12304"]],
+ v:["JPE 검사","https://www.youtube.com/watch?v=eL-mCFdJzPs"],
+ sim:{s:"JPE 신뢰도를 위해 권장되는 반복 횟수는?",o:["1회","2회","6회 이상","20회","측정 불필요"],a:2,e:"6회 이상이 권장된다."}},
+{t:"int",lo:"LO3",s:"Hodges·Richardson(1996)에서 요통 환자는 팔 움직임 때 배가로근 수축이 늦었다. 이 결과의 해석으로 가장 적절한 것은?",
+ o:["배가로근 지연이 요통의 원인임이 증명되었다","운동조절 결함을 보여 주며 비효율적 안정화의 가설을 지지하지만, 단면 비교라 인과는 알 수 없다","배가로근은 요통과 무관하다","요통 환자는 배가로근이 없다","건강인과 차이가 없었다"],a:1,
+ w:["단면 연구로 인과를 증명할 수 없다.","연구 설계에 맞는 해석이다.","차이가 관찰되었다.","근육이 없는 것이 아니라 늦게 켜진다.","유의한 지연이 있었다."],
+ c:"관찰된 차이 ≠ 원인. 가설로 해석.",
+ ev:[["비교 연구","Hodges 1996","https://pubmed.ncbi.nlm.nih.gov/8961451/"]],
+ v:["배가로근 지연","https://www.youtube.com/watch?v=PMIaKmviSrg"],
+ sim:{s:"같은 연구의 대상 수는?",o:["요통 15명·대조 15명","1000명","3명","요통만 50명","대조군 없음"],a:0,e:"각 15명이었다."}},
+{t:"int",lo:"LO3",s:"건강인에서 배가로근이 어깨 움직임 방향과 무관하게 항상 가장 먼저 켜졌다. 이 결과가 시사하는 것은?",
+ o:["배가로근은 팔을 움직이는 주동근이다","배가로근은 움직임 방향에 따라 다른 역할을 한다","배가로근은 방향과 무관한 척추 강성 생성(앞먹임 자세 조절)에 기여한다","배가로근은 되먹임으로만 작동한다","배가로근은 호흡근일 뿐이다"],a:2,
+ w:["팔의 주동근은 어깨세모근이다.","방향의 영향을 받지 않았다.","저자의 해석과 일치한다.","움직임 전에 켜지는 것은 앞먹임이다.","호흡 외 자세 기능이 있다."],
+ c:"방향 무관 + 선행 활성 → 앞먹임 안정화.",
+ ev:[["비교 연구","Hodges 1996","https://read.qxmd.com/doi/10.1097/00007632-199611150-00014"]],
+ v:["앞먹임 자세 조절","https://www.youtube.com/watch?v=jyv9nhHYPkc"],
+ sim:{s:"움직임 시작 전에 근육을 미리 켜는 조절은?",o:["되먹임","앞먹임","반사만","무의식 이완","길항 억제"],a:1,e:"앞먹임(feedforward)이다."}},
+{t:"int",lo:"LO5",s:"Saragiotto(2016) 코크란 고찰에서 만성 요통에 대한 운동조절 운동은 다른 운동과 임상적으로 중요한 차이가 없었다. 임상적 의미로 옳은 것은?",
+ o:["운동조절 운동은 효과가 없으므로 쓰지 않는다","운동조절 운동만 처방해야 한다","도수치료가 더 우월하다","최소 중재와도 차이가 없다","운동조절 운동은 여러 효과적 운동 중 하나이며, 선호·숙련·비용으로 선택한다"],a:4,
+ w:["최소 중재보다는 효과적이었다.","다른 운동보다 우월하지 않다.","도수치료와도 차이가 없었다.","최소 중재보다 통증을 개선했다.","고찰 결론에 맞는 적용이다."],
+ c:"최소 중재보다 우월, 다른 운동·도수치료와 비슷.",
+ ev:[["코크란","Saragiotto 2016","https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/"]],
+ v:["운동조절 운동","https://www.youtube.com/watch?v=DndzRZaZpQ0"],
+ sim:{s:"최소 중재 대비 장기 통증 평균차(100점 척도)는 대략?",o:["−1","−13","−50","+10","0"],a:1,e:"약 −12.97로 중간 효과크기였다."}},
+{t:"int",lo:"LO5",s:"Hupperets(2009) RCT에서 발목 염좌 1년 재발률이 훈련군 22%, 대조군 33%였고 NNT는 9였다. 해석으로 옳은 것은?",
+ o:["9명이 훈련하면 1명의 재발을 예방할 수 있다","훈련군 9명 중 1명만 효과가 있었다","재발 위험이 9배 줄었다","9주 훈련이 필요하다","효과가 없다"],a:0,
+ w:["NNT의 정의에 맞다.","NNT를 잘못 해석했다.","상대위험은 0.63이다.","프로그램은 8주였다.","절대위험 11% 감소가 있었다."],
+ c:"절대위험 감소 11% → NNT ≈ 9.",
+ ev:[["RCT","Hupperets 2009","https://search.pedro.org.au/search-results/record-detail/23915"]],
+ v:["발목 고유감각 훈련","https://www.youtube.com/watch?v=itnkeBmuXho"],
+ sim:{s:"이 연구의 훈련 방식은?",o:["감독 하 병원 훈련","8주 가정 비감독 고유감각 훈련","수술","보조기만","휴식"],a:1,e:"가정 비감독 프로그램이었다."}},
+{t:"int",lo:"LO2",s:"어떤 근육이 움직임 방향과 무관하게 일정하게 활성되고 척추 마디에 직접 붙어 있다. 이 근육에 대한 해석으로 옳은 것은?",
+ o:["큰 토크를 내는 전체 근육","팔다리 주동근","마디 강성을 조절하는 국소 근육","호흡에만 관여","표층 자세 근육"],a:2,
+ w:["전체 근육은 방향에 따라 활성이 달라진다.","주동근이 아니다.","국소 근육의 특징이다.","자세 기능도 있다.","깊은 근육이다."],
+ c:"국소: 깊음·척추 부착·방향 무관 활성.",
+ ev:[["모델","Bergmark 1989","https://www.youtube.com/watch?v=Lk3AT_KzqPk"]],
+ v:["국소·전체 근육","https://www.youtube.com/watch?v=Lk3AT_KzqPk"],
+ sim:{s:"전체 근육의 주된 역할은?",o:["마디 강성만","토크 생성과 큰 부하 조절","감각 수용만","혈류 조절","없음"],a:1,e:"큰 움직임과 부하를 조절한다."}},
+{t:"int",lo:"LO1",s:"Panjabi의 '그릇 속 공' 비유에서 그릇이 얕아진 상태의 의미로 옳은 것은?",
+ o:["중립 영역이 커져 안정성이 줄어든 상태","중립 영역이 작아져 더 안정된 상태","관절이 굳은 상태","근육이 과도하게 강한 상태","정상 상태"],a:0,
+ w:["얕은 그릇 = 큰 중립 영역 = 덜 안정.","반대이다.","운동 범위 감소와 다르다.","근육 활동은 그릇을 깊게 한다.","정상보다 불안정하다."],
+ c:"깊은 그릇 = 안정, 얕은 그릇 = 중립 영역 증가.",
+ ev:[["모델","Panjabi 1992 중립 영역","https://www.youtube.com/watch?v=hplw6Lg95SY"]],
+ v:["중립 영역","https://www.youtube.com/watch?v=hplw6Lg95SY"],
+ sim:{s:"중립 영역을 줄이는 요인은?",o:["근육 활동","인대 손상","원반 퇴행","피로","통증 억제"],a:0,e:"근육 활동이 중립 영역을 줄인다."}},
+{t:"sol",lo:"LO4",s:"CCFT에서 환자가 26 mmHg에 도달하자 목빗근이 촉지되고 머리를 뒤로 당겼다. 24 mmHg까지는 깨끗했다. 훈련 시작 단계는?",
+ o:["30 mmHg","28 mmHg","26 mmHg","20 mmHg","24 mmHg에서 10초 × 10회"],a:4,
+ w:["대상작용이 난다.","대상작용이 난다.","대상작용이 시작된 단계이다.","너무 낮다.","대상작용 없이 도달한 최고 단계에서 시작한다."],
+ c:"깨끗하게 도달한 최고 단계 = 훈련 시작점.",
+ ev:[["평가","CCFT","https://book.physiotutors.com/?p=2265"]],
+ v:["깊은목굽힘근 훈련","https://www.youtube.com/watch?v=p0PcmXJai2A"],
+ sim:{s:"24 mmHg에서 10초 × 10회를 깨끗하게 하면?",o:["26 mmHg로 진행","중단","20으로 낮춤","목빗근 강화","검사 반복만"],a:0,e:"다음 단계로 올린다."}},
+{t:"sol",lo:"LO6",s:"데드버그 운동 중 다리를 뻗을 때마다 허리가 바닥에서 뜨고(과다 폄) 숨을 참는다. 가장 적절한 조정은?",
+ o:["다리를 더 빨리 뻗게 한다","아령을 든다","무릎을 굽힌 채 발꿈치 미끄러지기로 낮추고 호흡과 중립 유지부터 재학습","짐볼 위에서 시킨다","그대로 30회 반복"],a:2,
+ w:["속도 증가는 조절을 더 어렵게 한다.","부하를 더하면 악화된다.","지렛대를 줄여 퇴행시키는 것이 원칙이다.","지지면을 불안정하게 하면 더 어렵다.","잘못된 패턴을 굳힌다."],
+ c:"질(중립·호흡·대상작용 없음)이 안 되면 한 단계 낮춘다.",
+ ev:[["코크란","운동조절 운동","https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/"]],
+ v:["데드버그 진행","https://www.youtube.com/watch?v=w2qcdzJBVB0"],
+ sim:{s:"버드독에서 골반이 돌아간다면?",o:["팔만 또는 다리만 들기로 낮춘다","팔다리를 더 높이 든다","속도 올리기","눈 감기","무게 추가"],a:0,e:"사지 하나씩으로 퇴행한다."}},
+{t:"sol",lo:"LO6",s:"바닥 브리지를 30초 중립 유지로 잘 해내는 환자의 다음 진행으로 가장 적절한 것은?",
+ o:["짐볼 위 한발 브리지 + 눈 감기 + 숫자 세기를 한 번에","한 가지 변수만 올림(예: 한발 브리지 또는 짐볼 브리지)","운동 종료","누워 끌어당기기로 돌아감","속도·부하·지지면을 모두 2배"],a:1,
+ w:["여러 변수를 동시에 올리면 실패와 대상작용이 늘어난다.","한 번에 한 변수 원칙이다.","진행할 수 있다.","불필요한 퇴행이다.","과도하다."],
+ c:"지지면·부하·속도·감각·이중 과제 중 하나씩.",
+ ev:[["RCT","Hupperets 2009 단계 프로그램","https://search.pedro.org.au/search-results/record-detail/23915"]],
+ v:["브리지 진행","https://www.youtube.com/watch?v=dodjximVxVk"],
+ sim:{s:"자동화 단계의 대표적 과제는?",o:["누워 끌어당기기","이중 과제(걷기 중 숫자 세기)","CCFT 22","엎드려 쉬기","수동 스트레칭"],a:1,e:"이중 과제로 자동 유지를 확인한다."}},
+{t:"sol",lo:"LO2",s:"깊은목굽힘근 훈련 중 환자가 '턱 당겨'라는 지시에 머리를 뒤로 미는 동작(뒤당김)만 한다. 가장 적절한 지시는?",
+ o:["턱을 더 세게 당기세요","머리를 들어 올리세요","목을 최대한 굽히세요","어깨를 귀에 붙이세요","뒤통수가 바닥을 미끄러져 올라가듯 천천히 끄덕이세요"],a:4,
+ w:["뒤당김이 심해진다.","목빗근이 과활성된다.","표층 굽힘근을 쓴다.","위등세모근 대상작용이다.","머리목 굽힘(끄덕임)을 유도한다."],
+ c:"끄덕임(머리목 굽힘) ≠ 뒤당김 ≠ 머리 들기.",
+ ev:[["평가","CCFT 지시","https://www.physiotutors.com/pt/wiki/craniocervical-flexion-test/"]],
+ v:["끄덕임 지시","https://www.youtube.com/watch?v=p0PcmXJai2A"],
+ sim:{s:"끄덕임 중 촉지해 대상작용을 확인할 근육은?",o:["목빗근·앞목갈비근","넙다리네갈래근","배곧은근","장딴지근","큰가슴근"],a:0,e:"표층 목 굽힘근을 촉지한다."}},
+{t:"sol",lo:"LO3",s:"재발성 요통 환자가 통증이 사라졌다며 치료를 끝내려 한다. 검사에서 움직임 조절 결함(웨이터 인사 때 허리가 따라 굽음)이 남아 있다. 가장 적절한 설명과 계획은?",
+ o:["통증이 없으니 종료한다","운동조절 변화는 통증 소실 뒤에도 남을 수 있어 재발 위험과 관련되므로, 기능 단계까지 가정 프로그램을 이어 간다","즉시 영상 검사를 한다","수술 상담을 권한다","절대 안정을 권한다"],a:1,
+ w:["조절 결함이 남아 있다.","근거에 맞는 계획이다.","적응증이 없다.","적응증이 없다.","해롭다."],
+ c:"통증 소실 ≠ 운동조절 회복.",
+ ev:[["연구","Tsao 2008","https://intranet.cnap.hst.aau.dk/digitalAssets/267/267827_nr-2-tsao_2008_brain.pdf"]],
+ v:["움직임 조절 검사","https://www.youtube.com/watch?v=t8Ya-cAsNHI"],
+ sim:{s:"재발성 요통에서 보고된 중추 변화는?",o:["운동겉질 표상 재구성","뼈 길이 변화","시력 저하","청력 저하","피부 변화"],a:0,e:"배가로근 운동겉질 표상이 바뀌었다."}},
+{t:"sol",lo:"LO1",s:"반복된 발목 염좌로 바깥쪽 인대가 늘어난(수동 하위체계 약화) 환자. Panjabi 모델에 따른 중재 방향으로 가장 적절한 것은?",
+ o:["인대를 스트레칭한다","아무것도 할 수 없다","장기간 고정만 한다","능동·신경 조절 하위체계를 훈련(종아리근 강화, 균형·고유감각 훈련)해 보상하게 한다","통증 소실까지 걷지 않는다"],a:3,
+ w:["늘어난 인대를 더 늘리면 안 된다.","다른 하위체계로 보상할 수 있다.","장기 고정은 조절 능력을 떨어뜨린다.","모델에 맞는 중재이다.","불필요한 제한이다."],
+ c:"한 하위체계 약화 → 다른 하위체계로 보상 훈련.",
+ ev:[["RCT","Hupperets 2009","https://search.pedro.org.au/search-results/record-detail/23915"]],
+ v:["발목 균형 훈련","https://www.youtube.com/watch?v=itnkeBmuXho"],
+ sim:{s:"이 환자의 고유감각 평가로 적절한 것은?",o:["한발서기(눈 뜨고·감고)","CCFT","손가락 악력","폐활량","시력표"],a:0,e:"한발서기로 평가한다."}},
+{t:"cas",lo:"LO4",s:"34세 여성, 교통사고 후 3개월간 목통증과 어지럼, 걸을 때 불안정감. JPE 평균 오차 회전 6.2°, CCFT 24 mmHg, 신경학적 검사 정상. 우선 추가할 중재는?",
+ o:["목 도수교정만","목 보조기 착용","침상 안정","머리 재위치·눈-머리 협응 등 목 고유감각 훈련을 깊은목굽힘근 훈련과 병행","무거운 목 근력운동"],a:3,
+ w:["단독으로 감각운동 결함을 다루지 못한다.","근거 없다.","해롭다.","JPE 손상(>4.5°)과 CCFT 저하에 맞춘 중재이다.","감각운동 결함에 우선이 아니다."],
+ c:"JPE > 4.5° + 어지럼 → 고유감각 훈련 추가.",
+ ev:[["평가","JPSE 4.5°","https://www.physiotutors.com/?p=12304"],["SR","de Vries 2015","https://atlas.chiro.org/?p=26964"]],
+ v:["목 고유감각 훈련","https://www.youtube.com/watch?v=xokqq8Y9n9M"],
+ sim:{s:"목 고유감각 훈련의 예는?",o:["레이저로 과녁 따라 그리기","팔굽혀펴기","자전거","줄넘기","다리 벌리기"],a:0,e:"머리에 단 레이저로 과녁을 따라간다."}},
+{t:"cas",lo:"LO6",s:"40세 남성 택배기사, 1년에 3회 재발하는 요통. 현재 통증 2/10, 누워 끌어당기기 10초 × 10회 가능, 버드독에서 골반 회전. 다음 4주 계획으로 가장 적절한 것은?",
+ o:["짐볼 위 무거운 들기 훈련","끌어당기기만 계속","운동 종료","버드독을 팔·다리 각각으로 낮춰 조절을 익힌 뒤 사지 부하 → 들기 과제로 진행","절대 안정"],a:3,
+ w:["단계를 건너뛰었다.","이미 1단계를 통과했다.","조절 결함이 남아 있다.","2단계 결함부터 단계적으로 진행한다.","해롭다."],
+ c:"현재 단계의 결함부터, 한 변수씩, 기능 과제로.",
+ ev:[["코크란","Saragiotto 2016","https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/"]],
+ v:["버드독 진행","https://www.youtube.com/watch?v=w2qcdzJBVB0"],
+ sim:{s:"이 환자의 최종 단계 목표 과제는?",o:["실제 상자 들기·옮기기 동작에서 중립 유지","누워 쉬기","CCFT","손목 운동","눈 운동"],a:0,e:"업무 과제로 연결한다."}},
+{t:"cas",lo:"LO3",s:"29세 여성 프로그래머, 6개월 목통증·두통. CCFT 22 mmHg에서 목빗근 과활성, 머리 앞으로 내민 자세. 가장 근거에 맞는 운동 중재는?",
+ o:["목빗근 최대 강화","저부하 깊은목굽힘근(CCFT 단계) 훈련과 어깨뼈 조절 운동","통증 소실까지 휴식","고강도 목 폄 운동만","운동 없이 자세 교정 의자만"],a:1,
+ w:["이미 과활성된 근육이다.","Jull 2002 저부하 운동과 일치한다.","근거 없다.","대상작용을 강화할 수 있다.","능동 운동이 핵심이다."],
+ c:"깊은 근육 억제 + 표층 과활성 → 저부하 특이 훈련.",
+ ev:[["RCT","Jull 2002","https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/"]],
+ v:["깊은목굽힘근 훈련","https://www.youtube.com/watch?v=p0PcmXJai2A"],
+ sim:{s:"Jull 2002에서 운동 효과가 유지된 기간은?",o:["1주","1개월","12개월","효과 없음","1일"],a:2,e:"12개월 추적에서도 유지되었다."}},
+{t:"cas",lo:"LO5",s:"22세 남성 배구 선수, 6주 전 바깥쪽 발목 염좌(재활 완료, 통증 없음). '다시 삐지 않으려면?'이라고 묻는다. 근거에 맞는 권고는?",
+ o:["8주 가정 고유감각 훈련(균형판·한발서기 등, 주 3회)을 권하고 순응도를 점검한다","아무 조치도 필요 없다","영구 보조기만 착용","배구 중단","발목 스트레칭만"],a:0,
+ w:["Hupperets 2009 RCT와 일치한다.","재발 위험은 첫해에 높다.","단독 권고 근거가 약하다.","불필요하다.","재발 예방 근거가 부족하다."],
+ c:"이전 염좌 → 고유감각 훈련으로 재발 예방(NNT 9).",
+ ev:[["RCT","Hupperets 2009","https://search.pedro.org.au/search-results/record-detail/23915"]],
+ v:["발목 고유감각 훈련","https://www.youtube.com/watch?v=itnkeBmuXho"],
+ sim:{s:"이 연구에서 완전 순응한 비율은?",o:["약 23%","100%","90%","0%","75%"],a:0,e:"23%만 완전 순응했다."}}
+];
+
+/* 정답 위치를 ①–⑤에 고르게 배치(고정 순서, 매번 같음) */
+(function(){
+  var TA=[1,4,2,0,3,3,0,1,4,2,4,2,3,1,0,0,3,4,2,1];
+  var TS=[3,4,0,2,1,0,2,4,3,1,2,0,4,1,3,1,4,0,2,3];
+  function place(opts,ans,target,extra){
+    var idx=[];for(var i=0;i<opts.length;i++) if(i!==ans) idx.push(i);
+    target=Math.min(target,opts.length-1); idx.splice(target,0,ans);
+    return idx;
+  }
+  Q.forEach(function(q,k){
+    var p=place(q.o,q.a,TA[k]);
+    q.o=p.map(function(i){return q.o[i];}); q.w=p.map(function(i){return q.w[i];}); q.a=p.indexOf(q.a);
+    var ps=place(q.sim.o,q.sim.a,TS[k]);
+    q.sim.o=ps.map(function(i){return q.sim.o[i];}); q.sim.a=ps.indexOf(q.sim.a);
+  });
+})();
+
+window.QUIZ_META=Q.map(function(q){return {t:q.t,lo:q.lo,s:q.s};});
+document.addEventListener("quizgoto",function(e){var k=+e.detail;if(k>=0&&k<Q.length){st.i=k;save();renderQuiz();}});
+/* ===== 퀴즈 상태 ===== */
+var KEY="ch7-quiz-v1";
+var st={i:0,ans:{},conf:{},done:false};
+try{var saved=JSON.parse(localStorage.getItem(KEY)||"null"); if(saved&&saved.ans) st=saved;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+var CONF=["확신한다","애매하다","모르겠다"];
+var NUM=["①","②","③","④","⑤"];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+function renderQuiz(){
+  var el=document.getElementById("quizIn");
+  var q=Q[st.i], n=st.i;
+  var answered=Object.keys(st.ans).filter(function(k){return st.conf[k]!=null;}).length;
+  var h='<div class="eyebrow">퀴즈 · 20문항<span class="lo">'+q.lo+'</span><span style="color:var(--muted)">'+TYPES[q.t]+'</span></div>';
+  h+='<div class="qwrap">';
+  h+='<div class="qhead"><b style="color:var(--ink)">문제 '+(n+1)+' / '+Q.length+'</b><span>응답 완료 '+answered+'개</span></div>';
+  h+='<div class="dots" role="group" aria-label="문항 바로가기">';
+  Q.forEach(function(_,k){h+='<button type="button" data-go="'+k+'" class="'+((st.ans[k]!=null&&st.conf[k]!=null)?"done ":"")+(k===n?"cur":"")+'" aria-label="문제 '+(k+1)+'">'+(k+1)+'</button>';});
+  h+='</div>';
+  h+='<p class="qstem">'+esc(q.s)+'</p><div class="opts" role="group" aria-label="보기">';
+  q.o.forEach(function(o,k){h+='<button type="button" class="opt" data-opt="'+k+'" aria-pressed="'+(st.ans[n]===k)+'"'+(st.done?" disabled":"")+'><span class="n">'+NUM[k]+'</span><span>'+esc(o)+'</span></button>';});
+  h+='</div><div><div class="qlabel" id="cl">이 답에 대한 확신도</div><div class="conf" role="group" aria-labelledby="cl">';
+  CONF.forEach(function(c,k){h+='<button type="button" data-conf="'+k+'" aria-pressed="'+(st.conf[n]===k)+'"'+(st.done?" disabled":"")+'>'+c+'</button>';});
+  h+='</div></div>';
+  var miss=(st.ans[n]==null||st.conf[n]==null);
+  h+='<div class="qnav"><button type="button" id="qp"'+(n===0?" disabled":"")+'>이전 문제</button>';
+  if(n<Q.length-1) h+='<button type="button" class="primary" id="qn">다음 문제</button>';
+  else h+='<button type="button" class="primary" id="qs">'+(st.done?"결과 다시 보기":"제출하고 결과 보기")+'</button>';
+  if(st.done) h+='<button type="button" id="qr">처음부터 다시 풀기</button>';
+  h+='<span class="hint" id="qh">'+(miss&&!st.done?"답과 확신도를 모두 골라야 다음으로 넘어갑니다.":"")+'</span></div>';
+  h+='</div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-opt]").forEach(function(b){b.onclick=function(){st.ans[n]=+b.dataset.opt;save();renderQuiz();};});
+  el.querySelectorAll("[data-conf]").forEach(function(b){b.onclick=function(){st.conf[n]=+b.dataset.conf;save();renderQuiz();};});
+  el.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){st.i=+b.dataset.go;save();renderQuiz();};});
+  var qp=document.getElementById("qp"); if(qp) qp.onclick=function(){st.i--;save();renderQuiz();};
+  var qn=document.getElementById("qn"); if(qn) qn.onclick=function(){ if(!st.done&&miss){return;} st.i++;save();renderQuiz();};
+  var qs=document.getElementById("qs"); if(qs) qs.onclick=function(){
+    if(!st.done){
+      var left=[];Q.forEach(function(_,k){if(st.ans[k]==null||st.conf[k]==null)left.push(k+1);});
+      if(left.length){document.getElementById("qh").textContent="아직 끝내지 않은 문항: "+left.join(", ");return;}
+      st.done=true;save();try{document.dispatchEvent(new CustomEvent("quizsubmit",{detail:{ans:Q.map(function(q,k){return st.ans[k]===q.a?1:0;}),conf:Q.map(function(q,k){return st.conf[k];})}}));}catch(e){}
+    }
+    goSlide("result");
+  };
+  var qr=document.getElementById("qr"); if(qr) qr.onclick=function(){st={i:0,ans:{},conf:{},done:false};save();renderQuiz();};
+}
+
+function cat(k){ var ok=st.ans[k]===Q[k].a, c=st.conf[k];
+  if(!ok&&c===0) return "mis"; if(!ok) return "unl"; if(c!==0) return "uns"; return "mas"; }
+
+function renderResult(){
+  var el=document.getElementById("resultIn");
+  if(!st.done){
+    el.innerHTML='<div class="eyebrow">결과와 오답 심화</div><h2>퀴즈를 먼저 제출하세요</h2><p class="lead">20문항에 답과 확신도를 모두 고르고 제출하면 여기에 결과와 오답 카드가 나타납니다.</p><div class="qnav"><button type="button" class="primary" onclick="goSlide(\'quiz\')">퀴즈로 가기</button></div>';
+    return;
+  }
+  var cnt={mis:0,unl:0,uns:0,mas:0}, score=0, byT={}, byL={};
+  Q.forEach(function(q,k){var c=cat(k);cnt[c]++; var ok=st.ans[k]===q.a; if(ok)score++;
+    byT[q.t]=byT[q.t]||[0,0]; byT[q.t][1]++; if(ok)byT[q.t][0]++;
+    byL[q.lo]=byL[q.lo]||[0,0]; byL[q.lo][1]++; if(ok)byL[q.lo][0]++;});
+  var h='<div class="eyebrow">결과와 오답 심화</div>';
+  h+='<h2>'+score+' / '+Q.length+'점 · 정답률 '+Math.round(score/Q.length*100)+'%</h2>';
+  h+='<div class="tiles">';
+  h+='<div class="tile mis"><div class="v">'+cnt.mis+'</div><div class="l">오개념 · 확신했는데 틀림 (1순위)</div></div>';
+  h+='<div class="tile unl"><div class="v">'+cnt.unl+'</div><div class="l">미학습 · 애매·모름 + 틀림 (2순위)</div></div>';
+  h+='<div class="tile uns"><div class="v">'+cnt.uns+'</div><div class="l">불안정 지식 · 애매·모름 + 맞음 (3순위)</div></div>';
+  h+='<div class="tile mas"><div class="v">'+cnt.mas+'</div><div class="l">숙달 · 확신하고 맞음</div></div>';
+  h+='</div>';
+  h+='<div class="grid2"><div class="card"><h3>학습목표별 정답률</h3><div class="bars">';
+  ["LO1","LO2","LO3","LO4","LO5","LO6"].forEach(function(l){var v=byL[l]||[0,0];var p=v[1]?Math.round(v[0]/v[1]*100):0;
+    h+='<div class="brow"><b>'+l+'</b><div class="btrack"><i style="width:'+p+'%"></i></div><span>'+v[0]+'/'+v[1]+'</span></div>';});
+  h+='</div></div><div class="card"><h3>문항 유형별 정답률</h3><div class="bars">';
+  ["mem","int","sol","cas"].forEach(function(t){var v=byT[t];var p=Math.round(v[0]/v[1]*100);
+    h+='<div class="brow"><b>'+TYPES[t].replace("형","")+'</b><div class="btrack"><i style="width:'+p+'%"></i></div><span>'+v[0]+'/'+v[1]+'</span></div>';});
+  h+='</div></div></div>';
+
+  var order=[]; Q.forEach(function(_,k){var c=cat(k); if(c!=="mas") order.push(k);});
+  var rank={mis:0,unl:1,uns:2}; order.sort(function(a,b){return rank[cat(a)]-rank[cat(b)]||a-b;});
+  h+='<h3 style="margin-top:.4em">오답·보완 카드 ('+order.length+'개, 우선순위 순)</h3>';
+  if(!order.length) h+='<p>모든 문항을 확신하고 맞혔습니다. 8장으로 넘어가도 좋습니다.</p>';
+  order.forEach(function(k){
+    var q=Q[k], c=cat(k), mine=st.ans[k];
+    var lab={mis:["오개념","mis",""],unl:["미학습","unl"," p2"],uns:["불안정 지식","uns"," p3"]}[c];
+    h+='<article class="wcard'+lab[2]+'"><h4><span class="pill '+lab[1]+'">'+lab[0]+'</span> 문제 '+(k+1)+' · '+q.lo+' · '+TYPES[q.t]+' · 내 확신도: '+CONF[st.conf[k]]+'</h4>';
+    h+='<p class="qstem" style="font-size:.95em">'+esc(q.s)+'</p>';
+    h+='<div class="row"><b>정답</b><span>'+NUM[q.a]+' '+esc(q.o[q.a])+(mine!==q.a?' <span style="color:var(--muscle)">(내 답: '+NUM[mine]+')</span>':'')+'</span></div>';
+    h+='<div class="row"><b>보기별 해설</b><ul class="k why">';
+    q.o.forEach(function(o,j){h+='<li class="'+(j===q.a?"ans":(j===mine?"mine":""))+'">'+NUM[j]+' '+esc(q.w[j])+'</li>';});
+    h+='</ul></div>';
+    h+='<div class="row"><b>핵심 개념</b><span class="key" style="padding:.4em .7em">'+esc(q.c)+'</span></div>';
+    h+='<div class="row"><b>근거</b><span>'+q.ev.map(function(e){return '<span class="badge">'+esc(e[0])+'</span> <a href="'+e[2]+'" target="_blank" rel="noopener">'+esc(e[1])+'</a>';}).join("<br>")+'</span></div>';
+    h+='<div class="row"><b>사진·영상</b><span class="media"><a href="'+q.v[1]+'" target="_blank" rel="noopener">영상: '+esc(q.v[0])+'</a><a class="doc" href="#" data-back="'+LOSLIDE[q.lo]+'">강의 슬라이드로 돌아가기 ('+q.lo+')</a></span></div>';
+    h+='<details class="sim"><summary>다시 풀기: 유사 문항</summary><p class="qstem" style="font-size:.95em;margin:.5em 0">'+esc(q.sim.s)+'</p><ol style="margin:0;padding-left:1.3em">';
+    q.sim.o.forEach(function(o,j){h+='<li>'+esc(o)+'</li>';});
+    h+='</ol><details style="margin-top:.4em"><summary>정답 보기</summary><p>'+NUM[q.sim.a]+' '+esc(q.sim.o[q.sim.a])+'. '+esc(q.sim.e)+'</p></details></details>';
+    h+='</article>';
+  });
+  h+='<div class="qnav"><button type="button" onclick="goSlide(\'quiz\')">문항 다시 보기</button><button type="button" id="rr">처음부터 다시 풀기</button></div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-back]").forEach(function(a){a.onclick=function(e){e.preventDefault();goSlide(a.dataset.back);};});
+  document.getElementById("rr").onclick=function(){st={i:0,ans:{},conf:{},done:false};save();renderQuiz();goSlide("quiz");};
+}
+
+renderQuiz();
+var m=location.hash.match(/^#slide-(\d+)$/);
+slides[0].classList.add("on");
+show(m?+m[1]-1:0,false);
+})();
+</script>
+<!--EXTRAS-->
+<script>window.CH_NO=7;</script>
+<div id="xs" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xsT">
+ <div class="xbox">
+  <div class="xhd"><b id="xsT">검색</b><button type="button" class="xclose" data-close="xs" aria-label="닫기">✕</button></div>
+  <input id="xsq" type="search" placeholder="예: 통증유발점, 등세모근, 스트레칭 용량" autocomplete="off" aria-label="검색어">
+  <div class="xtabs" id="xsTabs" hidden><button type="button" data-scope="here" aria-pressed="true">이 강의안</button><button type="button" data-scope="all" aria-pressed="false">과정 전체(1–8장)</button></div>
+  <p class="xhint" id="xsHint">단어 여러 개를 띄어 쓰면 모두 들어간 슬라이드만 찾습니다. 구용어·영문(예: 승모근, hamstring)도 6판 용어로 함께 찾습니다. 단축키: / 또는 Ctrl+K</p>
+  <ol id="xsR" class="xres"></ol>
+ </div>
+</div>
+<div id="xl" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xlT">
+ <div class="xbox">
+  <div class="xhd"><b id="xlT">내 YouTube 영상 추가</b><button type="button" class="xclose" data-close="xl" aria-label="닫기">✕</button></div>
+  <label class="xf">YouTube 주소<input id="xlU" type="url" placeholder="https://www.youtube.com/watch?v=… 또는 https://youtu.be/…"></label>
+  <label class="xf">제목<input id="xlN" type="text" maxlength="80" placeholder="예: 위등세모근 촉진 시범(교수 촬영)"></label>
+  <label class="xf">붙일 슬라이드<select id="xlS"></select></label>
+  <p class="xhint">추가한 영상은 해당 슬라이드 아래 '교수님이 추가한 영상'에 나타나며, 이 강의안을 여는 모든 수강생에게 보입니다. 영상 파일은 먼저 YouTube에 올린 뒤(일부 공개도 가능) 주소를 붙여 넣으세요.</p>
+  <p class="xmsg" id="xlM" role="status"></p>
+  <div class="xact"><button type="button" id="xlSave" class="xprimary">추가</button></div>
+ </div>
+</div>
+<div id="xp" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xpT">
+ <div class="xbox">
+  <div class="xhd"><b id="xpT">내 사진 추가</b><button type="button" class="xclose" data-close="xp" aria-label="닫기">✕</button></div>
+  <label class="xf">사진 파일(여러 장 가능)<input id="xpF" type="file" accept="image/*" multiple></label>
+  <div id="xpPrev"></div>
+  <label class="xf">설명(선택)<input id="xpN" type="text" maxlength="80" placeholder="예: 위등세모근 집게 촉진 — 엄지와 검지로 근육 배를 잡는다"></label>
+  <label class="xf">붙일 슬라이드<select id="xpS"></select></label>
+  <p class="xhint">사진은 긴 변 2000px로 줄여 올립니다. 올린 사진은 해당 슬라이드 아래 '교수님이 올린 사진'에 나타나며, 이 강의안을 여는 모든 수강생에게 보입니다. 환자 사진은 동의를 받고, 얼굴 등 알아볼 수 있는 부분은 가려 주세요.</p>
+  <p class="xmsg" id="xpM" role="status"></p>
+  <div class="xact"><button type="button" id="xpSave" class="xprimary">올리기</button></div>
+ </div>
+</div>
+<div id="xv" class="xv" hidden role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+ <button type="button" class="xclose" id="xvX" aria-label="닫기">✕</button>
+ <button type="button" class="xnav xprev" id="xvP" aria-label="이전 사진">‹</button>
+ <img id="xvI" alt="">
+ <p id="xvC"></p>
+ <button type="button" class="xnav xnext" id="xvN" aria-label="다음 사진">›</button>
+</div>
+<div id="xa" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xaT">
+ <div class="xbox wide">
+  <div class="xhd"><b id="xaT">수업 분석 (교수 전용)</b><button type="button" class="xclose" data-close="xa" aria-label="닫기">✕</button></div>
+  <div id="xaB"><p class="xhint">불러오는 중…</p></div>
+ </div>
+</div>
+<script>@@C:xtools.js@@</script>
+<!--/EXTRAS-->
+<!--STUDY--><style>@@C:notes.css@@</style>
+<script>@@C:notes.js@@</script><!--/STUDY-->
+<script type="application/json" id="lkData">@@C:glossary.json@@</script>
+<!--LOOKUP--><style>@@C:lookup.css@@</style>
+<script>@@C:lookup.js@@</script><!--/LOOKUP-->
+<script>window.STUDY_CFG={app:"ch7",mount:"header.bar",toc:"#toc",parentStore:true};</script>
+<!--EDIT: 내용 수정 v2 — 설정은 window.STUDY_CFG={app,slides,activeClass,mount,toc,goTo,parentStore,editable,editSkip}--><style>@@C:edit.css@@</style>
+<script>@@C:edit.js@@</script><!--/EDIT-->
+<script>@@C:links.js@@</script><script>@@C:a11y.js@@</script>
+</body>
+</html>

@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html data-mod="ch8" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8장 기능훈련과 통합 중재</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* 레이아웃: 넓은 화면은 16:9 슬라이드 한 장을 화면에 맞춰 축소·확대, 좁은 화면은 같은 슬라이드를 세로로 흘려 스크롤 */
+:root{
+  --bg:#eef1f4;
+  --paper:#ffffff;
+  --ink:#172033;
+  --muted:#5a6578;
+  --line:#d5dbe3;
+  --muscle:#b4233c;      /* 근육·통증 */
+  --muscle-soft:#f8e4e8;
+  --nerve:#1f5fa8;       /* 신경·척수 */
+  --nerve-soft:#e3edf8;
+  --ok:#1d7a4b; --ok-soft:#e1f2e8;
+  --warn:#a15c00; --warn-soft:#fbefd9;
+  --font-display:"IBM Plex Sans KR","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f141c; --paper:#171e29; --ink:#e7ebf1; --muted:#9aa5b5; --line:#2c3646;
+    --muscle:#f06a7f; --muscle-soft:#3a1d25; --nerve:#6ea8ec; --nerve-soft:#17283d;
+    --ok:#5fcf93; --ok-soft:#163327; --warn:#f0b35a; --warn-soft:#3a2a12;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f141c; --paper:#171e29; --ink:#e7ebf1; --muted:#9aa5b5; --line:#2c3646;
+  --muscle:#f06a7f; --muscle-soft:#3a1d25; --nerve:#6ea8ec; --nerve-soft:#17283d;
+  --ok:#5fcf93; --ok-soft:#163327; --warn:#f0b35a; --warn-soft:#3a2a12;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.55;display:flex;flex-direction:column}
+a{color:var(--nerve)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--nerve);outline-offset:2px}
+
+/* 상단 바 */
+.bar{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--paper);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bar h1{font-family:var(--font-display);font-size:15px;margin:0;font-weight:700;letter-spacing:-.01em}
+.bar .chap{color:var(--muscle);font-weight:700}
+.bar .spacer{flex:1}
+.bar select,.bar button{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px}
+.progress{height:3px;background:var(--line)}
+.progress i{display:block;height:100%;background:var(--muscle);width:0;transition:width .25s}
+
+/* 무대 */
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:16px;min-height:0}
+.slide{display:none;background:var(--paper);border:1px solid var(--line);border-radius:14px;position:relative;container-type:inline-size;overflow:auto}
+.slide.on{display:flex;flex-direction:column}
+@media (min-width:900px) and (min-height:520px){
+  .slide{width:min(100%, calc((100vh - 150px) * 16 / 9));aspect-ratio:16/9}
+  .slide .in{font-size:clamp(12px,1.55cqw,26px)}
+}
+@media (max-width:899px),(max-height:519px){
+  .stage{align-items:flex-start;overflow:auto}
+  .slide{width:100%}
+  .slide .in{font-size:16px}
+}
+.in{padding:3.2em 3.6em 2.4em;display:flex;flex-direction:column;gap:1em;flex:1;min-height:0}
+@media (max-width:899px){.in{padding:22px 18px 18px}}
+.eyebrow{font-size:.78em;font-weight:700;letter-spacing:.06em;color:var(--muscle);text-transform:uppercase;display:flex;gap:.6em;align-items:center;flex-wrap:wrap}
+.eyebrow .lo{background:var(--muscle);color:var(--paper);padding:.15em .6em;border-radius:99px;letter-spacing:0}
+h2{font-family:var(--font-display);font-size:2em;line-height:1.25;margin:0;text-wrap:balance;letter-spacing:-.02em}
+h3{font-family:var(--font-display);font-size:1.15em;margin:0 0 .3em}
+p{margin:0}
+.lead{font-size:1.15em;max-width:42em}
+.cols{display:grid;grid-template-columns:1.05fr 1fr;gap:2em;align-items:center;flex:1;min-height:0}
+.cols.top{align-items:start}
+@media (max-width:899px){.cols{grid-template-columns:1fr;gap:16px}}
+.fig{width:100%;height:auto;max-height:100%}
+.fig text{font-family:var(--font-body)}
+.card{border:1px solid var(--line);border-radius:12px;padding:1em 1.1em;background:var(--paper)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.8em}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em}
+@media (max-width:640px){.grid2,.grid3{grid-template-columns:1fr}}
+ul.k{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:.35em}
+.big{font-family:var(--font-display);font-size:3.2em;font-weight:700;line-height:1;color:var(--muscle);font-variant-numeric:tabular-nums}
+.big small{font-size:.35em;color:var(--muted);font-weight:600;margin-left:.2em}
+.src{margin-top:auto;display:flex;gap:.5em;flex-wrap:wrap;align-items:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);padding-top:.7em}
+.badge{display:inline-block;font-size:.95em;font-weight:700;padding:.1em .55em;border-radius:6px;background:var(--nerve-soft);color:var(--nerve);white-space:nowrap}
+.badge.g{background:var(--ok-soft);color:var(--ok)}
+.badge.w{background:var(--warn-soft);color:var(--warn)}
+.media{display:flex;gap:.5em;flex-wrap:wrap}
+.media a{font-size:.8em;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:.25em .8em;display:inline-flex;gap:.35em;align-items:center}
+.media a::before{content:"▶";font-size:.75em;color:var(--muscle)}
+.media a.doc::before{content:"▤";color:var(--nerve)}
+table.t{border-collapse:collapse;width:100%;font-size:.88em}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:.45em .55em;text-align:left;vertical-align:top}
+table.t th{color:var(--muted);font-weight:700;font-size:.9em}
+.tw{overflow-x:auto}
+.key{background:var(--muscle-soft);border-left:4px solid var(--muscle);padding:.7em 1em;border-radius:0 10px 10px 0;font-weight:500}
+.note{display:none;border-top:1px dashed var(--line);background:var(--bg);padding:.8em 3.6em;font-size:14px;color:var(--muted)}
+body.notes .note{display:block}
+
+/* 하단 내비 */
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 16px 12px}
+.nav button{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 18px;cursor:pointer;font-weight:700}
+.nav button:disabled{opacity:.4;cursor:default}
+.nav .count{font-variant-numeric:tabular-nums;color:var(--muted);min-width:5em;text-align:center;font-size:14px}
+
+/* 학습목표 */
+.los{display:grid;grid-template-columns:repeat(3,1fr);gap:.8em}
+@media (max-width:899px){.los{grid-template-columns:1fr}}
+.lo-card{border:1px solid var(--line);border-radius:12px;padding:.9em 1em;display:flex;flex-direction:column;gap:.4em}
+.lo-card b{font-family:var(--font-display);color:var(--muscle)}
+.lo-card .verb{font-size:.75em;color:var(--muted);font-weight:700}
+
+/* 퀴즈 */
+.qwrap{display:flex;flex-direction:column;gap:.9em}
+.qhead{display:flex;gap:.6em;align-items:center;flex-wrap:wrap;font-size:.8em;color:var(--muted)}
+.qstem{font-size:1.12em;font-weight:500;white-space:pre-line}
+.opts{display:flex;flex-direction:column;gap:.45em}
+.opt{display:flex;gap:.7em;align-items:flex-start;text-align:left;border:1px solid var(--line);border-radius:10px;padding:.55em .8em;background:var(--paper);cursor:pointer}
+.opt .n{font-weight:700;color:var(--muted);min-width:1.4em}
+.opt[aria-pressed="true"]{border-color:var(--nerve);background:var(--nerve-soft)}
+.conf{display:flex;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;width:max-content;max-width:100%}
+.conf button{border:0;border-right:1px solid var(--line);background:var(--paper);padding:.5em 1.1em;cursor:pointer;font-weight:600}
+.conf button:last-child{border-right:0}
+.conf button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.qlabel{font-size:.8em;font-weight:700;color:var(--muted)}
+.qnav{display:flex;gap:.6em;flex-wrap:wrap;align-items:center}
+.qnav button{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:.5em 1em;cursor:pointer;font-weight:700}
+.qnav button.primary{background:var(--muscle);border-color:var(--muscle);color:#fff}
+.qnav button:disabled{opacity:.45;cursor:default}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dots button{width:1.9em;height:1.9em;border-radius:6px;border:1px solid var(--line);background:var(--paper);font-size:.72em;cursor:pointer;padding:0}
+.dots button.done{background:var(--nerve-soft);border-color:var(--nerve)}
+.dots button.cur{outline:2px solid var(--muscle)}
+.hint{font-size:.8em;color:var(--warn)}
+
+/* 결과 */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:.7em}
+@media (max-width:899px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{border:1px solid var(--line);border-radius:12px;padding:.8em}
+.tile .v{font-family:var(--font-display);font-size:1.8em;font-weight:700;font-variant-numeric:tabular-nums}
+.tile .l{font-size:.78em;color:var(--muted)}
+.tile.mis{border-color:var(--muscle);background:var(--muscle-soft)}
+.tile.unl{border-color:var(--warn);background:var(--warn-soft)}
+.tile.uns{border-color:var(--nerve);background:var(--nerve-soft)}
+.tile.mas{border-color:var(--ok);background:var(--ok-soft)}
+.bars{display:flex;flex-direction:column;gap:.35em}
+.brow{display:grid;grid-template-columns:3.5em 1fr 3.5em;gap:.6em;align-items:center;font-size:.85em}
+.btrack{height:.7em;background:var(--line);border-radius:99px;overflow:hidden}
+.btrack i{display:block;height:100%;background:var(--nerve)}
+.wcard{border:1px solid var(--line);border-left:6px solid var(--muscle);border-radius:12px;padding:1em 1.1em;display:flex;flex-direction:column;gap:.6em}
+.wcard.p2{border-left-color:var(--warn)}
+.wcard.p3{border-left-color:var(--nerve)}
+.wcard h4{margin:0;font-family:var(--font-display);font-size:1em}
+.wcard .row{display:grid;grid-template-columns:6.5em 1fr;gap:.6em;font-size:.9em}
+@media (max-width:640px){.wcard .row{grid-template-columns:1fr}}
+.wcard .row>b{color:var(--muted);font-size:.85em}
+.why li.mine{color:var(--muscle);font-weight:600}
+.why li.ans{color:var(--ok);font-weight:600}
+details.sim{border:1px dashed var(--line);border-radius:10px;padding:.6em .8em}
+details.sim summary{cursor:pointer;font-weight:700}
+.pill{display:inline-block;font-size:.75em;font-weight:700;padding:.12em .55em;border-radius:99px}
+.pill.mis{background:var(--muscle);color:#fff}
+.pill.unl{background:var(--warn);color:#fff}
+.pill.uns{background:var(--nerve);color:#fff}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.slide h2{word-break:keep-all}.mnote{margin:.2em 0 .6em;color:var(--muted);font-size:.85em}.mlib{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em}@media (max-width:900px){.mlib{grid-template-columns:repeat(2,1fr)}}@media (max-width:560px){.mlib{grid-template-columns:1fr}}.mcard{border:1px solid var(--line);border-left:4px solid var(--muscle);border-radius:10px;padding:.55em .75em;font-size:.86em;display:flex;flex-direction:column}.mcard b{font-size:1.08em}.mcard small{color:var(--muted);font-size:.8em}.mcard p{margin:.3em 0 .5em;font-size:.88em;line-height:1.4;flex:1}.mcard .media{flex-direction:column;gap:.3em}.mcard .media a{font-size:.78em;border-radius:8px;line-height:1.3}
+h2.th{font-size:1.5em;margin:.1em 0 .2em}.tcard .media{flex-direction:column}h2.th{font-size:1.5em;margin:.1em 0 .2em}.tlib{grid-template-columns:repeat(3,1fr)}@media (max-width:900px){.tlib{grid-template-columns:1fr}}.tbody{display:flex;flex-direction:column;gap:.4em;flex:1}.tfig{display:flex;gap:.3em;justify-content:center;background:#fbf7f3;border-radius:8px;padding:.3em}.tf{display:flex;flex-direction:column;align-items:center;font-size:.7em;color:var(--muted)}.tf svg{height:185px;width:auto;max-width:100%}.tlib .tf svg{height:152px}.tcard .media{gap:.3em}.tcard .media a{padding:.25em .6em;line-height:1.3}.tfig.none{min-height:120px;align-items:center;font-size:.78em;color:var(--muted);background:#f5f2ee;padding:.8em;line-height:1.4;text-align:center}.tcard dl{margin:0 0 .4em;font-size:.8em;line-height:1.35;display:grid;grid-template-columns:auto 1fr;align-content:start;gap:.1em .5em}.tcard dt{font-weight:700;color:var(--muscle);white-space:nowrap}.tcard dd{margin:0}.tcard .noimg{font-size:.74em;color:var(--muted);padding:.2em .4em}
+/*CR*/.mm{position:relative;display:grid;grid-template-columns:1fr .62fr 1fr;grid-template-rows:repeat(3,auto);grid-template-areas:"a m d" "b m e" "c m f";gap:.7em 1.2em;flex:1;min-height:0;align-items:center}
+.mmlines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.mmlines path{fill:none;stroke:var(--line);stroke-width:.5;vector-effect:non-scaling-stroke;stroke-width:2}
+.mmb{position:relative;font:inherit;text-align:left;cursor:pointer;background:var(--paper);color:inherit;border:1px solid var(--line);border-left:.45em solid var(--c);border-radius:.7em;padding:.45em .7em;display:flex;flex-direction:column;gap:.15em;font-size:.74em;line-height:1.35;transition:opacity .2s,transform .2s}
+.mmb b{color:var(--c);font-size:1.12em}.mmb em{font-style:normal;font-weight:700;font-size:.95em}
+.mmb.core{box-shadow:0 0 0 2px var(--muscle) inset;background:var(--muscle-soft)}
+.mmc{position:relative;font:inherit;cursor:pointer;justify-self:center;width:100%;aspect-ratio:1;max-width:11em;border-radius:50%;border:0;background:var(--ink);color:var(--paper);font-weight:800;font-size:.95em;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mmc small{font-weight:400;font-size:.62em;opacity:.8;margin-top:.4em}
+.mm.f .mmb{opacity:.28}.mm.f .mmb.on{opacity:1;transform:scale(1.04);z-index:1;box-shadow:0 .4em 1.2em rgba(0,0,0,.18)}
+.alg{display:flex;flex-direction:column;gap:.42em;font-size:.72em;line-height:1.28}.alst{margin:0;font-size:1.05em}.ay.ghost{background:none;color:var(--muted);font-size:.92em}
+.ar{display:grid;grid-template-columns:3.4em 1.15fr 1fr;gap:.6em;align-items:stretch;transition:opacity .2s}
+.an{display:grid;place-items:center;background:var(--ink);color:var(--paper);border-radius:.5em;font-weight:800}
+.ar.st .an{background:var(--nerve)}.ar.end .an{background:var(--muted);font-size:.85em}
+.aq{border:1px solid var(--line);border-radius:.5em;padding:.3em .6em;position:relative}.aq b{display:block}.aq span{color:var(--muted)}
+.ar:not(.st):not(.end) .aq::after{content:"아니오 ↓";position:absolute;right:.5em;bottom:-1.1em;font-size:.78em;color:var(--muted);background:var(--paper);padding:0 .3em;z-index:1}
+.ar[data-s="6"] .aq::after{content:"아니오 ↓"}
+.ay{border-radius:.5em;padding:.3em .6em;background:var(--nerve-soft)}.ay:empty{background:none}.ay.red{background:#fde3e6;color:#8a0020}.ay.ok{background:var(--ok-soft)}
+.alg.go .ar{opacity:.3}.alg.go .ar.cur,.alg.go .ar.done{opacity:1}.alg.go .ar.cur .aq{border:2px solid var(--muscle)}.alg.go .ar.hit .ay{outline:3px solid var(--muscle);outline-offset:1px}.alg.go .ar.done{opacity:.6}
+.algc{display:flex;justify-content:space-between;align-items:center;gap:.6em;font-size:.72em;flex-wrap:wrap}.algc #algMsg{font-weight:600}
+.algb{font:inherit;border:1px solid var(--line);background:var(--paper);color:inherit;border-radius:999px;padding:.25em 1em;margin-left:.3em;cursor:pointer;font-weight:700}.algb[data-a=y]{background:var(--muscle);color:#fff;border-color:transparent}.algb.ghost{font-weight:400}
+.cx{display:grid;grid-template-columns:1fr 1fr;gap:.8em;font-size:.84em;line-height:1.45}
+.cxc{border:1px solid var(--line);border-radius:.7em;padding:.55em .8em;background:var(--paper)}.cxc[open]{border-color:var(--muscle);background:var(--muscle-soft)}
+.cxc summary{cursor:pointer;list-style:none}.cxc summary::-webkit-details-marker{display:none}.cxc summary::after{content:" ▸ 처방 보기";color:var(--muscle);font-weight:700;font-size:.9em}.cxc[open] summary::after{content:" ▾"}
+.cxc p{margin:.5em 0 0;border-top:1px dashed var(--line);padding-top:.45em}.pth{display:block;font-size:.88em;color:var(--nerve);font-weight:700;margin-bottom:.2em}
+@media (max-width:760px){.mm{grid-template-columns:1fr;grid-template-areas:"m" "a" "b" "c" "d" "e" "f"}.mmlines{display:none}.mmc{max-width:8em}.ar{grid-template-columns:2.8em 1fr}.ay{grid-column:2}.ay:empty{display:none}.cx{grid-template-columns:1fr}}
+@media print{.algc{display:none}.cxc p{display:block}}.pb{display:grid;grid-template-columns:1fr 1fr;gap:1em;flex:1;min-height:0;font-size:.74em;line-height:1.35}
+.pbq{display:flex;flex-direction:column;gap:.35em}.pbst{margin:0 0 .2em;padding:.45em .7em;border-radius:.6em;background:var(--nerve-soft);font-size:.95em}
+.pbq label{display:flex;gap:.6em;align-items:flex-start;border:1px solid var(--line);border-radius:.6em;padding:.4em .7em;cursor:pointer;background:var(--paper)}
+.pbq label:has(input:checked){border-color:var(--muscle);background:var(--muscle-soft)}
+.pbq input{width:1.2em;height:1.2em;margin-top:.15em;accent-color:var(--muscle);flex:none}.pbq label b{display:block}.pbq label small{color:var(--muted)}
+.pbo{border:2px solid var(--muscle);border-radius:.8em;padding:.6em .9em;background:var(--paper);overflow:auto}
+.pbo h4{margin:0 0 .3em;color:var(--muscle);font-size:1.08em}.pbo h5{margin:.5em 0 .2em;font-size:.95em;color:var(--nerve)}
+.pbo ol{margin:0;padding-left:1.3em}.pbo li{margin:.15em 0}.pbo li a{font-weight:700;color:var(--nerve);white-space:nowrap}.pbo .re{margin-top:.5em;padding-top:.4em;border-top:1px dashed var(--line);color:var(--muted)}
+@media (max-width:760px){.pb{grid-template-columns:1fr}}/*/CR*//*QFIT*/@media (min-width:900px){#quiz .in{padding-top:2.4em;padding-bottom:1.6em;gap:.75em}}/*/QFIT*//*XCSS*/.bar .xbtn{font-weight:600}.xov{position:fixed;inset:0;background:rgba(15,20,30,.45);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:6vh 12px}.xov[hidden]{display:none}.xbox{background:var(--paper,#fff);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.25);width:min(720px,100%);max-height:84vh;overflow:auto;padding:16px 18px}.xhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:1.05em}.xclose{border:0;background:none;font-size:18px;cursor:pointer;padding:4px 8px}#xsq,.xf input,.xf select{width:100%;box-sizing:border-box;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper,#fff);color:inherit}.xtabs{display:flex;gap:6px;margin:8px 0}.xtabs button{border:1px solid var(--line);background:var(--paper,#fff);border-radius:999px;padding:5px 12px;cursor:pointer;font-size:13px}.xtabs button[aria-pressed=true]{background:var(--muscle,#b4233c);color:#fff;border-color:transparent}.xhint{color:var(--muted);font-size:.82em;margin:.5em 0}.xres{list-style:none;margin:0;padding:0}.xres li a{display:block;padding:9px 10px;border-radius:10px;text-decoration:none;color:inherit;border:1px solid transparent}.xres li a:hover,.xres li a:focus{background:#f6f1ee;border-color:var(--line)}.xres .xc{display:block;font-size:.72em;color:var(--muscle,#b4233c);font-weight:700}.xres b{display:block;font-size:.95em}.xres .xs{display:block;font-size:.8em;color:var(--muted);line-height:1.45}.xres mark{background:#ffe08a;color:inherit;border-radius:3px;padding:0 1px}.xf{display:block;font-size:.85em;font-weight:600;margin:.6em 0}.xf input,.xf select{margin-top:4px;font-weight:400}.xmsg{font-size:.85em;color:var(--muscle,#b4233c);min-height:1.2em}.xact{text-align:right}.xprimary{background:var(--muscle,#b4233c);color:#fff;border:0;border-radius:10px;padding:9px 18px;font-size:15px;cursor:pointer}.xprimary:disabled{opacity:.6}.mylinks{margin-top:.8em;padding:.6em .8em;border:2px dashed var(--muscle,#b4233c);border-radius:12px;background:#fff8f6;font-size:.9em}.mylinks b{display:block;margin-bottom:.35em;color:var(--muscle,#b4233c)}.mylinks .media{flex-direction:column;gap:.3em}.myrow{display:flex;gap:.4em;align-items:center}.myrow a{flex:1}.mydel{border:1px solid var(--line);background:#fff;border-radius:8px;font-size:12px;padding:4px 8px;cursor:pointer}.xbox.wide{width:min(980px,100%)}.anas{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6em;margin:.4em 0 .8em}.anas div{border:1px solid var(--line);border-radius:10px;padding:.5em .7em}.anas b{display:block;font-size:1.5em;color:var(--muscle,#b4233c)}.anas span{font-size:.8em;color:var(--muted)}.anat{width:100%;border-collapse:collapse;font-size:.85em}.anat th,.anat td{border-bottom:1px solid var(--line);padding:.35em .4em;text-align:left;vertical-align:top}.anat th{font-size:.8em;color:var(--muted)}.anat tr.hot td{background:var(--muscle-soft,#fbecee)}.abar{display:inline-block;height:.6em;border-radius:3px;background:var(--nerve,#1f5fa8);vertical-align:middle;margin-right:.3em}.abar.mis{background:var(--muscle,#b4233c)}.anat .q{max-width:420px;color:var(--ink)}.anat button{font:inherit;border:0;background:none;color:var(--nerve,#1f5fa8);cursor:pointer;padding:0;text-align:left}.anlo{display:flex;flex-wrap:wrap;gap:.4em .9em;font-size:.85em;margin:.3em 0 .8em}.qnote{font-size:.78em;color:var(--muted);margin:.3em 0 0}.qsend{position:absolute;right:14px;bottom:6px;margin:0;font-size:11px;color:var(--muted);pointer-events:none}.myphotos,.mylinks{flex:none}.in:has(.myphotos)>*,.in:has(.mylinks)>*{flex:none}.mydel{white-space:nowrap;flex:none}.myphotos{margin-top:.8em;padding:.6em .8em;border:2px dashed var(--nerve,#1f5fa8);border-radius:12px;background:var(--nerve-soft,#eef4fb)}.myphotos>b{display:block;margin-bottom:.4em;color:var(--nerve,#1f5fa8)}.mpgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,170px));gap:.6em}.mpgrid figure{margin:0;background:var(--paper,#fff);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}.mpgrid button.mpimg{border:0;padding:0;background:#000;cursor:zoom-in;display:block}.mpgrid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}.mpgrid figcaption{font-size:.78em;padding:.35em .5em;line-height:1.35;display:flex;gap:.4em;align-items:flex-start;justify-content:space-between}.xv{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2vh 2vw;gap:.6em}.xv[hidden]{display:none}.xv img{max-width:96vw;max-height:84vh;object-fit:contain;border-radius:6px}.xv p{color:#fff;margin:0;font-size:1.05em;text-align:center}.xv .xclose{position:absolute;top:10px;right:14px;color:#fff;font-size:26px}.xv .xnav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:50%;width:48px;height:48px;font-size:24px;cursor:pointer}.xv .xprev{left:12px}.xv .xnext{right:12px}.xprev[hidden],.xnext[hidden]{display:none}#xpPrev{display:flex;gap:.4em;flex-wrap:wrap;margin:.4em 0}#xpPrev img{width:72px;height:54px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}#finderBtn{display:inline-block;text-decoration:none;color:#fff;background:var(--muscle,#b4233c);border:1px solid transparent;border-radius:8px;padding:6px 10px;font-size:14px;font-weight:600;white-space:nowrap}#finderBtn:hover{filter:brightness(1.1)}.fdl{font-weight:700;color:var(--muscle,#b4233c);white-space:nowrap}@media print{.xv,#finderBtn{display:none!important}}@media print{.xov,.xbtn{display:none!important}}.note:empty::before{content:"이 슬라이드에는 아직 발표자 노트가 없습니다.";font-style:italic}body.notes .note{border-top:2px dashed var(--muscle,#b4233c)}/*/XCSS*/
+</style>
+</head>
+<body>
+<header class="bar">
+  <h1><span class="chap">8장</span> 기능훈련과 통합 중재</h1>
+  <span class="spacer"></span>
+  <label for="toc" class="qlabel" style="font-size:13px">목차</label>
+  <select id="toc" aria-label="슬라이드 목차"></select>
+  <a id="finderBtn" class="xbtn" href="https://claude.ai/artifact/J92F6QmMP5HnFDebazPdYQ" target="_blank" rel="noopener" title="아픈 부위를 누르면 후보 근육을 보여 주는 도구(새 탭)">통증 원인 찾기 ↗</a><button id="srchBtn" class="xbtn" type="button" aria-label="슬라이드 검색">검색</button><button id="myVidBtn" class="xbtn" type="button" hidden>＋ 내 영상</button><button id="myPicBtn" class="xbtn" type="button" hidden>＋ 내 사진</button><button id="anaBtn" class="xbtn" type="button" hidden>수업 분석</button><button id="noteBtn" type="button" aria-pressed="false">발표자 노트</button>
+</header>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<main class="stage" id="stage">
+
+<!-- 1 표지 -->
+<section class="slide" data-title="표지" data-group="도입">
+ <div class="in">
+  <div class="eyebrow">근육 기원 통증의 원인·증상·중재 · 8장</div>
+  <div class="cols">
+   <div style="display:flex;flex-direction:column;gap:1em">
+    <h2 style="font-size:2.6em">치료실에서 삶으로<br>기능훈련과 통합 중재</h2>
+    <p class="lead">스트레칭(4장), 도수치료(5장), 근력(6장), 안정화(7장)를 배웠습니다. 마지막 장은 이것들을 환자의 일·운동·일상 동작으로 묶는 법입니다. 두려움을 다루는 교육, 단계적 노출, 복귀 기준, 자기관리와 재발 예방까지.</p>
+    <div class="media"><a href="https://www.youtube.com/watch?v=_8_KaslbT1A" target="_blank" rel="noopener">도입 영상: 인지기능치료(CFT)</a></div>
+   </div>
+   <div data-anat='{"view":"back","hl":["erector","gmax","hamstrings","trapezius_ml"],"labels":[[124,250,"척추세움근",-85,240],[130,352,"큰볼기근",385,350],[124,410,"뒤넙다리근",-85,420],[132,170,"중간·아래등세모근",385,170]],"label":"들기 동작에서 함께 쓰이는 근육 사슬","viewBox":"-90 120 480 340"}'></div>
+  </div>
+  <div class="src"><span>강의 구성: 학습목표 6 → 인포그래픽 → 핵심 강의 18장 → 중재 선택 3장 → 퀴즈 30문항 → 오답 심화</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 2 학습목표 -->
+<section class="slide" data-title="학습목표" data-group="도입">
+ <div class="in">
+  <div class="eyebrow">학습목표</div>
+  <h2>이 장을 마치면 할 수 있는 것</h2>
+  <div class="los">
+   <div class="lo-card"><b>LO1</b><span class="verb">설명한다</span><span>기능훈련의 원리(과제 특이성, 다관절·다평면, 환자 목표 중심)를 설명할 수 있다.</span></div>
+   <div class="lo-card"><b>LO2</b><span class="verb">적용한다</span><span>단계적 활동과 단계적 노출을 구분해 움직임 재교육에 적용할 수 있다.</span></div>
+   <div class="lo-card"><b>LO3</b><span class="verb">통합한다</span><span>통증신경과학교육(PNE)과 인지기능치료(CFT)를 운동·도수치료와 통합할 수 있다.</span></div>
+   <div class="lo-card"><b>LO4</b><span class="verb">판단한다</span><span>기능 검사(Y-균형, 환자특이기능척도 등)로 업무·스포츠 복귀를 판단할 수 있다.</span></div>
+   <div class="lo-card"><b>LO5</b><span class="verb">설계한다</span><span>목·어깨·허리 사례별 통합 프로그램을 설계하고 물리적인자를 보조로 배치할 수 있다.</span></div>
+   <div class="lo-card"><b>LO6</b><span class="verb">계획한다</span><span>가정 프로그램, 순응도 전략, 재발 예방 계획을 세울 수 있다.</span></div>
+  </div>
+  <div class="src"><span>1–7장 총정리: 원인 이해 → 평가 → 수동 중재 → 능동 운동 → 기능과 자기관리</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 3 인포그래픽 -->
+<section class="slide" data-title="인포그래픽: 한 장 요약" data-group="도입">
+ <div class="in" style="gap:.6em">
+  <div class="eyebrow">인포그래픽 · 학습 지도</div>
+  <h2 style="font-size:1.6em">통합 중재의 다리: 수동 → 능동 → 기능 → 자기관리</h2>
+  <svg class="fig" viewBox="0 0 960 400" role="img" aria-label="수동 중재에서 능동 운동, 기능훈련, 자기관리로 이어지는 다리와 각 단계의 학습목표" style="flex:1;min-height:0">
+   <path d="M40 300 Q480 60 920 300" fill="none" stroke="var(--line)" stroke-width="10"/>
+   <g font-size="14" text-anchor="middle" font-weight="700">
+    <circle cx="120" cy="250" r="54" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="2"/><text x="120" y="246" fill="var(--warn)">수동</text><text x="120" y="266" font-size="12" font-weight="400" fill="var(--ink)">도수·물리적인자</text>
+    <circle cx="350" cy="155" r="54" fill="var(--nerve-soft)" stroke="var(--nerve)" stroke-width="2"/><text x="350" y="151" fill="var(--nerve)">능동</text><text x="350" y="171" font-size="12" font-weight="400" fill="var(--ink)">근력·안정화</text>
+    <circle cx="610" cy="155" r="54" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="2"/><text x="610" y="151" fill="var(--ok)">기능</text><text x="610" y="171" font-size="12" font-weight="400" fill="var(--ink)">과제·노출</text>
+    <circle cx="840" cy="250" r="54" fill="var(--muscle-soft)" stroke="var(--muscle)" stroke-width="2"/><text x="840" y="246" fill="var(--muscle)">자기관리</text><text x="840" y="266" font-size="12" font-weight="400" fill="var(--ink)">재발 예방</text>
+   </g>
+   <g font-size="13" text-anchor="middle" fill="var(--ink)">
+    <text x="120" y="335">LO5 보조 배치</text><text x="350" y="240">LO1 기능 원리</text><text x="610" y="240">LO2 노출 · LO4 복귀 기준</text><text x="840" y="335">LO6 순응·재발 예방</text>
+   </g>
+   <rect x="300" y="40" width="360" height="52" rx="12" fill="var(--paper)" stroke="var(--nerve)" stroke-width="2"/>
+   <text x="480" y="72" text-anchor="middle" font-size="15" font-weight="700" fill="var(--nerve)">LO3 다리 위 전체: PNE·CFT로 두려움 낮추기</text>
+   <rect x="250" y="330" width="460" height="56" rx="12" fill="var(--muscle-soft)" stroke="var(--muscle)" stroke-width="2"/>
+   <text x="480" y="354" text-anchor="middle" font-size="14" font-weight="700" fill="var(--muscle)">출발점: 중재 선택 알고리즘</text>
+   <text x="480" y="375" text-anchor="middle" font-size="12.5" fill="var(--ink)">자극 민감도·두려움·가동범위·근력·운동조절·기능 목표 → 묶음 처방</text>
+  </svg>
+  <div class="src"><span class="badge g">RCT</span><a href="https://pubmed.ncbi.nlm.nih.gov/37146623/" target="_blank" rel="noopener">RESTORE 2023</a><span class="badge g">SR/MA</span><a href="https://researchportalplus.anu.edu.au/en/publications/short-term-impact-of-combining-pain-neuroscience-education-with-e/" target="_blank" rel="noopener">Siddall 2022</a><a href="https://pubmed.ncbi.nlm.nih.gov/26752509/" target="_blank" rel="noopener">Steffens 2016</a><span class="badge">CPG</span><a href="https://pubmed.ncbi.nlm.nih.gov/28192789/" target="_blank" rel="noopener">ACP 2017</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO1 -->
+<section class="slide" data-title="LO1-1 기능훈련 원리" data-group="LO1" id="lo1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>원리</div>
+  <h2>환자가 '하고 싶은 일'을 연습한다</h2>
+  <div class="grid3">
+   <div class="card"><h3>과제 특이성</h3><p>상자 들기가 목표라면 결국 상자를 든다. 6장의 특이성 원리가 동작 수준으로 확장된 것이다.</p></div>
+   <div class="card"><h3>다관절·다평면</h3><p>밀기·당기기·들기·회전·걷기·계단. 한 근육이 아니라 움직임 패턴을 훈련한다.</p></div>
+   <div class="card"><h3>환자 목표 중심</h3><p>환자특이기능척도(PSFS)로 환자가 고른 3–5개 활동을 목표·재평가 지표로 쓴다.</p></div>
+  </div>
+  <div class="key">기능훈련은 근력·안정화의 '다음 단계'가 아니라 처음부터 함께 간다. 첫 회기에도 환자의 목표 동작을 작게 쪼개 연습한다.</div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=IcDyqdO1bWg" target="_blank" rel="noopener">영상: 재활 기능훈련</a></div>
+  <div class="src"><span class="badge">평가</span><a href="https://www.youtube.com/watch?v=fzHL106Dy_M" target="_blank" rel="noopener">PSFS 사용법 영상</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO1-2 기본 움직임 패턴" data-group="LO1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>움직임 패턴</div>
+  <h2>일곱 가지 기본 패턴으로 일상을 쪼갠다</h2>
+  <div class="cols top">
+   <div class="tw"><table class="t">
+    <tr><th>패턴</th><th>일상 과제</th><th>훈련 예</th></tr>
+    <tr><td>쪼그려 앉기</td><td>의자 앉기, 바닥 물건</td><td>상자 스쿼트</td></tr>
+    <tr><td>엉덩관절 접기</td><td>들기, 세면대</td><td>막대 엉덩관절 접기, 데드리프트</td></tr>
+    <tr><td>밀기</td><td>문 열기, 선반 넣기</td><td>벽 밀기 → 밴드 밀기</td></tr>
+    <tr><td>당기기</td><td>서랍, 가방</td><td>밴드 노젓기</td></tr>
+    <tr><td>나아가기</td><td>계단, 차 타기</td><td>스텝업, 런지</td></tr>
+    <tr><td>회전</td><td>뒤돌아보기, 운전</td><td>밴드 회전 저항</td></tr>
+    <tr><td>나르기</td><td>장바구니</td><td>한 손 나르기 걷기</td></tr>
+   </table></div>
+   <div data-anat='{"view":"front","hl":["quads","iliopsoas","oblique"],"labels":[[110,380,"넙다리네갈래근: 앉기·계단",-85,390],[120,300,"엉덩허리근",385,300],[110,230,"배빗근: 회전·나르기",-85,230]],"label":"기능 동작에 쓰이는 앞쪽 근육","viewBox":"-90 190 480 260"}'></div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=nbP3zV6C8OI" target="_blank" rel="noopener">영상: 엉덩관절 접기</a><a href="https://www.youtube.com/watch?v=V97zH30eO1g" target="_blank" rel="noopener">영상: 한 손 나르기</a></div>
+  <div class="src"><span>기능 동작 분류는 임상 교육용 틀이다.</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO1-3 진행 원칙" data-group="LO1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>진행</div>
+  <h2>쉬운 버전 → 실제 과제 → 과제 + 변수</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 200" role="img" aria-label="쉬운 버전에서 실제 과제, 과제와 변수로 이어지는 세 단계 화살표">
+    <g font-size="13" text-anchor="middle" font-weight="700">
+     <rect x="10" y="70" width="120" height="60" rx="10" fill="var(--nerve-soft)" stroke="var(--nerve)"/><text x="70" y="98" fill="var(--nerve)">쉬운 버전</text><text x="70" y="117" font-size="11" font-weight="400" fill="var(--ink)">높은 상자·가벼운 짐</text>
+     <rect x="150" y="70" width="120" height="60" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/><text x="210" y="98" fill="var(--ok)">실제 과제</text><text x="210" y="117" font-size="11" font-weight="400" fill="var(--ink)">바닥 상자</text>
+     <rect x="290" y="70" width="120" height="60" rx="10" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="350" y="98" fill="var(--muscle)">과제 + 변수</text><text x="350" y="117" font-size="11" font-weight="400" fill="var(--ink)">무게·반복·속도</text>
+    </g>
+    <g stroke="var(--ink)" stroke-width="2"><line x1="130" y1="100" x2="148" y2="100"/><line x1="270" y1="100" x2="288" y2="100"/></g>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>범위: 높은 곳 → 낮은 곳</li><li>부하: 가볍게 → 실제 무게 → 실제 이상</li><li>환경: 치료실 → 집·작업장 모의</li><li>예측: 정해진 동작 → 예측 불가 상황</li></ul>
+    <div class="key">'올바른 자세'를 하나로 정하지 않는다. 허리를 굽혀 드는 것 자체가 위험하다는 근거는 약하다. 여러 방식으로 자신 있게 움직이는 능력이 목표이다.</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://pubmed.ncbi.nlm.nih.gov/37146623/" target="_blank" rel="noopener">RESTORE: 보호적 움직임 교정을 포함한 CFT</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO2 -->
+<section class="slide" data-title="LO2-1 활동 vs 노출" data-group="LO2" id="lo2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>두 가지 단계적 접근</div>
+  <h2>단계적 활동은 '할당량', 단계적 노출은 '두려운 동작'</h2>
+  <div class="tw"><table class="t">
+   <tr><th></th><th>단계적 활동(graded activity)</th><th>단계적 노출(graded exposure)</th></tr>
+   <tr><td>원리</td><td>조작적 조건화: 시간·할당량 기준, 긍정 강화</td><td>두려움 소거: 두려운 활동에 단계적으로 노출</td></tr>
+   <tr><td>진행 기준</td><td>미리 정한 할당량(통증과 무관)</td><td>두려움 위계(가장 덜 무서운 것부터)</td></tr>
+   <tr><td>적합 대상</td><td>활동 회피·낮은 활동량</td><td>운동공포(TSK 높음), 특정 동작 회피</td></tr>
+   <tr><td>도구</td><td>기준선 측정 → 할당량 증가</td><td>사진 활동 두려움 척도, 행동 실험</td></tr>
+  </table></div>
+  <div class="key">통증 의존(아프면 멈춤)이 아니라 시간·할당량 의존으로 진행한다. 6장 통증 모니터링 모델과 함께 쓰면 안전 범위 안에서 꾸준히 올릴 수 있다.</div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://search.pedro.org.au/search-results/record-detail/22641" target="_blank" rel="noopener">Leeuw M 등. Pain 2008;138:192–207</a><a href="https://www.onderzoekmetmensen.nl/en/node/24939" target="_blank" rel="noopener">BackActive 연구 설계</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO2-2 두려움 회피 모델" data-group="LO2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>두려움 회피</div>
+  <h2>두려움 → 회피 → 탈조건 → 더 큰 통증의 고리</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 240" role="img" aria-label="통증, 파국화, 운동공포, 회피, 장애의 악순환과 직면을 통한 회복 경로">
+    <g font-size="13" text-anchor="middle" font-weight="700">
+     <rect x="160" y="10" width="100" height="36" rx="8" fill="var(--paper)" stroke="var(--ink)"/><text x="210" y="33" fill="var(--ink)">통증 경험</text>
+     <rect x="290" y="70" width="110" height="36" rx="8" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="345" y="93" fill="var(--muscle)">파국화</text>
+     <rect x="290" y="150" width="110" height="36" rx="8" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="345" y="173" fill="var(--muscle)">운동공포</text>
+     <rect x="160" y="200" width="100" height="36" rx="8" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="210" y="223" fill="var(--muscle)">회피·경계</text>
+     <rect x="20" y="110" width="110" height="36" rx="8" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="75" y="133" fill="var(--muscle)">탈조건·장애</text>
+    </g>
+    <g stroke="var(--muscle)" stroke-width="2" fill="none" marker-end="url(#ar8)"><path d="M262 30 L300 68"/><path d="M345 108 L345 148"/><path d="M300 186 L262 210"/><path d="M160 214 L110 148"/><path d="M90 108 L160 40"/></g>
+    <defs><marker id="ar8" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="var(--muscle)"/></marker></defs>
+    <path d="M200 50 Q120 80 200 120" fill="none" stroke="var(--ok)" stroke-width="3" stroke-dasharray="5 4"/>
+    <text x="215" y="110" font-size="12" font-weight="700" fill="var(--ok)">직면 → 회복</text>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>평가: Tampa 운동공포척도(TSK), 통증파국화척도(PCS), 3장 황색기</li><li>운동공포가 큰 요통 환자에서 노출은 파국화와 '활동이 해롭다'는 믿음을 더 줄였다</li><li>그러나 기능 장애에서 노출이 단계적 활동보다 낫다고 볼 수는 없었다</li></ul>
+   </div>
+  </div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://search.pedro.org.au/search-results/record-detail/22641" target="_blank" rel="noopener">Leeuw 2008 (85명)</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO2-3 노출 실제" data-group="LO2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>실제</div>
+  <h2>두려움 위계표로 '가장 덜 무서운 것'부터</h2>
+  <div class="tw"><table class="t">
+   <tr><th>단계</th><th>활동(두려움 0–100)</th><th>행동 실험 질문</th></tr>
+   <tr><td>1</td><td>앉아서 몸 앞으로 숙이기(20)</td><td>"숙이면 허리가 다칠까?" → 해 보고 결과 확인</td></tr>
+   <tr><td>2</td><td>바닥의 빈 상자 들기(40)</td><td>예상 통증 vs 실제 통증 기록</td></tr>
+   <tr><td>3</td><td>5 kg 상자 굽혀 들기(60)</td><td>다음 날 아침 상태 확인</td></tr>
+   <tr><td>4</td><td>정원 일 30분(80)</td><td>실제 환경에서 반복</td></tr>
+   <tr><td>5</td><td>아이 안아 올리기(95)</td><td>목표 활동 달성</td></tr>
+  </table></div>
+  <div class="key">예상 vs 실제의 차이가 믿음을 바꾼다. 치료자는 '안전 신호'를 주되, 회피(벨트·보조기 의존)를 강화하지 않는다.</div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=WVhWMbEm6_o" target="_blank" rel="noopener">영상: 단계적 노출</a></div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://search.pedro.org.au/search-results/record-detail/22641" target="_blank" rel="noopener">Leeuw 2008</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO3 -->
+<section class="slide" data-title="LO3-1 통증신경과학교육" data-group="LO3" id="lo3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>PNE</div>
+  <h2>교육 + 운동이 운동 단독보다 단기에 낫다</h2>
+  <div class="cols">
+   <div class="grid2">
+    <div class="card"><h3>메타분석</h3><p>고품질 RCT 5편(460명). PNE와 운동을 함께 하면 운동 단독보다 단기 통증, 장애, 운동공포, 파국화가 더 좋아졌다.</p></div>
+    <div class="card"><h3>교육 내용</h3><ul class="k"><li>통증 ≠ 조직 손상</li><li>신경계의 민감화와 회복 가능성</li><li>움직임은 안전하고 이롭다</li></ul></div>
+   </div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <div class="key">교육은 단독이 아니라 운동과 '함께'. 근거 확실성은 낮은–매우 낮은 수준이고 장기 효과는 불확실하다.</div>
+    <p>1장(통증 체계), 2장(중추 민감화) 내용이 환자 언어로 바뀌는 지점이다. 비유: "화재경보기가 너무 예민해진 상태".</p>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=jIsF8CXouk8" target="_blank" rel="noopener">영상: 통증신경과학교육</a></div>
+  <div class="src"><span class="badge g">SR/MA</span><a href="https://researchportalplus.anu.edu.au/en/publications/short-term-impact-of-combining-pain-neuroscience-education-with-e/" target="_blank" rel="noopener">Siddall B 등. Pain 2022;163:e20–30</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO3-2 인지기능치료 RESTORE" data-group="LO3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>RESTORE 시험</div>
+  <h2>CFT 7회기 + 추가 1회: 활동 제한 4.6점 감소, 1년 유지</h2>
+  <div class="cols">
+   <div class="grid2">
+    <div class="card"><div class="big">−4.6<small>/24점</small></div><p>13주 롤랜드-모리스 장애 점수, 일반 치료 대비</p></div>
+    <div class="card"><div class="big" style="color:var(--ok)">52주</div><p>효과크기 유지, 비용 효과적, 3년 추적에서도 유지</p></div>
+   </div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>호주 1차 물리치료 클리닉 20곳, 만성 장애성 요통 492명</li><li>CFT의 세 요소: ① 통증 이해(의미 부여) ② 노출과 통제(보호적 움직임 버리기) ③ 생활 습관 변화</li><li>기초 장애가 클수록 효과가 컸다</li></ul>
+   </div>
+  </div>
+  <div class="key">CFT는 PNE + 단계적 노출 + 기능훈련 + 생활 습관을 개인 맞춤으로 묶은 '통합 중재'의 대표 예이다.</div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://pubmed.ncbi.nlm.nih.gov/37146623/" target="_blank" rel="noopener">Kent P 등. Lancet 2023;401:1866–77</a><a href="https://www.iasp-pain.org/wp-content/uploads/2024/06/cognitive-functional-therapy-msk-fact-sheet_R1.pdf" target="_blank" rel="noopener">IASP CFT 자료</a><a href="https://pubmed.ncbi.nlm.nih.gov/39327170/" target="_blank" rel="noopener">효과 조절인자 분석 2024</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO3-3 수동+능동 통합" data-group="LO3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>통합 순서</div>
+  <h2>도수치료는 '창을 열고', 운동은 '그 창으로 들어간다'</h2>
+  <div class="tw"><table class="t">
+   <tr><th>회기 흐름</th><th>내용</th><th>시간</th></tr>
+   <tr><td>1 재평가</td><td>PSFS, 통증, 압통역치, 비교 동작(3장)</td><td>5분</td></tr>
+   <tr><td>2 교육</td><td>짧은 PNE 메시지 1개, 환자 질문</td><td>5분</td></tr>
+   <tr><td>3 수동 중재(필요 시)</td><td>통증·가동성 '창' 열기(5장)</td><td>5–10분</td></tr>
+   <tr><td>4 능동 운동</td><td>근력·안정화(6·7장)</td><td>15분</td></tr>
+   <tr><td>5 기능 과제</td><td>목표 동작·노출</td><td>10분</td></tr>
+   <tr><td>6 가정 프로그램</td><td>2–3개 운동, 일지, 다음 목표</td><td>5분</td></tr>
+  </table></div>
+  <div class="key">수동 중재 후 바로 능동 운동으로 이어 '방금 생긴 변화'를 움직임으로 굳힌다. 수동 중재만으로 회기를 끝내지 않는다.</div>
+  <div class="src"><span class="badge">CPG</span><a href="https://www.orthopt.org/uploads/content_files/files/LBP_Revision_2021.pdf" target="_blank" rel="noopener">요통 지침 2021: 도수치료는 운동과 병행</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO4 -->
+<section class="slide" data-title="LO4-1 기능 검사" data-group="LO4" id="lo4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>기능 검사</div>
+  <h2>복귀 판단은 '통증 없음'이 아니라 '기능 기준 충족'</h2>
+  <div class="grid3">
+   <div class="card"><h3>Y-균형 검사</h3><p>앞·뒤안쪽·뒤가쪽 뻗기. 앞쪽 뻗기 좌우 차이 4 cm 초과는 균형 비대칭과 부상 위험 증가 가능성을 시사한다.</p></div>
+   <div class="card"><h3>근력·지구력</h3><p>건측 대비 근력 비(사지 대칭 지수), 몸통 폄 지구력, 옆 플랭크 시간.</p></div>
+   <div class="card"><h3>환자 보고</h3><p>PSFS, NDI·ODI(3장), 운동공포(TSK), 자기효능감.</p></div>
+  </div>
+  <div data-anat='{"view":"front","hl":["quads","tib_ant"],"labels":[[110,380,"넙다리네갈래근",-85,370],[112,480,"앞정강근",385,480]],"label":"Y-균형 검사의 지지 다리 근육","viewBox":"-90 320 480 220"}'></div>
+  <div class="src"><span class="badge">평가</span><a href="https://www.physiotutors.com/wiki/y-balance-test/" target="_blank" rel="noopener">Y-균형 검사 절차</a><a href="https://typeset.io/pdf/y-balance-test-a-reliability-study-involving-multiple-raters-4ji215hryi.pdf" target="_blank" rel="noopener">Shaffer 2013 신뢰도</a><span class="badge g">SR</span><a href="https://doaj.org/article/67df0304c3de48d6af0841aaa499ce5f" target="_blank" rel="noopener">Plisky 2021 YBT 고찰</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO4-2 Y-균형 해석" data-group="LO4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>해석</div>
+  <h2>Y-균형: 연습 4–6회, 본 시행 3회, 다리 길이로 정규화</h2>
+  <div class="cols">
+   <svg class="fig" viewBox="0 0 420 240" role="img" aria-label="앞쪽과 두 뒤쪽 방향으로 135도와 45도 각도의 Y자 검사 판">
+    <circle cx="210" cy="130" r="14" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+    <g stroke="var(--nerve)" stroke-width="6" stroke-linecap="round"><line x1="210" y1="116" x2="210" y2="20"/><line x1="200" y1="140" x2="120" y2="220"/><line x1="220" y1="140" x2="300" y2="220"/></g>
+    <g font-size="13" font-weight="700" fill="var(--nerve)"><text x="220" y="30">앞쪽</text><text x="40" y="225">뒤안쪽</text><text x="310" y="225">뒤가쪽</text></g>
+    <text x="250" y="140" font-size="12" fill="var(--muted)">135°</text><text x="196" y="210" font-size="12" fill="var(--muted)">45°</text>
+   </svg>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>합성 점수 = 세 방향 합 ÷ (3 × 다리 길이) × 100</li><li>좌우 비대칭: 앞쪽 4 cm 초과 주의, 뒤안쪽 4 cm 이상 비대칭과 부상 위험 연관 보고</li><li>단독 예측력은 제한적 → 여러 검사와 함께 판단</li></ul>
+    <div class="key">'통과/실패'보다 재활 진행 추적 도구로 쓴다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=KJM_sXb_4CU" target="_blank" rel="noopener">영상: Y-균형 검사</a></div>
+  <div class="src"><span class="badge">평가</span><a href="https://www.physiotutors.com/wiki/y-balance-test/" target="_blank" rel="noopener">Physiotutors YBT</a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6769269" target="_blank" rel="noopener">뒤안쪽 비대칭과 달리기 부상 2019</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO4-3 업무 복귀" data-group="LO4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>업무·스포츠 복귀</div>
+  <h2>단계적 복귀: 시간·과제·부하를 나눠 돌아간다</h2>
+  <div class="tw"><table class="t">
+   <tr><th>단계</th><th>업무(사무직·육체노동)</th><th>스포츠</th><th>기준</th></tr>
+   <tr><td>1</td><td>단축 근무, 자세 변경 허용</td><td>개인 기술 훈련</td><td>PSFS 목표 활동 50% 이상</td></tr>
+   <tr><td>2</td><td>정상 시간, 무거운 과제 제외</td><td>비접촉 팀 훈련</td><td>근력 대칭 80–90%, YBT 비대칭 감소</td></tr>
+   <tr><td>3</td><td>전체 과제</td><td>접촉·경기 복귀</td><td>기능 검사 충족, 두려움 낮음, 자기효능감</td></tr>
+  </table></div>
+  <div class="key">요통은 '통증이 허락하는 만큼 활동 유지'가 원칙이다. 완전 휴식 후 복귀보다 일찍, 조정된 형태로 복귀하는 편이 낫다.</div>
+  <div class="src"><span class="badge">CPG</span><a href="https://www.aafp.org/afp/2017/0915/p407" target="_blank" rel="noopener">ACP 2017: 통증이 허락하는 만큼 활동 유지</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO5 -->
+<section class="slide" data-title="LO5-1 목·어깨 사례" data-group="LO5" id="lo5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>사례 1</div>
+  <h2>목·어깨: 사무직 위등세모근 근육통 + 두통</h2>
+  <div class="cols">
+   <div data-anat='{"view":"back","hl":["trapezius_u","levator","trapezius_ml"],"marks":[[118,112]],"labels":[[118,112,"위등세모근 통증유발점",-85,110],[106,86,"어깨올림근",385,80],[132,170,"중간·아래등세모근",385,180]],"label":"목 어깨 사례의 표적 근육","viewBox":"-90 30 480 220"}'></div>
+   <div class="tw"><table class="t">
+    <tr><th>요소</th><th>중재(장)</th></tr>
+    <tr><td>교육</td><td>통증 이해, 업무 중 미세 휴식(1·2장)</td></tr>
+    <tr><td>수동(필요 시)</td><td>통증유발점 압박, 목뼈 가동술(5장)</td></tr>
+    <tr><td>운동</td><td>특이적 아령 근력 주 3회(6장) + CCFT(7장)</td></tr>
+    <tr><td>기능</td><td>컴퓨터 작업 자세 변화, 가방 나르기</td></tr>
+    <tr><td>보조</td><td>표면열(자가 관리)</td></tr>
+    <tr><td>재평가</td><td>NDI, 압통역치, 두통 빈도</td></tr>
+   </table></div>
+  </div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://www.epistemonikos.org/en/documents/1562a53538ea5791ace6ab89611bbc273b5c1c75" target="_blank" rel="noopener">Andersen 2008</a><a href="https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/" target="_blank" rel="noopener">Jull 2002</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO5-2 허리 사례" data-group="LO5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>사례 2</div>
+  <h2>허리: 운동공포가 큰 만성 요통 물류 노동자</h2>
+  <div class="cols">
+   <div class="tw"><table class="t">
+    <tr><th>주</th><th>통합 프로그램</th></tr>
+    <tr><td>1–2</td><td>PNE + 엉덩관절 접기·브리지 + 걷기 기준선</td></tr>
+    <tr><td>3–6</td><td>단계적 노출(두려움 위계), 데드리프트 패턴, 옆 플랭크</td></tr>
+    <tr><td>7–10</td><td>실제 상자 들기·나르기, 작업 모의, 근력 증량</td></tr>
+    <tr><td>11–12</td><td>단계적 업무 복귀, 가정 프로그램, 추가 회기</td></tr>
+   </table></div>
+   <div data-anat='{"view":"back","hl":["erector","ql","gmax"],"labels":[[124,250,"척추세움근",-85,240],[112,272,"허리네모근",385,260],[130,352,"큰볼기근",385,350]],"label":"허리 사례의 표적 근육","viewBox":"-90 200 480 200"}'></div>
+  </div>
+  <div class="key">수동 중재와 물리적인자는 초반 '참여를 돕는 도구'로만, 주 중심은 노출·기능·근력이다.</div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://pubmed.ncbi.nlm.nih.gov/37146623/" target="_blank" rel="noopener">RESTORE 2023</a><a href="https://search.pedro.org.au/search-results/record-detail/22641" target="_blank" rel="noopener">Leeuw 2008</a><span class="badge g">코크란</span><a href="https://pedro.org.au/?p=21080" target="_blank" rel="noopener">Hayden 2021</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO5-3 물리적인자(보조)" data-group="LO5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>보조 중재</div>
+  <h2>물리적인자는 '보조'로 짧게, 운동의 자리를 대신하지 않는다</h2>
+  <div class="tw"><table class="t">
+   <tr><th>인자</th><th>근거 요약</th><th>쓰는 법</th></tr>
+   <tr><td>표면열</td><td>급성·아급성 요통에 비약물 1차 선택지 중 하나(ACP, 중간 질)</td><td>자가 관리용 온찜질, 운동 전 준비</td></tr>
+   <tr><td>경피신경전기자극(TENS)</td><td>만성 요통 효과 근거 불충분</td><td>단기 통증 조절 보조, 단독 금지</td></tr>
+   <tr><td>저출력 레이저·근전도 바이오피드백</td><td>ACP는 만성 요통 비약물 선택지로 나열(근거 낮음)</td><td>운동과 병행 시에만</td></tr>
+   <tr><td>초음파·간섭전류</td><td>임상적 효과 근거 약함</td><td>일상 사용 지양</td></tr>
+  </table></div>
+  <div class="key">원칙: 수동적 치료는 환자를 '치료받는 사람'으로 만들 수 있다. 쓰더라도 능동 운동으로 넘어가는 다리로만.</div>
+  <div class="src"><span class="badge">CPG</span><a href="https://pubmed.ncbi.nlm.nih.gov/28192789/" target="_blank" rel="noopener">Qaseem A 등. Ann Intern Med 2017;166:514–30</a><a href="https://cm.healio.com/news/primary-care/20170213/acp-recommends-drugfree-treatment-for-low-back-pain" target="_blank" rel="noopener">권고 요약</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO6 -->
+<section class="slide" data-title="LO6-1 재발 예방 근거" data-group="LO6" id="lo6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>재발 예방</div>
+  <h2>운동 + 교육은 요통 위험을 45% 줄인다, 단 '계속할 때'</h2>
+  <div class="cols">
+   <div class="tw"><table class="t">
+    <tr><th>중재</th><th>요통 발생 상대위험</th><th>근거 질</th></tr>
+    <tr><td>운동 + 교육</td><td>0.55</td><td>중간</td></tr>
+    <tr><td>운동 단독</td><td>0.65</td><td>낮음–매우 낮음</td></tr>
+    <tr><td>교육 단독</td><td>1.03(효과 없음)</td><td>중간–매우 낮음</td></tr>
+    <tr><td>허리 벨트·깔창</td><td>효과 없음</td><td>낮음</td></tr>
+   </table></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>RCT 21편, 30,850명</li><li>운동 + 교육의 효과는 1년 뒤 줄었고, 운동 단독 효과는 1년 뒤 사라졌다</li></ul>
+    <div class="key">저자들은 예방 효과를 유지하려면 운동을 계속해야 할 가능성이 크다고 결론지었다.</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge g">SR/MA</span><a href="https://chiro.org/LINKS/ABSTRACTS/Prevention_of_Low_Back_Pain.shtml" target="_blank" rel="noopener">Steffens D 등. JAMA Intern Med 2016;176:199–208</a><a href="https://researchers.mq.edu.au/en/publications/prevention-of-lowback-pain-a-systematic-review-and-meta-analysis/" target="_blank" rel="noopener">초록</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO6-2 순응도 전략" data-group="LO6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>순응도</div>
+  <h2>운동은 '하는 사람'에게만 효과가 있다</h2>
+  <div class="grid3">
+   <div class="card"><h3>적게, 짧게</h3><p>가정 운동은 2–3개. 주 1시간도 짧게 나누면 효과가 있었다(6장).</p></div>
+   <div class="card"><h3>좋아하는 운동</h3><p>운동 유형 간 차이는 작다. 환자가 즐기는 운동을 고르면 순응도가 오른다(7장).</p></div>
+   <div class="card"><h3>기록·피드백</h3><p>운동 일지, 통증 일지, 영상 자료, 다음 회기 확인.</p></div>
+  </div>
+  <div class="key">발목 고유감각 훈련 연구에서 완전 순응은 23%뿐이었다. 처방보다 '실행 계획'(언제, 어디서, 무엇을 신호로)이 중요하다.</div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://blogs.the-hospitalist.org/index.php/content/help-patients-prevent-repeat-ankle-injury" target="_blank" rel="noopener">Hupperets 2009 순응도</a><span class="badge g">NMA</span><a href="https://latam-cl.demo.elsevierpure.com/es/publications/some-types-of-exercise-are-more-effective-than-others-in-people-w" target="_blank" rel="noopener">Hayden 2021: 즐기는 운동 권장</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO6-3 자기관리 계획" data-group="LO6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>퇴원 계획</div>
+  <h2>'악화 대처 계획'까지 써 주고 보낸다</h2>
+  <div class="tw"><table class="t">
+   <tr><th>항목</th><th>내용 예</th></tr>
+   <tr><td>유지 운동</td><td>근력 주 2–3회, 안정화 2–3개, 걷기 매일(6·7장)</td></tr>
+   <tr><td>업무 습관</td><td>30–40분마다 자세 바꾸기, 미세 휴식</td></tr>
+   <tr><td>악화 신호</td><td>통증이 다음 날 아침까지 지속, 주마다 증가</td></tr>
+   <tr><td>악화 대처</td><td>운동량 50%로 줄이고 활동 유지, 표면열, 1–2주 안에 원래 수준으로</td></tr>
+   <tr><td>연락 기준</td><td>적신호(3장), 2주 넘는 악화, 다리 저림·근력 약화</td></tr>
+   <tr><td>추가 회기</td><td>4–8주 뒤 1회 점검(RESTORE의 26주 추가 회기처럼)</td></tr>
+  </table></div>
+  <div class="key">재발은 '실패'가 아니라 예상되는 사건이다. 스스로 대처하는 능력(자기효능감)이 최종 목표이다.</div>
+  <div class="src"><span class="badge g">SR/MA</span><a href="https://chiro.org/LINKS/ABSTRACTS/Prevention_of_Low_Back_Pain.shtml" target="_blank" rel="noopener">Steffens 2016</a><span class="badge g">RCT</span><a href="https://pubmed.ncbi.nlm.nih.gov/37146623/" target="_blank" rel="noopener">RESTORE 추가 회기</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 중재 선택 -->
+<section class="slide" data-title="중재 선택 1: 마인드맵" data-group="중재 선택" id="cr">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">중재 선택</span>3장 원인 찾기 → 4–8장 중재</div>
+  <h2>근막통증 환자, 무엇으로 시작할까 — 중재 선택 마인드맵</h2>
+  <div class="mm" id="mm">
+   <svg class="mmlines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M50 50 C40 50 40 16 33 16"/><path d="M50 50 L33 50"/><path d="M50 50 C40 50 40 84 33 84"/>
+    <path d="M50 50 C60 50 60 16 67 16"/><path d="M50 50 L67 50"/><path d="M50 50 C60 50 60 84 67 84"/>
+   </svg>
+   <button class="mmb" style="--c:#1d7a4b;grid-area:a" data-k="a"><b>① 교육·안심 (모든 환자)</b><span>두려움·파국화·민감화 단서가 클수록 비중↑ · "아픔 ≠ 손상", 움직임은 안전</span><em>→ 통증신경과학교육 + 활동 유지 (8장 LO3)</em></button>
+   <button class="mmb" style="--c:#6b4fa0;grid-area:b" data-k="b"><b>② 도수치료 (보조)</b><span>자극 민감도가 높아 운동을 못 할 때 · 통증유발점 압박·가동술로 '운동의 창'을 연다</span><em>→ 짧게, 반드시 운동과 함께 (5장)</em></button>
+   <button class="mmb" style="--c:var(--nerve);grid-area:c" data-k="c"><b>③ 스트레칭</b><span>근육 길이·가동범위 제한 · 효과는 주로 신장 내성 증가</span><em>→ 근육별 주 5–10분, 주 5일 이상 (4장)</em></button>
+   <button class="mmc" style="grid-area:m" data-k="">근막통증<br>확인 후<small>3장 알고리즘 Q6 '예'<br>→ 환자 특성 확인</small></button>
+   <button class="mmb core" style="--c:var(--muscle);grid-area:d" data-k="d"><b>④ 근력·근지구력 (중심)</b><span>약화·지구력 부족 · 근육 과부하 업무 · 위등세모근 근육통에 특이적 근력 운동</span><em>→ 지구력 40–60% 1RM → 근력 8–12RM, 주 3회 (6장)</em></button>
+   <button class="mmb" style="--c:#a15c00;grid-area:e" data-k="e"><b>⑤ 안정화 (신경근조절)</b><span>운동조절 결손(CCFT 22 mmHg 전후 실패) · 재발성 통증 · 일반 운동과 효과 비슷</span><em>→ 인지 → 연합 → 자동 단계 (7장)</em></button>
+   <button class="mmb" style="--c:#c0002a;grid-area:f" data-k="f"><b>⑥ 기능훈련·단계적 노출</b><span>활동 제한·특정 동작 회피 · 일·운동 복귀 목표</span><em>→ PSFS 목표 동작, 두려움 위계 (8장 LO1·LO2)</em></button>
+  </div>
+  <div class="key">하나를 고르는 것이 아니라 <b>묶음을 처방</b>한다. 능동적 운동이 중심, 수동 중재는 보조. 2–4주마다 재평가해 묶음을 고친다.</div>
+  <div class="src"><span class="badge w">CPG</span><a href="https://scholars.duke.edu/individual/pub1266147" target="_blank" rel="noopener">Blanpied 2017(목통증)</a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241" target="_blank" rel="noopener">George 2021(요통)</a><span class="badge">SR/MA</span><a href="https://pedro.org.au/?p=21080" target="_blank" rel="noopener">Hayden 2021</a><a href="https://researchportalplus.anu.edu.au/en/publications/short-term-impact-of-combining-pain-neuroscience-education-with-e/" target="_blank" rel="noopener">Siddall 2022</a><span class="badge g">RCT</span><a href="https://www.epistemonikos.org/en/documents/1562a53538ea5791ace6ab89611bbc273b5c1c75" target="_blank" rel="noopener">Andersen 2008</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="중재 선택 2: 처방 알고리즘" data-group="중재 선택">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">중재 선택</span>체크하면 처방 묶음이 만들어진다</div>
+  <h2>중재 선택 알고리즘 — 환자에게 해당하는 것을 모두 고르세요</h2>
+  <div class="pb">
+   <div class="pbq">
+    <p class="pbst"><b>시작 조건</b> 3장 알고리즘에서 근막통증 확인(Q6 '예'). Q1 '예'는 의뢰, 신경병증성·통각변조가 주된 기전이면 그 경로를 먼저 따른다.</p>
+    <label><input type="checkbox" data-c="irr"><span><b>① 자극 민감도가 높다</b><small>작은 움직임에도 심한 통증, 통증이 오래 감, 잠을 깸</small></span></label>
+    <label><input type="checkbox" data-c="fear"><span><b>② 두려움·회피·파국화가 크다</b><small>운동공포(TSK) 높음, 특정 동작 회피, "부서질 것 같다"</small></span></label>
+    <label><input type="checkbox" data-c="rom"><span><b>③ 근육 길이·가동범위가 줄었다</b><small>근육 길이 검사·관절 가동범위 제한</small></span></label>
+    <label><input type="checkbox" data-c="str"><span><b>④ 근력·지구력이 부족하다</b><small>약화, 빨리 지침, 근육 과부하 업무(반복·정적 작업)</small></span></label>
+    <label><input type="checkbox" data-c="mc"><span><b>⑤ 운동조절 결손이 있다</b><small>CCFT 실패·대상 움직임, 재발성 통증</small></span></label>
+    <label><input type="checkbox" data-c="fx"><span><b>⑥ 구체적인 기능 목표가 있다</b><small>업무·운동 복귀, 들기·계단 등 PSFS 활동</small></span></label>
+   </div>
+   <div class="pbo" id="pbOut" aria-live="polite"></div>
+  </div>
+  <div class="src"><span class="badge w">CPG</span><a href="https://scholars.duke.edu/individual/pub1266147" target="_blank" rel="noopener">Blanpied 2017</a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241" target="_blank" rel="noopener">George 2021</a><span class="badge">SR/MA</span><a href="https://pedro.org.au/?p=21080" target="_blank" rel="noopener">Hayden 2021</a><a href="https://pubmed.ncbi.nlm.nih.gov/29506306/" target="_blank" rel="noopener">Thomas 2018</a><a href="https://researchers.mq.edu.au/en/publications/motor-control-exercise-for-chronic-non-specific-low-back-pain/" target="_blank" rel="noopener">Saragiotto 2016</a><span class="badge g">RCT</span><a href="https://search.pedro.org.au/search-results/record-detail/22641" target="_blank" rel="noopener">Leeuw 2008</a><a href="https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/" target="_blank" rel="noopener">Jull 2002</a><span class="badge">리뷰</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/" target="_blank" rel="noopener">Bialosky 2009</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="중재 선택 3: 사례로 처방하기" data-group="중재 선택">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">중재 선택</span>사례 적용</div>
+  <h2>네 환자에게 어떤 묶음을 처방할까</h2>
+  <div class="cx">
+   <details class="cxc"><summary><b>사례 1</b> 34세 사무직. 6주째 오른쪽 위등세모근 통증과 오후 두통. 어깨 으쓱 근지구력이 낮다. 두려움 없음, 자극 민감도 보통.</summary><p><span class="pth">④ 근력 + ⑥ 기능 (+ 교육)</span>교육(업무 중 미세 휴식) + <b>특이적 근력 운동</b>(지구력 → 근력, 주 3회, 6장) + 업무 자세·가방 나르기 연습. 필요하면 통증유발점 압박을 짧게(5장). 재평가: NDI·두통 빈도·압통역치.</p></details>
+   <details class="cxc"><summary><b>사례 2</b> 48세. 허리 통증 1년. 운동공포(TSK) 높고 허리 굽히기를 피한다. 허리네모근 통증유발점 있음.</summary><p><span class="pth">② 두려움 + ⑥ 기능 (+ 교육)</span><b>통증신경과학교육 + 단계적 노출</b>(굽히기 두려움 위계, 8장 LO2·LO3) + 즐기는 일반 운동. 수동 치료는 보조로만. 재평가: TSK·ODI·PSFS.</p></details>
+   <details class="cxc"><summary><b>사례 3</b> 26세 러너. 3일 전 장거리 뒤 장딴지근 통증, 걸으면 아프고 밤에도 욱신거림. 적신호 없음.</summary><p><span class="pth">① 자극 민감도 높음 → 이후 ④ 근력 + ⑥ 복귀</span>1단계: 안심, 부하 조절, 통증유발점 압박·자가 압박(5장), 통증 0–2 범위의 가벼운 활동. 2단계: 점진적 근력(신장성 포함, 6장) → 뜀뛰기 → 달리기 복귀 기준(8장 LO4).</p></details>
+   <details class="cxc"><summary><b>사례 4</b> 60세. 해마다 재발하는 목 통증. CCFT 22 mmHg에서 목빗근이 먼저 켜진다. 목 돌림이 조금 줄었다.</summary><p><span class="pth">⑤ 운동조절 + ③ 가동범위 + ④ 근력</span><b>깊은목굽힘근 훈련</b>(CCFT 단계, 7장) + 목 가동 스트레칭(4장) + 어깨·목 근력(6장) → 일상 자세에 통합. 재발 예방: 운동 지속(8장 LO6).</p></details>
+  </div>
+  <div class="key">사례를 누르면 처방 묶음이 열립니다. 학생이 먼저 알고리즘으로 체크해 보게 한 뒤 비교하세요. 원인 근육이 헷갈리면 <a class="fdl" href="https://claude.ai/artifact/J92F6QmMP5HnFDebazPdYQ" target="_blank" rel="noopener">→ 통증 원인 근육 찾기</a></div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=IcDyqdO1bWg" target="_blank" rel="noopener">영상: 재활 기능훈련</a><a href="https://www.youtube.com/watch?v=WVhWMbEm6_o" target="_blank" rel="noopener">영상: 단계적 노출</a></div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://www.epistemonikos.org/en/documents/1562a53538ea5791ace6ab89611bbc273b5c1c75" target="_blank" rel="noopener">Andersen 2008</a><a href="https://search.pedro.org.au/search-results/record-detail/22641" target="_blank" rel="noopener">Leeuw 2008</a><a href="https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/" target="_blank" rel="noopener">Jull 2002</a><span class="badge">SR/MA</span><a href="https://chiro.org/LINKS/ABSTRACTS/Prevention_of_Low_Back_Pain.shtml" target="_blank" rel="noopener">Steffens 2016</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 정리 -->
+
+<section class="slide" data-title="근육 영상 1/2: 목·어깨·허리·몸통" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>8장에 나온 근육</div>
+  <h2>목·어깨·허리·몸통 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>위등세모근</b><small>Upper trapezius</small><p>어깨뼈 올림·위쪽돌림, 목 폄·가쪽굽힘. 목·어깨 근육통의 대표 근육</p><div class="media"><a href="https://www.youtube.com/watch?v=SjBceqTrVaE" target="_blank" rel="noopener">영상 1: 해부학I 승모근 – 기시·정지·기능·촉진</a><a href="https://www.youtube.com/watch?v=GXcJdGM56sE" target="_blank" rel="noopener">영상 2: 승모근 기능해부학의 이해(카데바)</a></div></div><div class="mcard"><b>중간·아래등세모근</b><small>Middle·lower trapezius</small><p>어깨뼈 뒤당김·내림·위쪽돌림. 위등세모근과 균형을 이루는 근력 표적</p><div class="media"><a href="https://www.youtube.com/watch?v=WBjeUJr8XKs" target="_blank" rel="noopener">영상 1: 어깨 기능 해부: 승모근의 역할(카데바)</a><a href="https://www.youtube.com/watch?v=UqyDjSrNpT4" target="_blank" rel="noopener">영상 2: 중·하부승모근 강화 운동 – 송영민의 바른 자세</a></div></div><div class="mcard"><b>어깨올림근</b><small>Levator scapulae</small><p>C1–C4 가로돌기→어깨뼈 위각. 어깨뼈 올림·아래쪽돌림, 목 뒤가쪽 통증</p><div class="media"><a href="https://www.youtube.com/watch?v=Mp_d7Uj7Lc0" target="_blank" rel="noopener">영상 1: 해부학II 견갑거근 – 기능해부학·통증 양상</a><a href="https://www.youtube.com/watch?v=DAADjMW12hg" target="_blank" rel="noopener">영상 2: 기능적 촉진 해부학 1강: 견갑거근과 승모근</a></div></div><div class="mcard"><b>깊은목굽힘근</b><small>Deep neck flexors (긴목근·긴머리근)</small><p>위목뼈 굽힘과 목뼈 분절 안정. 머리-목 굽힘 검사·훈련의 표적</p><div class="media"><a href="https://www.youtube.com/watch?v=VWo-a8v3SNs" target="_blank" rel="noopener">영상 1: 목 앞가쪽 깊은 근육_긴목근(경장근)·긴머리근</a><a href="https://www.youtube.com/watch?v=8307gOFYfjs" target="_blank" rel="noopener">영상 2: 복근 운동 시 목이 아픈 해부학적 근거(심부경추굴곡근)</a></div></div><div class="mcard"><b>척주세움근</b><small>Erector spinae</small><p>척주 폄·가쪽굽힘. 몸통 폄 지구력의 주동근</p><div class="media"><a href="https://www.youtube.com/watch?v=zUJ49aMcho8" target="_blank" rel="noopener">영상 1: 척추근육1 – 척주세움근(엉덩갈비근·가장긴근·가시근) VR</a><a href="https://www.youtube.com/watch?v=8nypWdQDW7k" target="_blank" rel="noopener">영상 2: 필라테스 기능해부학 2. 척추기립근</a></div></div><div class="mcard"><b>허리네모근</b><small>Quadratus lumborum</small><p>몸통 가쪽굽힘·골반 올림. 허리·엉덩이 연관통</p><div class="media"><a href="https://www.youtube.com/watch?v=gXW8EZK32wI" target="_blank" rel="noopener">영상 1: 요방형근의 해부학과 기능, 촉진법 – 근육학 마스터</a><a href="https://www.youtube.com/watch?v=1u-Tb2heBWU" target="_blank" rel="noopener">영상 2: 요방형근 해부학적 위치(허리네모근)</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근육 영상 2/2: 허리·몸통·엉덩관절·무릎·발목·발" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>8장에 나온 근육</div>
+  <h2>허리·몸통·엉덩관절·무릎·발목·발 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>배바깥빗근</b><small>External oblique</small><p>몸통 돌림·가쪽굽힘. 옆 플랭크의 주 표적</p><div class="media"><a href="https://www.youtube.com/watch?v=lDc47IYbWCg" target="_blank" rel="noopener">영상 1: 구조해부학: 배속빗근과 배바깥빗근</a><a href="https://www.youtube.com/watch?v=7UqXk01iJZk" target="_blank" rel="noopener">영상 2: 외복사근·내복사근·복횡근 – 근육학 마스터</a></div></div><div class="mcard"><b>엉덩허리근</b><small>Iliopsoas</small><p>엉덩관절 굽힘. 오래 앉은 자세에서 짧아짐</p><div class="media"><a href="https://www.youtube.com/watch?v=h5h9TwRrHww" target="_blank" rel="noopener">영상 1: [힐링무브 근육학] 장요근(엉덩허리근)의 해부학과 기능</a><a href="https://www.youtube.com/watch?v=CY_RnkxlcDI" target="_blank" rel="noopener">영상 2: 엉덩허리근 &amp; 가쪽돌림근(6개)</a></div></div><div class="mcard"><b>큰볼기근</b><small>Gluteus maximus</small><p>엉덩관절 폄·가쪽돌림. 브리지·스쿼트의 주동근</p><div class="media"><a href="https://www.youtube.com/watch?v=7JMLQK44zNw" target="_blank" rel="noopener">영상 1: 대둔근·중둔근·소둔근의 기시와 정지</a><a href="https://www.youtube.com/watch?v=wIyDWjH1OCU" target="_blank" rel="noopener">영상 2: 엉덩이 근육의 기능적 움직임(대둔근·중둔근·소둔근)</a></div></div><div class="mcard"><b>넙다리네갈래근</b><small>Quadriceps (넙다리곧은근·안쪽넓은근 포함)</small><p>무릎 폄. 넙다리곧은근은 엉덩관절 굽힘도 담당</p><div class="media"><a href="https://www.youtube.com/watch?v=CIRBfe-Nh-Q" target="_blank" rel="noopener">영상 1: 대퇴사두근/넙다리네갈래근 완전정복</a><a href="https://www.youtube.com/watch?v=yv_EQHlwBBE" target="_blank" rel="noopener">영상 2: 넙다리 앞쪽 근육 VR(넙다리네갈래근·넙다리빗근)</a></div></div><div class="mcard"><b>뒤넙다리근</b><small>Hamstrings</small><p>무릎 굽힘·엉덩관절 폄. 스트레칭 연구의 대표 근육</p><div class="media"><a href="https://www.youtube.com/watch?v=Pwf7Gp_XRzo" target="_blank" rel="noopener">영상 1: [해부학-근육학] 넙다리두갈래근(대퇴이두근)</a><a href="https://www.youtube.com/watch?v=Pp25lY5_kCw" target="_blank" rel="noopener">영상 2: 햄스트링(뒤넙다리근) 해부·기능·운동</a></div></div><div class="mcard"><b>앞정강근</b><small>Tibialis anterior</small><p>발등굽힘·안쪽번짐. 정강이 앞 통증</p><div class="media"><a href="https://www.youtube.com/watch?v=nxor7beOHQA" target="_blank" rel="noopener">영상 1: [해부학-근육학] 앞정강근(전경골근)</a><a href="https://www.youtube.com/watch?v=tjZ6UQLfyKc" target="_blank" rel="noopener">영상 2: [힐링무브 근육학] 전경골근(앞정강근)의 해부학과 기능</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 1/4: 목·어깨" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>8장에 나온 근육의 근막통증</div>
+  <h2 class="th">목·어깨 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3). <a class="fdl" href="https://claude.ai/artifact/J92F6QmMP5HnFDebazPdYQ" target="_blank" rel="noopener">→ 아픈 부위로 원인 근육 찾기</a></p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>위등세모근</b><small>Upper trapezius</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["trapezius_u"], "marks": [[118, 110]], "ref": [[137, 82, 7, 13], [126, 54, 8, 10], [124, 34, 8, 9]], "viewBox": "78 9 100 133", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>위등세모근 중간, 어깨 위 자유모서리(수직 섬유)</dd><dt>연관통</dt><dd>목 뒤가쪽 → 귀 뒤·관자놀이·턱각(긴장형 두통 양상)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=vgA34wdmNqo" target="_blank" rel="noopener">TrP 영상: 해부학II 승모근 – 기능해부학과 통증유발점</a><a class="doc" href="https://learnmuscles.com/glossary/trapezius-trigger-point/" target="_blank" rel="noopener">그림: 등세모근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>중간·아래등세모근</b><small>Middle·lower trapezius</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["trapezius_ml"], "marks": [[130, 148], [140, 205]], "ref": [[140, 142, 7, 16], [134, 74, 7, 9], [96, 120, 8, 6]], "viewBox": "72 49 106 203", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>어깨뼈 안쪽모서리 근처(중간), 아래각 안쪽(아래)</dd><dt>연관통</dt><dd>어깨뼈 사이 표층 화끈거림, 아래섬유는 목 위쪽·꼭지돌기 부위·어깨 봉우리</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=tmVDta2T5Ns" target="_blank" rel="noopener">TrP 영상: 트리거 포인트 치료: 승모근·견갑거근 완벽 정리(김강훈 교수)</a><a class="doc" href="https://learnmuscles.com/glossary/trapezius-trigger-point/" target="_blank" rel="noopener">그림: 등세모근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>어깨올림근</b><small>Levator scapulae</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["levator"], "marks": [[130, 108]], "ref": [[130, 104, 11, 9], [114, 150, 6, 18], [92, 132, 8, 8]], "viewBox": "68 68 110 116", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>목-어깨 모서리(어깨뼈 위각 위쪽)와 근육 중간</dd><dt>연관통</dt><dd>목-어깨 모서리 → 어깨뼈 안쪽모서리·어깨 뒤, 목 돌림 제한(뻣뻣한 목)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=iUC-lMXhULg" target="_blank" rel="noopener">TrP 영상: 견갑거근 트리거포인트 실습(동의과학대 김강훈 교수)</a><a class="doc" href="https://learnmuscles.com/glossary/levator-scapulae-trigger-point/" target="_blank" rel="noopener">그림: 어깨올림근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 2/4: 목·어깨·허리·몸통" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>8장에 나온 근육의 근막통증</div>
+  <h2 class="th">목·어깨·허리·몸통 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3). <a class="fdl" href="https://claude.ai/artifact/J92F6QmMP5HnFDebazPdYQ" target="_blank" rel="noopener">→ 아픈 부위로 원인 근육 찾기</a></p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>깊은목굽힘근</b><small>Deep neck flexors (긴목근·긴머리근)</small><div class="tbody"><div class="tfig none">정립된 연관통 지도가 없어 도해를 그리지 않았습니다.</div><dl><dt>통증유발점</dt><dd>목뼈 앞쪽(긴목근·긴머리근) — 촉진이 어렵고 고전적 TrP 지도는 정립되지 않음</dd><dt>연관통</dt><dd>주로 목 앞·인두 부위 불편감; 임상에서는 TrP보다 운동조절 결손(머리-목 굽힘 검사)이 핵심</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=c9fgxGLP61U" target="_blank" rel="noopener">TrP 영상: 심부 경추 굴곡근 근거 논문 소개(Jull·Falla·Hodges)</a><span class="noimg">표준 연관통 그림 없음</span></div></div><div class="mcard tcard"><b>척주세움근</b><small>Erector spinae</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["erector"], "marks": [[142, 205], [142, 282]], "ref": [[138, 302, 10, 12], [130, 342, 12, 14]], "viewBox": "66 154 100 218", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>등·허리 엉덩갈비근, 가장긴근 배</dd><dt>연관통</dt><dd>엉덩갈비근: 허리 아래·엉치·엉덩이 / 가장긴근: 엉덩이·엉치엉덩관절 부위</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=zBA6FKFf0OE" target="_blank" rel="noopener">TrP 영상: 척주기립근 – 연관통·TTP·치료 테크닉(PT LOG)</a><a class="doc" href="https://learnmuscles.com/glossary/iliocostalis-and-longissimus-trigger-point/" target="_blank" rel="noopener">그림: 엉덩갈비근·가장긴근 TrP 그림</a></div></div><div class="mcard tcard"><b>허리네모근</b><small>Quadratus lumborum</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["ql"], "deep": ["ql"], "marks": [[134, 280], [140, 296]], "ref": [[138, 334, 8, 8], [122, 372, 10, 8], [116, 300, 12, 6], [98, 352, 6, 8]], "viewBox": "62 252 100 144", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>열두째 갈비뼈 아래·엉덩뼈능선 위 가쪽 깊은 곳</dd><dt>연관통</dt><dd>엉치엉덩관절·엉덩이 아래 → 엉덩뼈능선·큰돌기 부위·아랫배·샅</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=DVaaOFSHaTQ" target="_blank" rel="noopener">TrP 영상: [트리거포인트 오디오북] 요방형근 완전 해부</a><a class="doc" href="https://learnmuscles.com/glossary/quadratus-lumborum-ql-trigger-point/" target="_blank" rel="noopener">그림: 허리네모근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 3/4: 허리·몸통·엉덩관절" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>8장에 나온 근육의 근막통증</div>
+  <h2 class="th">허리·몸통·엉덩관절 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3). <a class="fdl" href="https://claude.ai/artifact/J92F6QmMP5HnFDebazPdYQ" target="_blank" rel="noopener">→ 아픈 부위로 원인 근육 찾기</a></p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>배바깥빗근</b><small>External oblique</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["oblique"], "marks": [[112, 188]], "ref": [[146, 178, 12, 8], [136, 292, 12, 8], [128, 332, 8, 8]], "viewBox": "74 154 100 202", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>갈비 아래모서리·엉덩뼈능선 근처 가쪽 배벽</dd><dt>연관통</dt><dd>명치(속쓰림 유사)·아랫배·샅 — 내장 통증과 감별</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=XiwYeLfOmQs" target="_blank" rel="noopener">TrP 영상: 복직근·외복사근·내복사근·복횡근 트리거포인트 촉진 실습</a><a class="doc" href="https://learnmuscles.com/glossary/external-internal-abdominal-obliques-trigger-point/" target="_blank" rel="noopener">그림: 배빗근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>엉덩허리근</b><small>Iliopsoas</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["iliopsoas"], "marks": [[134, 300], [127, 340]], "ref": [[118, 372, 10, 16]], "viewBox": "58 264 100 140", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div><div class="tf"><div data-anat='{"view": "back", "hl": [], "marks": [], "ref": [[141, 282, 6, 28], [140, 332, 8, 8]], "viewBox": "64 238 100 118", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>엉덩근(엉덩뼈 오목), 큰허리근(배꼽 가쪽 깊은 곳), 넙다리 위 부착부</dd><dt>연관통</dt><dd>허리 같은쪽 척주 옆 세로 띠·엉치 위쪽, 샅·넙다리 앞 위쪽</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=A7TKMfwXBkI&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): The Psoas Trigger Point (Dr. Perry)</a><a class="doc" href="https://learnmuscles.com/glossary/iliopsoas-trigger-point/" target="_blank" rel="noopener">그림: 엉덩허리근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>큰볼기근</b><small>Gluteus maximus</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["gmax"], "marks": [[140, 342], [126, 370]], "ref": [[142, 334, 8, 10], [122, 378, 14, 8], [150, 372, 5, 6]], "viewBox": "71 299 100 110", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>엉치뼈 가장자리, 궁둥뼈결절 위, 꼬리뼈 근처</dd><dt>연관통</dt><dd>엉치·엉덩이 아래·꼬리뼈 주위(오래 앉을 때 통증)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=zoWDgzDIcwI" target="_blank" rel="noopener">TrP 영상: 허리·엉덩이 통증, 대둔근 통증유발점 3곳</a><a class="doc" href="https://learnmuscles.com/glossary/gluteus-maximus-trigger-point/" target="_blank" rel="noopener">그림: 큰볼기근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 4/4: 무릎·발목·발" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>8장에 나온 근육의 근막통증</div>
+  <h2 class="th">무릎·발목·발 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3). <a class="fdl" href="https://claude.ai/artifact/J92F6QmMP5HnFDebazPdYQ" target="_blank" rel="noopener">→ 아픈 부위로 원인 근육 찾기</a></p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>넙다리네갈래근</b><small>Quadriceps (넙다리곧은근·안쪽넓은근 포함)</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["quads"], "marks": [[124, 350], [134, 425], [104, 400]], "ref": [[122, 446, 10, 10], [133, 440, 6, 8], [102, 410, 6, 22]], "viewBox": "56 320 100 152", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>넙다리곧은근 위쪽(AIIS 아래), 안쪽넓은근 아래 안쪽, 가쪽넓은근 여러 곳</dd><dt>연관통</dt><dd>넙다리곧은근: 무릎뼈 주위·무릎 앞 깊은 곳(밤 통증) / 안쪽넓은근: 무릎 앞안쪽, 무릎 꺾임 / 가쪽넓은근: 넙다리·무릎 가쪽</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=clkJLVjORvs" target="_blank" rel="noopener">TrP 영상: 대퇴사두근 트리거포인트 촉진·허혈성 압박(강성규 근육연구소)</a><a class="doc" href="https://learnmuscles.com/glossary/vastus-medialis-trigger-point/" target="_blank" rel="noopener">그림: 안쪽넓은근 TrP 그림</a><a class="doc" href="https://learnmuscles.com/glossary/rectus-femoris-trigger-point/" target="_blank" rel="noopener">그림: 넙다리곧은근 TrP 그림</a></div></div><div class="mcard tcard"><b>뒤넙다리근</b><small>Hamstrings</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["hamstrings"], "marks": [[124, 422]], "ref": [[124, 382, 14, 6], [124, 410, 8, 20], [124, 452, 8, 6], [122, 472, 6, 8]], "viewBox": "60 360 100 136", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>넙다리 뒤 중간~아래 1/3 근육 배</dd><dt>연관통</dt><dd>엉덩이 아래 주름·넙다리 뒤 → 오금·종아리 위(앉을 때·걸을 때 악화)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=YYP1u4D14Zw&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): Trigger Point Referral Pattern: Hamstring</a><a class="doc" href="https://learnmuscles.com/glossary/semitendinosus-and-semimembranosus-hamstrings-trigger-points/" target="_blank" rel="noopener">그림: 안쪽 뒤넙다리근 TrP 그림</a></div></div><div class="mcard tcard"><b>앞정강근</b><small>Tibialis anterior</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["tib_ant"], "marks": [[114, 492]], "ref": [[118, 566, 8, 6], [130, 590, 5, 4]], "viewBox": "56 448 100 162", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>정강뼈 가쪽 위 1/3 근육 배</dd><dt>연관통</dt><dd>발목 앞·엄지발가락 등쪽(정강이 통증과 감별)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=qa0ZYhoBS7o" target="_blank" rel="noopener">TrP 영상: 정강이·발목·엄지발가락 통증과 전경골근</a><a class="doc" href="https://learnmuscles.com/glossary/tibialis-anterior-trigger-point/" target="_blank" rel="noopener">그림: 앞정강근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="정리" data-group="정리">
+ <div class="in">
+  <div class="eyebrow">정리</div>
+  <h2>8장 핵심 여섯 문장</h2>
+  <div class="los">
+   <div class="lo-card"><b>LO1</b><span>환자의 목표 과제를 쪼개 처음부터 함께 연습한다.</span></div>
+   <div class="lo-card"><b>LO2</b><span>단계적 활동은 할당량, 단계적 노출은 두려움 위계로 진행한다.</span></div>
+   <div class="lo-card"><b>LO3</b><span>PNE + 운동이 운동 단독보다 단기에 낫고, CFT는 1년 이상 효과가 유지된다.</span></div>
+   <div class="lo-card"><b>LO4</b><span>복귀는 기능 기준(YBT, 근력 대칭, PSFS, 두려움)으로 단계적으로.</span></div>
+   <div class="lo-card"><b>LO5</b><span>사례별로 교육·운동·기능을 중심에, 수동 중재·물리적인자는 보조로.</span></div>
+   <div class="lo-card"><b>LO6</b><span>운동 + 교육은 요통 위험 45% 감소, 계속해야 유지된다. 악화 대처 계획까지.</span></div>
+  </div>
+  <div class="key"><b>중재 선택</b> 하나를 고르지 않고 묶음을 처방한다. 교육은 모두에게, 자극 민감도가 높으면 통증 조절과 가벼운 활동부터, 두려움이 크면 단계적 노출, 결손에 맞춰 스트레칭·근력·안정화, 목표가 있으면 기능훈련. 2–4주마다 재평가.</div>
+  <p class="hand"><a class="fdl" href="https://claude.ai/artifact/P4JyzFpYrL5b1nczbKmhQ2" target="_blank" rel="noopener">→ 학생용 핵심 유인물(8장 탭, PDF 내려받기)</a></p>
+  <div class="src"><span>다음: 퀴즈 30문항(암기 6 · 해석 9 · 해결 9 · 사례 6, 21–30번은 중재 선택 알고리즘 문제) · 과정 마침</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 퀴즈 -->
+<section class="slide" data-title="퀴즈 30문항" data-group="퀴즈" id="quiz">
+ <div class="in" id="quizIn"></div>
+ <div class="note"></div>
+</section>
+
+<!-- 결과 -->
+<section class="slide" data-title="결과와 오답 심화" data-group="퀴즈" id="result">
+ <div class="in" id="resultIn"></div>
+ <div class="note"></div>
+</section>
+
+</main>
+
+<nav class="nav" aria-label="슬라이드 이동">
+ <button id="prev" type="button">← 이전</button>
+ <span class="count" id="count">1 / 1</span>
+ <button id="next" type="button">다음 →</button>
+</nav>
+
+<script>@@C:anat.js@@</script>
+<script>
+(function(){
+"use strict";
+var slides=[].slice.call(document.querySelectorAll(".slide"));
+var cur=0;
+var toc=document.getElementById("toc");
+slides.forEach(function(s,i){
+  var o=document.createElement("option");
+  o.value=i; o.textContent=(i+1)+". "+(s.dataset.title.indexOf(s.dataset.group)===0||s.dataset.group===s.dataset.title?"":"["+s.dataset.group+"] ")+s.dataset.title;
+  toc.appendChild(o);
+});
+function idxOf(id){for(var i=0;i<slides.length;i++){if(slides[i].id===id)return i;}return -1;}
+function show(i,push){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[cur].classList.remove("on");
+  cur=i; slides[cur].classList.add("on");
+  document.getElementById("count").textContent=(cur+1)+" / "+slides.length;
+  document.getElementById("prev").disabled=cur===0;
+  document.getElementById("next").disabled=cur===slides.length-1;
+  document.getElementById("prog").style.width=((cur+1)/slides.length*100)+"%";
+  toc.value=cur;
+  if(push!==false){try{history.replaceState(null,"","#slide-"+(cur+1));}catch(e){}}
+  var st=document.getElementById("stage"); st.scrollTop=0; slides[cur].scrollTop=0;
+  if(slides[cur].id==="result") renderResult();
+}
+window.goSlide=function(id){var i=idxOf(id); if(i>=0) show(i);};
+document.getElementById("prev").onclick=function(){show(cur-1)};
+document.getElementById("next").onclick=function(){show(cur+1)};
+toc.onchange=function(){show(+toc.value)};
+document.getElementById("noteBtn").onclick=function(){
+  var on=document.body.classList.toggle("notes"); this.setAttribute("aria-pressed",on);
+};
+document.addEventListener("keydown",function(e){
+  var t=e.target.tagName; if(t==="SELECT"||t==="INPUT"||t==="TEXTAREA")return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"){show(cur+1);e.preventDefault();}
+  if(e.key==="ArrowLeft"||e.key==="PageUp"){show(cur-1);e.preventDefault();}
+});
+var tx=null,ty=null;
+document.getElementById("stage").addEventListener("touchstart",function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.getElementById("stage").addEventListener("touchend",function(e){
+  if(tx===null)return; var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(slides[cur].id!=="quiz") show(cur+(dx<0?1:-1)); }
+  tx=ty=null;
+},{passive:true});
+window.addEventListener("hashchange",function(){var m=location.hash.match(/^#slide-(\d+)$/); if(m) show(+m[1]-1,false);});
+
+/* ===== 퀴즈 데이터 ===== */
+var TYPES={mem:"암기형",int:"해석형",sol:"해결형",cas:"사례형"};
+var LOSLIDE={LO1:"lo1",LO2:"lo2",LO3:"lo3",LO4:"lo4",LO5:"lo5",LO6:"lo6","중재 선택":"cr"};
+var Q=[
+{t:"mem",lo:"LO2",s:"단계적 활동(graded activity)의 진행 원칙으로 옳은 것은?",
+ o:["통증이 생기면 즉시 멈추고 다음 날 다시 시작","두려움 위계표의 가장 무서운 활동부터 시작","수동 치료 후에만 진행","미리 정한 시간·할당량 기준으로 늘리고 긍정 강화한다","환자가 원할 때만 진행"],a:3,
+ w:["통증 의존 진행이다.","노출에서도 가장 덜 무서운 것부터 시작한다.","무관하다.","조작적 조건화에 기반한 할당량 의존 진행이다.","계획된 진행이 아니다."],
+ c:"단계적 활동 = 할당량·시간 의존 + 긍정 강화.",
+ ev:[["RCT","Leeuw 2008","https://search.pedro.org.au/search-results/record-detail/22641"]],
+ v:["단계적 활동","https://www.youtube.com/watch?v=lSdmsQufd-8"],
+ sim:{s:"단계적 노출의 진행 기준은?",o:["두려움 위계(덜 무서운 것부터)","체중","나이","날씨","통증 0"],a:0,e:"두려움 위계로 진행한다."}},
+{t:"mem",lo:"LO6",s:"Steffens(2016) 메타분석에서 요통 발생 위험을 가장 근거 있게 줄인 중재와 상대위험은?",
+ o:["교육 단독, 0.55","운동 + 교육, 0.55","허리 벨트, 0.65","깔창, 0.74","운동 단독, 1.03"],a:1,
+ w:["교육 단독은 1.03으로 효과가 없었다.","중간 질 근거로 위험을 45% 줄였다.","벨트는 효과가 없었다.","깔창은 효과가 없었다.","운동 단독은 0.65였다."],
+ c:"운동+교육 0.55 · 운동 0.65 · 교육 1.03 · 벨트·깔창 효과 없음.",
+ ev:[["SR/MA","Steffens 2016","https://chiro.org/LINKS/ABSTRACTS/Prevention_of_Low_Back_Pain.shtml"]],
+ v:["요통 예방","https://www.youtube.com/watch?v=20zybMbnVoU"],
+ sim:{s:"이 메타분석에 포함된 연구 수와 대상자는?",o:["RCT 21편, 30,850명","3편, 100명","100편, 1000명","1편","관찰 연구만"],a:0,e:"RCT 21편, 30,850명이다."}},
+{t:"mem",lo:"LO4",s:"Y-균형 검사(하지)의 세 뻗기 방향은?",
+ o:["앞쪽, 뒤안쪽, 뒤가쪽","위, 아래, 옆","굽힘, 폄, 돌림","안쪽, 가쪽, 위","앞쪽, 뒤쪽, 옆쪽 점프"],a:0,
+ w:["별 뻗기 검사를 줄인 세 방향이다.","틀리다.","관절 운동이다.","틀리다.","점프 검사가 아니다."],
+ c:"앞쪽 · 뒤안쪽 · 뒤가쪽, 다리 길이로 정규화.",
+ ev:[["평가","Physiotutors YBT","https://www.physiotutors.com/wiki/y-balance-test/"]],
+ v:["Y-균형 검사","https://www.youtube.com/watch?v=KJM_sXb_4CU"],
+ sim:{s:"Y-균형 합성 점수를 정규화하는 기준은?",o:["체중","다리 길이","키","나이","발 크기"],a:1,e:"다리 길이로 정규화한다."}},
+{t:"mem",lo:"LO5",s:"ACP(2017) 지침이 급성·아급성 요통에 권고한 비약물 1차 선택지에 포함되는 것은?",
+ o:["치료용 초음파","간섭전류","침상 안정","허리 벨트","표면열"],a:4,
+ w:["권고 목록에 없다.","권고 목록에 없다.","활동 유지를 권한다.","예방·치료 근거가 없다.","중간 질 근거로 권고되었다."],
+ c:"급성·아급성: 표면열, 마사지, 침, 척추 도수치료.",
+ ev:[["CPG","ACP 2017","https://pubmed.ncbi.nlm.nih.gov/28192789/"]],
+ v:["ACP 요통 지침","https://www.youtube.com/watch?v=1m80ZcRbBk8"],
+ sim:{s:"ACP가 모든 요통 환자에게 권한 것은?",o:["통증이 허락하는 만큼 활동 유지","2주 침상 안정","즉시 MRI","수술 상담","보조기 착용"],a:0,e:"활동 유지를 권한다."}},
+{t:"int",lo:"LO3",s:"Siddall(2022) 메타분석(RCT 5편, 460명)에서 PNE와 운동 병행이 운동 단독보다 단기 통증·장애·운동공포·파국화를 더 개선했다. 해석으로 옳은 것은?",
+ o:["PNE 단독이 운동보다 우월하다","장기 효과가 확실하다","운동에 PNE를 더하면 단기 이득이 있으나 근거 확실성은 낮고 장기 효과는 불확실하다","운동은 필요 없다","PNE는 효과가 없다"],a:2,
+ w:["PNE 단독과 비교하지 않았다.","단기 결과이다.","결과와 한계를 모두 반영한 해석이다.","운동이 기본이다.","병행 이득이 있었다."],
+ c:"PNE는 운동의 '추가'로, 단기 이득, 낮은 확실성.",
+ ev:[["SR/MA","Siddall 2022","https://researchportalplus.anu.edu.au/en/publications/short-term-impact-of-combining-pain-neuroscience-education-with-e/"]],
+ v:["PNE","https://www.youtube.com/watch?v=jIsF8CXouk8"],
+ sim:{s:"PNE의 핵심 메시지는?",o:["통증은 항상 조직 손상을 뜻한다","통증은 조직 손상과 같지 않으며 신경계는 회복 가능하다","움직이면 손상이 커진다","통증은 상상이다","약만 해결책이다"],a:1,e:"통증 ≠ 손상, 회복 가능."}},
+{t:"int",lo:"LO3",s:"RESTORE(2023)에서 CFT는 13주 롤랜드-모리스 장애 점수(24점)를 일반 치료보다 4.6점 더 줄였고 52주까지 비슷하게 유지되었다. 해석으로 가장 적절한 것은?",
+ o:["효과가 일시적이다","CFT는 약물 치료이다","기초 장애가 낮을수록 효과가 컸다","CFT는 일반 치료보다 활동 제한을 의미 있게 줄였고 효과가 지속되었다","생체되먹임 센서가 필수였다"],a:3,
+ w:["52주(3년 추적)까지 유지되었다.","물리치료사가 시행한 개인 맞춤 중재이다.","기초 장애가 클수록 효과가 컸다.","결과에 맞는 해석이다.","센서 유무에 따른 결과가 비슷했다."],
+ c:"CFT: −4.6/24(13주), 52주 유지, 비용 효과적.",
+ ev:[["RCT","Kent 2023","https://pubmed.ncbi.nlm.nih.gov/37146623/"],["자료","IASP CFT","https://www.iasp-pain.org/wp-content/uploads/2024/06/cognitive-functional-therapy-msk-fact-sheet_R1.pdf"]],
+ v:["CFT","https://www.youtube.com/watch?v=_8_KaslbT1A"],
+ sim:{s:"RESTORE의 CFT 회기 수는?",o:["최대 7회 + 26주 추가 1회","30회","1회","매일 1년","없음"],a:0,e:"12주 동안 최대 7회와 추가 회기 1회이다."}},
+{t:"int",lo:"LO6",s:"Steffens(2016)에서 교육 단독의 요통 발생 상대위험은 1.03(95% CI 0.83–1.27)이었다. 해석으로 옳은 것은?",
+ o:["교육 단독은 위험을 3% 낮춘다","교육 단독은 위험을 높인다","교육은 모든 상황에서 무의미하다","교육 단독으로는 요통 예방 효과가 없으며, 운동과 결합할 때 의미가 있다","신뢰구간이 1을 포함하지 않는다"],a:3,
+ w:["1.03은 효과 없음에 가깝다.","신뢰구간이 1을 포함해 증가로 볼 수 없다.","운동과 결합하면 효과가 있었다.","결과에 맞는 해석이다.","1을 포함한다."],
+ c:"교육은 '운동과 함께'일 때 예방 효과.",
+ ev:[["SR/MA","Steffens 2016","https://researchers.mq.edu.au/en/publications/prevention-of-lowback-pain-a-systematic-review-and-meta-analysis/"]],
+ v:["요통 예방","https://www.youtube.com/watch?v=20zybMbnVoU"],
+ sim:{s:"운동 단독의 예방 효과가 1년 뒤 어떻게 되었나?",o:["사라졌다","두 배가 되었다","변함없다","측정 안 함","위험 증가"],a:0,e:"1년 뒤 사라져 지속적 운동이 필요하다."}},
+{t:"int",lo:"LO2",s:"Leeuw(2008) RCT에서 운동공포가 큰 만성 요통 환자에게 단계적 노출은 파국화와 '활동이 해롭다'는 믿음을 단계적 활동보다 더 줄였지만, 기능 장애에서는 더 낫다고 볼 수 없었다. 임상적 해석은?",
+ o:["노출은 효과가 없다","두 접근 모두 쓸 수 있으며, 두려움·파국화가 주된 장벽이면 노출이 그 요소를 더 직접 다룬다","단계적 활동은 금기이다","운동공포는 평가할 필요가 없다","노출은 수동 치료이다"],a:1,
+ w:["인지 요소를 더 줄였다.","결과에 맞는 해석이다.","대등한 선택지이다.","선택에 필요하다.","능동적 행동 중재이다."],
+ c:"노출 = 두려움·믿음 직접 표적, 기능은 두 방법 비슷.",
+ ev:[["RCT","Leeuw 2008","https://search.pedro.org.au/search-results/record-detail/22641"]],
+ v:["단계적 노출","https://www.youtube.com/watch?v=WVhWMbEm6_o"],
+ sim:{s:"운동공포 평가 도구는?",o:["Tampa 운동공포척도(TSK)","Y-균형","CCFT","악력계","VAS만"],a:0,e:"TSK로 평가한다."}},
+{t:"int",lo:"LO4",s:"축구 선수의 Y-균형 앞쪽 뻗기가 좌우 5 cm 차이였다. 해석으로 가장 적절한 것은?",
+ o:["정상 범위이므로 무시","즉시 수술 필요","부상이 반드시 발생한다","4 cm를 넘는 비대칭으로 균형 조절 결함과 부상 위험 증가 가능성을 시사하므로 다른 검사와 함께 재활 목표로 삼는다","검사 자체가 무의미"],a:3,
+ w:["4 cm 초과 비대칭이다.","적응증이 없다.","단독 예측력은 제한적이다.","올바른 해석이다.","추적 도구로 유용하다."],
+ c:"앞쪽 > 4 cm 비대칭 → 주의, 단독 판단 금지.",
+ ev:[["평가","Shaffer 2013","https://typeset.io/pdf/y-balance-test-a-reliability-study-involving-multiple-raters-4ji215hryi.pdf"],["SR","Plisky 2021","https://doaj.org/article/67df0304c3de48d6af0841aaa499ce5f"]],
+ v:["Y-균형 검사","https://www.youtube.com/watch?v=KJM_sXb_4CU"],
+ sim:{s:"Y-균형 검사 본 시행 횟수는?",o:["1회","3회(연습 4–6회 후)","10회","20회","무제한"],a:1,e:"연습 후 3회 시행한다."}},
+{t:"int",lo:"LO1",s:"환자특이기능척도(PSFS)에서 환자가 '아이 안아 올리기 3/10, 30분 운전 4/10'을 골랐다. 이 정보의 가장 적절한 활용은?",
+ o:["점수를 무시하고 표준 운동만","통증 강도만 재평가","PSFS는 연구용이다","의사에게 의뢰","환자가 고른 활동을 기능훈련 목표와 재평가 지표로 쓴다"],a:4,
+ w:["환자 목표 중심 원칙에 어긋난다.","기능 변화를 놓친다.","임상에서 널리 쓴다.","적응증 없다.","올바른 활용이다."],
+ c:"PSFS = 환자 목표 = 훈련 과제 = 재평가.",
+ ev:[["평가","PSFS","https://www.youtube.com/watch?v=fzHL106Dy_M"]],
+ v:["PSFS 사용법","https://www.youtube.com/watch?v=fzHL106Dy_M"],
+ sim:{s:"PSFS 점수 범위는?",o:["0–10(활동별)","0–100%","1–5","0–24","0–50"],a:0,e:"활동별 0–10점이다."}},
+{t:"sol",lo:"LO1",s:"목표가 '바닥의 18 kg 아이 안아 올리기'인 요통 환자가 현재 5 kg 상자를 무릎 높이에서 들 수 있다. 다음 기능훈련 진행으로 가장 적절한 것은?",
+ o:["누워 끌어당기기로 돌아간다","무릎 높이에서 무게를 늘리거나 같은 무게로 높이를 낮추는 등 한 변수씩 진행해 실제 과제로","바로 18 kg 바닥 들기","들기 금지","허리 벨트 착용 후 18 kg"],a:1,
+ w:["불필요한 퇴행이다.","쉬운 버전 → 실제 과제로 한 변수씩 진행한다.","단계 건너뛰기이다.","회피를 강화한다.","예방·기능 근거가 없다."],
+ c:"범위·부하를 하나씩 올려 실제 과제로.",
+ ev:[["RCT","RESTORE","https://pubmed.ncbi.nlm.nih.gov/37146623/"]],
+ v:["들기 훈련","https://www.youtube.com/watch?v=IcDyqdO1bWg"],
+ sim:{s:"들기 자세에 대한 현재 관점은?",o:["허리를 굽히면 반드시 다친다","한 가지 올바른 자세만 있다","여러 방식으로 자신 있게 움직이는 능력이 목표이다","들기를 피해야 한다","벨트가 필수다"],a:2,e:"굽힘 자체가 위험하다는 근거는 약하다."}},
+{t:"sol",lo:"LO2",s:"TSK 45점의 만성 요통 환자가 '허리를 숙이면 디스크가 터질 것 같다'며 모든 숙이기를 피한다. 첫 노출 과제로 가장 적절한 것은?",
+ o:["30 kg 바닥 들기","정원 일 2시간","앉아서 몸 앞으로 천천히 숙이기 후 예상 vs 실제 통증 기록","숙이기 영구 금지","보조기 착용 후 운동"],a:2,
+ w:["위계의 최상위이다.","너무 높은 단계이다.","가장 덜 무서운 활동부터 행동 실험을 한다.","회피 강화이다.","안전 행동이 노출을 방해한다."],
+ c:"두려움 위계 하위 단계부터 + 행동 실험.",
+ ev:[["RCT","Leeuw 2008","https://search.pedro.org.au/search-results/record-detail/22641"]],
+ v:["단계적 노출","https://www.youtube.com/watch?v=WVhWMbEm6_o"],
+ sim:{s:"행동 실험의 핵심은?",o:["예상과 실제 결과의 차이 확인","통증 0 확인","근력 측정","체중 측정","약 복용"],a:0,e:"예상 vs 실제가 믿음을 바꾼다."}},
+{t:"sol",lo:"LO3",s:"목뼈 가동술 후 목 돌림 범위가 15° 늘고 통증이 줄었다. 회기 남은 시간의 가장 적절한 사용은?",
+ o:["같은 가동술을 20분 더","핫팩 20분 후 귀가","휴식","늘어난 범위에서 바로 능동 운동(깊은목굽힘근·회전 과제)으로 변화를 굳힌다","다음 회기까지 운동 금지"],a:3,
+ w:["수동 중재만으로 끝내지 않는다.","수동적 마무리이다.","기회를 놓친다.","수동 → 능동 연결 원칙이다.","근거 없다."],
+ c:"도수치료는 창을 열고, 운동이 들어간다.",
+ ev:[["CPG","요통 지침 2021","https://www.orthopt.org/uploads/content_files/files/LBP_Revision_2021.pdf"]],
+ v:["수동 후 능동","https://www.youtube.com/watch?v=wpTlEohwqXk"],
+ sim:{s:"회기 마지막 단계로 적절한 것은?",o:["가정 프로그램 2–3개와 다음 목표","장비 대여","아무것도 안 함","다음 주 MRI","진통제 처방"],a:0,e:"가정 프로그램으로 마친다."}},
+{t:"sol",lo:"LO5",s:"만성 요통 환자가 매 회기 'TENS와 핫팩만 해 주세요'라고 요청한다. 가장 적절한 대응은?",
+ o:["원하는 대로 수동 치료만 계속","운동을 강요하며 치료 거부","간섭전류를 추가","초음파 추가","물리적인자는 보조임을 설명하고 짧게 쓴 뒤 환자가 원하는 기능 목표와 연결된 운동으로 전환"],a:4,
+ w:["수동 의존을 강화한다.","치료 동맹을 해친다.","근거가 약하다.","근거가 약하다.","보조 배치 + 능동 전환 원칙이다."],
+ c:"물리적인자 = 운동으로 넘어가는 다리.",
+ ev:[["CPG","ACP 2017","https://pubmed.ncbi.nlm.nih.gov/28192789/"]],
+ v:["능동 치료","https://www.youtube.com/watch?v=mx53SyKbZoo"],
+ sim:{s:"만성 요통 TENS 근거에 대한 ACP 판단은?",o:["근거 불충분","강력 권고","금기","1차 치료","수술 대체"],a:0,e:"근거가 불충분했다."}},
+{t:"sol",lo:"LO6",s:"퇴원 3개월 뒤 환자가 이사 후 허리 통증이 다시 생겼다(5/10, 적신호 없음). 미리 준 악화 대처 계획에 따른 행동으로 옳은 것은?",
+ o:["운동량을 줄이고(약 50%) 활동을 유지하며 1–2주 안에 원래 수준으로 되돌린다","모든 운동 중단, 침상 안정","즉시 응급실","허리 벨트 상시 착용","진통제만"],a:0,
+ w:["악화 대처 계획에 맞다.","회피는 회복을 늦춘다.","적신호가 없다.","근거 없다.","능동 대처가 우선이다."],
+ c:"재발 = 예상된 사건, 스스로 대처.",
+ ev:[["SR/MA","Steffens 2016","https://chiro.org/LINKS/ABSTRACTS/Prevention_of_Low_Back_Pain.shtml"]],
+ v:["악화 관리","https://www.youtube.com/watch?v=E6rr0B2IEY4"],
+ sim:{s:"연락해야 할 기준은?",o:["2주 넘는 악화, 다리 저림·근력 약화, 적신호","하루 통증 3/10","운동 후 근육통","날씨 변화","가벼운 뻐근함"],a:0,e:"악화 지속·신경 증상·적신호이다."}},
+{t:"sol",lo:"LO4",s:"6주간 요통으로 휴직한 물류 노동자. 현재 PSFS 목표 활동 6/10, 10 kg 상자 반복 들기 가능, 20 kg은 아직 두려워한다. 업무 복귀 계획으로 가장 적절한 것은?",
+ o:["통증 0이 될 때까지 휴직 연장","무거운 과제를 제외한 단축·조정 근무로 시작해 단계적으로 전체 과제로","즉시 전일 전체 과제","직종 변경 권고","복귀 판단 보류"],a:1,
+ w:["활동 유지 원칙에 어긋난다.","단계적 복귀 원칙이다.","재악화·두려움 위험이 크다.","근거 없다.","기능 기준으로 판단 가능하다."],
+ c:"시간·과제·부하를 나눈 단계적 복귀.",
+ ev:[["CPG","ACP 2017","https://www.aafp.org/afp/2017/0915/p407"]],
+ v:["업무 복귀","https://www.youtube.com/watch?v=MKLB7obTf8w"],
+ sim:{s:"20 kg 두려움을 다루는 방법은?",o:["단계적 노출로 무게를 올림","20 kg 영구 금지","약물","보조기","무시"],a:0,e:"노출로 다룬다."}},
+{t:"cas",lo:"LO5",s:"36세 여성 회계사, 8개월 목·어깨 통증과 주 2회 긴장성 두통. 위등세모근 통증유발점, CCFT 24 mmHg, NDI 32%, 적신호 없음. 12주 통합 프로그램으로 가장 적절한 것은?",
+ o:["매주 TENS·초음파 12회","통증 교육 + 필요 시 통증유발점 압박 + 특이적 아령 근력운동 + CCFT 훈련 + 업무 중 미세 휴식, NDI·두통 빈도 재평가","목 보조기와 휴식","도수교정만 12회","스트레칭만"],a:1,
+ w:["능동 요소가 없다.","교육·운동·기능 중심에 수동은 보조로 배치했다.","근거 없다.","단독 중재이다.","단독 효과가 제한적이다."],
+ c:"교육 + 특이 근력 + 운동조절 + 기능, 수동은 보조.",
+ ev:[["RCT","Andersen 2008","https://www.epistemonikos.org/en/documents/1562a53538ea5791ace6ab89611bbc273b5c1c75"],["RCT","Jull 2002","https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/"]],
+ v:["목통증 통합 운동","https://www.youtube.com/watch?v=cUteHlKEuXg"],
+ sim:{s:"이 환자의 기능 과제 예는?",o:["컴퓨터 작업 중 자세 바꾸기·가방 나르기","마라톤","다이빙","수영 경기","역도 대회"],a:0,e:"업무·일상 과제로 연결한다."}},
+{t:"cas",lo:"LO3",s:"52세 남성, 2년간 만성 요통(RMDQ 16/24). '허리가 약해서 조심해야 한다'며 굽히기를 피하고, 걸을 때 몸통을 굳게 버틴다. 수동 치료를 여러 번 받았으나 효과가 일시적이었다. 가장 적절한 접근은?",
+ o:["같은 수동 치료 반복","보조기 착용","인지기능치료: 통증 이해 재구성, 보호적 버팀 풀기와 두려운 동작 노출, 생활 습관 변화","절대 안정","영상 검사 반복"],a:2,
+ w:["효과가 일시적이었다.","보호 행동을 강화한다.","RESTORE에서 지속 효과를 보인 접근이다.","해롭다.","치료 방향을 바꾸지 않는다."],
+ c:"높은 장애 + 보호 행동 → CFT가 특히 효과적.",
+ ev:[["RCT","RESTORE 2023","https://pubmed.ncbi.nlm.nih.gov/37146623/"],["RCT","효과 조절인자 2024","https://pubmed.ncbi.nlm.nih.gov/39327170/"]],
+ v:["CFT","https://www.youtube.com/watch?v=_8_KaslbT1A"],
+ sim:{s:"이 환자처럼 기초 장애가 클 때 CFT 효과는?",o:["더 크다","없다","작다","해롭다","무관"],a:0,e:"기초 장애가 클수록 효과가 컸다."}},
+{t:"cas",lo:"LO6",s:"45세 여성, 요통 재활을 마치고 통증 1/10. '이제 운동을 그만해도 되나요?'라고 묻는다. 근거에 맞는 답은?",
+ o:["네, 완치되었으니 그만해도 됩니다","허리 벨트로 대체하세요","교육 자료만 읽으면 충분합니다","깔창을 쓰세요","예방 효과는 운동을 계속할 때 유지되므로, 즐기는 운동을 주 2–3회 이어 가세요"],a:4,
+ w:["운동 단독 효과는 1년 뒤 사라졌다.","효과 없다.","교육 단독은 효과가 없었다.","효과 없다.","Steffens 결론과 일치한다."],
+ c:"계속하는 운동 + 교육 = 재발 예방.",
+ ev:[["SR/MA","Steffens 2016","https://chiro.org/LINKS/ABSTRACTS/Prevention_of_Low_Back_Pain.shtml"]],
+ v:["요통 재발 예방","https://www.youtube.com/watch?v=20zybMbnVoU"],
+ sim:{s:"순응도를 높이는 전략은?",o:["좋아하는 운동, 적은 수, 실행 계획","운동 10가지 이상","매일 2시간","처방 없이 알아서","1년에 한 번"],a:0,e:"적게·좋아하는·계획된 운동이다."}},
+{t:"cas",lo:"LO4",s:"19세 남성 축구 선수, 뒤넙다리근 근육통 재활 6주. 통증 0, 뒤넙다리근 근력 건측 대비 75%, Y-균형 뒤안쪽 비대칭 6 cm, TSK 낮음. 경기 복귀 판단은?",
+ o:["통증이 없으니 즉시 경기 복귀","근력 대칭과 균형 비대칭이 기준에 못 미치므로 비접촉 팀 훈련 단계에서 근력·균형 훈련을 이어 간다","시즌 종료까지 휴식","수술 의뢰","영상 검사로만 판단"],a:1,
+ w:["통증 없음 ≠ 기능 기준 충족.","기능 기준에 따른 단계적 복귀이다.","과도하다.","적응증 없다.","기능 검사가 필요하다."],
+ c:"복귀 = 기능 기준(근력 80–90% 이상, 비대칭 감소, 두려움 낮음).",
+ ev:[["SR","Plisky 2021","https://doaj.org/article/67df0304c3de48d6af0841aaa499ce5f"],["연구","뒤안쪽 비대칭 2019","https://pmc.ncbi.nlm.nih.gov/articles/PMC6769269"]],
+ v:["복귀 검사","https://www.youtube.com/watch?v=BujRlvjZud4"],
+ sim:{s:"이 선수의 뒤넙다리근 진행 운동은?",o:["노르딕 컬(신장성)","목 등척성","손목 폄","CCFT","눈 운동"],a:0,e:"신장성 부하로 진행한다."}},
+{"t": "mem", "lo": "중재 선택", "s": "근막통증 환자의 처방 묶음에서 근거기반 지침이 '중심'으로 두라고 하는 중재는?", "o": ["능동적 운동과 교육", "도수치료 단독", "물리적인자 단독", "통증이 사라질 때까지 휴식", "통증유발점 주사"], "a": 0, "w": ["요통·목통증 지침 모두 운동과 교육을 중심에, 수동 중재는 보조로 둔다.", "도수치료는 운동과 함께일 때 권고된다.", "물리적인자는 단기 보조다.", "휴식보다 활동 유지가 권고된다.", "물리치료 중재 선택의 중심이 아니다."], "c": "능동(운동·교육) 중심 + 수동(도수·인자) 보조 = 묶음 처방의 뼈대.", "ev": [["CPG", "George 2021(요통)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241"], ["CPG", "Blanpied 2017(목통증)", "https://scholars.duke.edu/individual/pub1266147"]], "v": ["능동 치료", "https://www.youtube.com/watch?v=mx53SyKbZoo"], "sim": {"s": "도수치료를 처방 묶음에 넣을 때 가장 알맞은 역할은?", "o": ["운동을 할 수 있게 통증을 낮추는 짧은 보조", "중재의 전부", "운동을 대신하는 것", "매 회기 30분 이상 고정", "만성기에만 사용"], "a": 0, "e": "도수치료는 '운동의 창'을 여는 보조로 짧게 쓴다."}},
+{"t": "mem", "lo": "중재 선택", "s": "중재 선택 알고리즘에서 '근육 길이·가동범위 제한'에 체크했을 때 처방하는 정적 스트레칭 용량으로 옳은 것은?", "o": ["근육별 주 5–10분, 주 5일 이상", "근육별 주 30초, 주 1회", "한 번에 10분 이상 1회만", "반동을 주며 매일 1시간", "통증이 7 이상 될 때까지"], "a": 0, "w": ["주당 총량이 핵심이다: 근육별 주 5–10분, 주 5일 이상(예: 30초 × 2회 × 주 5일).", "너무 적다.", "한 회기의 길이보다 주당 총량과 빈도가 중요하다.", "탄도성 스트레칭은 통증 환자에게 주의가 필요하다.", "강한 통증은 목표가 아니다."], "c": "스트레칭 = 근육별 주 5–10분 · 주 5일 이상 (4장 LO3).", "ev": [["SR/MA", "Thomas 2018", "https://pubmed.ncbi.nlm.nih.gov/29506306/"]], "v": ["스트레칭 용량", "https://www.youtube.com/watch?v=6oafLsrRdqQ"], "sim": {"s": "스트레칭으로 가동범위가 늘어나는 주된 기전은?", "o": ["신장 내성(감각) 증가", "근육 길이의 영구적 증가", "근섬유 수 증가", "인대 늘어남", "관절 모양 변화"], "a": 0, "e": "단기·수주 프로그램의 변화는 주로 신장 내성 증가로 설명된다."}},
+{"t": "int", "lo": "중재 선택", "s": "처방 알고리즘에서 ① 자극 민감도 높음, ④ 근력 부족, ⑥ 기능 목표에 체크했다. 만들어진 처방 묶음을 가장 바르게 해석한 것은?", "o": ["1단계에서 교육·통증 조절·가벼운 활동을 하고, 민감도가 내려가면 근력·기능훈련 부하를 올린다", "처음부터 8–12RM 근력 운동을 최대로 한다", "민감도가 높으니 운동은 하지 않는다", "도수치료만 하고 근력·기능은 생략한다", "기능훈련을 먼저 최대 강도로 한다"], "a": 0, "w": ["자극 민감도가 높으면 단계를 나눠, 통증 0–5 범위에서 부하를 점차 올린다.", "민감도가 높을 때 고강도는 악화 위험이 크다.", "가벼운 활동은 유지한다.", "보조만으로는 결손을 해결하지 못한다.", "순서가 거꾸로다."], "c": "민감도 높음 → 1단계(교육·통증 조절·가벼운 활동) → 2단계(부하 증가).", "ev": [["RCT", "Silbernagel 2007(통증 모니터링)", "https://search.pedro.org.au/search-results/record-detail/18389"], ["CPG", "George 2021(요통)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241"]], "v": ["부하 조절", "https://www.youtube.com/watch?v=1NB-qP79Dss"], "sim": {"s": "통증 모니터링 모델에서 운동 중 '허용' 범위로 보는 통증 점수는?", "o": ["3–5", "0", "6–8", "9–10", "점수와 무관"], "a": 0, "e": "0–2 안전, 3–5 허용, 5 초과면 부하를 줄인다(6장 LO6)."}},
+{"t": "int", "lo": "중재 선택", "s": "48세 요통 환자. 운동공포(TSK)가 높고 허리 굽히기를 피한다. 처방 묶음이 '스트레칭 + 근력 운동'뿐이다. 이 묶음에서 빠진 핵심을 가장 잘 짚은 것은?", "o": ["통증신경과학교육과 단계적 노출이 빠졌다", "도수치료가 빠졌다", "물리적인자가 빠졌다", "휴식이 빠졌다", "보조기 착용이 빠졌다"], "a": 0, "w": ["두려움·회피가 크면 교육과 두려움 위계에 따른 노출이 묶음에 들어가야 한다.", "도수치료는 보조이며 두려움을 직접 다루지 않는다.", "두려움을 다루지 못한다.", "회피를 강화할 수 있다.", "보호 행동을 늘릴 수 있다."], "c": "② 두려움·회피 체크 → PNE + 단계적 노출(8장 LO2·LO3).", "ev": [["RCT", "Leeuw 2008", "https://search.pedro.org.au/search-results/record-detail/22641"], ["SR/MA", "Siddall 2022", "https://researchportalplus.anu.edu.au/en/publications/short-term-impact-of-combining-pain-neuroscience-education-with-e/"]], "v": ["단계적 노출", "https://www.youtube.com/watch?v=WVhWMbEm6_o"], "sim": {"s": "단계적 노출의 진행 기준으로 옳은 것은?", "o": ["두려움 위계(덜 무서운 동작부터)", "통증이 0이 될 때까지 기다림", "미리 정한 할당량만", "치료사 기분", "하루 걸음 수"], "a": 0, "e": "노출은 두려움 위계, 활동은 할당량 기준이다(8장 LO2)."}},
+{"t": "int", "lo": "중재 선택", "s": "처방 4주 뒤 재평가.\n· NPRS 6 → 5\n· 압통역치 변화가 MDC보다 작다\n· PSFS 변화 없음\n가장 알맞은 해석과 다음 조치는?", "o": ["의미 있는 변화가 없으므로 3장 알고리즘으로 원인을 다시 점검하고 묶음을 고치거나 의뢰한다", "1점 줄었으니 성공이므로 그대로 종료한다", "압통역치는 무시하고 같은 처방을 6개월 계속한다", "통증이 줄었으니 운동을 끊는다", "PSFS는 의미가 없으니 측정을 그만둔다"], "a": 0, "w": ["NPRS MCID(2점) 미만, MDC 미만, 기능 변화 없음 → 재평가 시점이다.", "1점은 MCID에 못 미친다.", "반응이 없는 처방을 오래 끌지 않는다.", "변화가 없는데 끊을 이유가 없다.", "PSFS는 환자 목표 중심 핵심 지표다."], "c": "2–4주 재평가: NPRS 2점·MDC·PSFS → 반응 없으면 원인 재점검.", "ev": [["CPG", "George 2021(요통)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241"]], "v": ["PSFS 사용법", "https://www.youtube.com/watch?v=fzHL106Dy_M"], "sim": {"s": "PSFS가 측정하는 것은?", "o": ["환자가 직접 고른 활동 3–5개의 수행 능력", "통증 강도만", "근력", "관절 가동범위", "수면 시간"], "a": 0, "e": "환자특이기능척도는 환자가 고른 활동의 수행 정도를 0–10으로 매긴다."}},
+{"t": "sol", "lo": "중재 선택", "s": "34세 사무직. 6주째 위등세모근 근육통. 어깨 으쓱 근지구력이 낮고, 두려움·민감도는 높지 않다. 처방 묶음의 중심으로 가장 알맞은 것은?", "o": ["특이적 근력 운동(지구력 → 근력, 주 3회)과 업무 조절", "통증유발점 압박만 매일", "스트레칭만", "완전 휴식 2주", "온열 치료만"], "a": 0, "w": ["위등세모근 근육통 RCT에서 특이적 근력 운동이 통증을 크게 줄였다.", "수동 중재는 보조다.", "근지구력 결손을 해결하지 못한다.", "활동 유지가 원칙이다.", "보조 인자는 자가관리용이다."], "c": "④ 근력 부족 → 특이적 근력 운동(6장), 업무 요인 조절.", "ev": [["RCT", "Andersen 2008", "https://www.epistemonikos.org/en/documents/1562a53538ea5791ace6ab89611bbc273b5c1c75"]], "v": ["목·어깨 근력운동", "https://www.youtube.com/watch?v=cUteHlKEuXg"], "sim": {"s": "Andersen 2008 RCT에서 위등세모근 활성이 가장 높았던 운동은?", "o": ["어깨 으쓱", "팔굽혀펴기", "스쿼트", "플랭크", "걷기"], "a": 0, "e": "근전도에서 어깨 으쓱이 최대 수의 수축의 약 102%로 가장 높았다."}},
+{"t": "sol", "lo": "중재 선택", "s": "26세 러너. 3일 전 장거리 뒤 장딴지근 통증, 걸으면 아프고 밤에도 욱신거린다. 적신호 없음. 처음 1–2주의 처방으로 가장 알맞은 것은?", "o": ["안심·부하 조절, 통증유발점 압박·자가 압박, 통증 0–2 범위의 가벼운 활동", "즉시 고강도 신장성 운동과 달리기 복귀", "2주간 완전 고정", "스트레칭만 하루 1시간", "통증이 없어질 때까지 아무것도 하지 않음"], "a": 0, "w": ["자극 민감도가 높을 때의 1단계다. 민감도가 내려가면 신장성 근력 → 복귀 기준으로 간다.", "민감도가 높을 때는 악화 위험이 크다.", "불필요한 고정은 회복을 늦춘다.", "과도하고 근거가 약하다.", "가벼운 활동 유지가 원칙이다."], "c": "① 민감도 높음 → 1단계 통증 조절·부하 조절 → 2단계 근력·복귀.", "ev": [["RCT", "Silbernagel 2007(통증 모니터링)", "https://search.pedro.org.au/search-results/record-detail/18389"], ["리뷰", "Bialosky 2009", "https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/"]], "v": ["부하 조절", "https://www.youtube.com/watch?v=1NB-qP79Dss"], "sim": {"s": "이 러너가 달리기에 복귀하기 전 확인할 기준으로 가장 알맞은 것은?", "o": ["근력 대칭·뜀뛰기 통증 없음 등 기능 기준", "통증 없음만", "2주가 지났는지", "날씨", "신발 브랜드"], "a": 0, "e": "복귀는 통증만이 아니라 기능 기준으로 판단한다(8장 LO4)."}},
+{"t": "sol", "lo": "중재 선택", "s": "60세. 해마다 재발하는 목 통증. CCFT 22 mmHg 단계에서 목빗근이 먼저 켜진다. 처방 묶음에 꼭 들어가야 할 것은?", "o": ["깊은목굽힘근 운동조절 훈련(인지 → 연합 → 자동 단계)", "목빗근 고강도 근력 운동", "목 보조기 장기 착용", "목 도수치료 단독", "휴식"], "a": 0, "w": ["⑤ 운동조절 결손 체크 → 안정화. Jull 2002 RCT에서 운동이 두통·목통증을 줄였다.", "대상작용 근육을 더 키우는 것은 목표가 아니다.", "장기 착용은 권하지 않는다.", "보조로만 쓴다.", "결손을 해결하지 못한다."], "c": "⑤ 운동조절 결손 → 안정화(7장), 기능 동작에 통합.", "ev": [["RCT", "Jull 2002", "https://researchers.mq.edu.au/en/publications/a-randomized-controlled-trial-of-exercise-and-manipulative-therap/"], ["CPG", "Blanpied 2017(목통증)", "https://scholars.duke.edu/individual/pub1266147"]], "v": ["깊은목굽힘근 훈련", "https://www.youtube.com/watch?v=p0PcmXJai2A"], "sim": {"s": "CCFT에서 건강한 성인 대부분이 깨끗하게 유지하는 압력 범위는?", "o": ["28–30 mmHg", "20 mmHg", "10–12 mmHg", "40 mmHg 이상", "0 mmHg"], "a": 0, "e": "건강한 성인은 대개 28–30 mmHg를 대상 움직임 없이 유지한다."}},
+{"t": "cas", "lo": "중재 선택", "s": "45세 간호사. 8주째 허리 통증.\n· 환자를 옮길 때 '허리가 나갈까 봐' 무섭다(TSK 높음)\n· 허리네모근 통증유발점이 평소 통증을 재현한다\n· 몸통 폄 지구력이 낮다\n· 목표(PSFS): 환자 옮기기\n· 자극 민감도는 보통\n처방 묶음으로 가장 알맞은 것은?", "o": ["PNE + 단계적 노출 + 몸통 지구력 운동 + 환자 이동 기능훈련, 필요하면 통증유발점 압박을 짧게", "통증유발점 압박만 주 5회", "스트레칭만", "업무를 그만두고 쉬게 한다", "허리 보조기와 진통제"], "a": 0, "w": ["② 두려움 ④ 지구력 ⑥ 기능 목표에 모두 맞춘 묶음이다. 수동 중재는 보조.", "결손과 두려움을 다루지 못한다.", "지구력·두려움·기능을 놓친다.", "활동 유지가 원칙이다.", "회피를 강화하고 기능을 회복시키지 못한다."], "c": "해당 항목마다 묶음에 넣는다: 두려움→노출, 지구력→근력, 목표→기능훈련.", "ev": [["RCT", "Leeuw 2008", "https://search.pedro.org.au/search-results/record-detail/22641"], ["CPG", "George 2021(요통)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241"], ["SR/MA", "Hayden 2021", "https://pedro.org.au/?p=21080"]], "v": ["들기 훈련", "https://www.youtube.com/watch?v=IcDyqdO1bWg"], "sim": {"s": "이 간호사의 재평가 지표로 가장 알맞은 묶음은?", "o": ["TSK·ODI·PSFS(환자 옮기기)", "혈압·맥박", "체중", "키", "시력"], "a": 0, "e": "두려움(TSK), 장애(ODI), 목표 활동(PSFS)을 함께 본다."}},
+{"t": "cas", "lo": "중재 선택", "s": "30세 테니스 동호인. 4개월째 팔꿈치 가쪽~아래팔 통증. 짧은노쪽손목폄근 통증유발점이 평소 통증을 재현한다. 그동안 도수치료만 20회 받았고, 쉬면 나아졌다가 치면 다시 아프다. 손목 폄 근력이 약하다.\n가장 알맞은 처방 전환은?", "o": ["손목 폄근 근력 운동(등척성 → 신장성) + 경기·연습량 조절 + 교육, 도수치료는 보조로 줄인다", "도수치료를 주 5회로 늘린다", "테니스를 영구히 그만두게 한다", "스트레칭만 한다", "보조기만 착용한다"], "a": 0, "w": ["④ 근력 부족 + ⑥ 기능 목표 → 능동 부하 중심으로 전환한다. 수동 단독은 효과가 짧다.", "수동 단독의 한계를 반복한다.", "목표(경기 복귀)를 무시한다.", "근력 결손을 해결하지 못한다.", "보조 수단일 뿐이다."], "c": "수동 단독 → 능동 부하 중심으로 전환(6장), 부하·활동 조절.", "ev": [["리뷰", "Bialosky 2009", "https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/"], ["SR/MA", "Hayden 2021", "https://pedro.org.au/?p=21080"]], "v": ["신장성 손목 운동", "https://www.youtube.com/watch?v=CYbEA9eZPOM"], "sim": {"s": "이 환자의 근력 운동을 시작할 때, 통증이 심한 날 먼저 쓰기 좋은 수축 형태는?", "o": ["등척성", "탄도성", "최대 신장성", "반동 동작", "폭발적 단축성"], "a": 0, "e": "등척성은 통증이 심할 때 부하를 시작하기 좋다(6장 LO3)."}}
+];
+
+/* 정답 위치를 ①–⑤에 고르게 배치(고정 순서, 매번 같음) */
+(function(){
+  var TA=[2,4,0,3,1,1,3,4,0,2,4,0,2,1,3,3,1,2,4,0,3,1,4,0,2,0,2,4,3,1];
+  var TS=[3,4,0,2,1,0,2,4,3,1,2,0,4,1,3,1,4,0,2,3,1,3,0,4,2,4,2,1,3,0];
+  function place(opts,ans,target,extra){
+    var idx=[];for(var i=0;i<opts.length;i++) if(i!==ans) idx.push(i);
+    target=Math.min(target,opts.length-1); idx.splice(target,0,ans);
+    return idx;
+  }
+  Q.forEach(function(q,k){
+    var p=place(q.o,q.a,TA[k]);
+    q.o=p.map(function(i){return q.o[i];}); q.w=p.map(function(i){return q.w[i];}); q.a=p.indexOf(q.a);
+    var ps=place(q.sim.o,q.sim.a,TS[k]);
+    q.sim.o=ps.map(function(i){return q.sim.o[i];}); q.sim.a=ps.indexOf(q.sim.a);
+  });
+})();
+
+window.QUIZ_META=Q.map(function(q){return {t:q.t,lo:q.lo,s:q.s};});
+document.addEventListener("quizgoto",function(e){var k=+e.detail;if(k>=0&&k<Q.length){st.i=k;save();renderQuiz();}});
+/* ===== 퀴즈 상태 ===== */
+var KEY="ch8-quiz-v2";
+var st={i:0,ans:{},conf:{},done:false};
+try{var saved=JSON.parse(localStorage.getItem(KEY)||"null"); if(saved&&saved.ans) st=saved;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+var CONF=["확신한다","애매하다","모르겠다"];
+var NUM=["①","②","③","④","⑤"];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+function renderQuiz(){
+  var el=document.getElementById("quizIn");
+  var q=Q[st.i], n=st.i;
+  var answered=Object.keys(st.ans).filter(function(k){return st.conf[k]!=null;}).length;
+  var h='<div class="eyebrow">퀴즈 · 30문항<span class="lo">'+q.lo+'</span><span style="color:var(--muted)">'+TYPES[q.t]+'</span></div>';
+  h+='<div class="qwrap">';
+  h+='<div class="qhead"><b style="color:var(--ink)">문제 '+(n+1)+' / '+Q.length+'</b><span>응답 완료 '+answered+'개</span></div>';
+  h+='<div class="dots" role="group" aria-label="문항 바로가기">';
+  Q.forEach(function(_,k){h+='<button type="button" data-go="'+k+'" class="'+((st.ans[k]!=null&&st.conf[k]!=null)?"done ":"")+(k===n?"cur":"")+'" aria-label="문제 '+(k+1)+'">'+(k+1)+'</button>';});
+  h+='</div>';
+  h+='<p class="qstem">'+esc(q.s)+'</p><div class="opts" role="group" aria-label="보기">';
+  q.o.forEach(function(o,k){h+='<button type="button" class="opt" data-opt="'+k+'" aria-pressed="'+(st.ans[n]===k)+'"'+(st.done?" disabled":"")+'><span class="n">'+NUM[k]+'</span><span>'+esc(o)+'</span></button>';});
+  h+='</div><div><div class="qlabel" id="cl">이 답에 대한 확신도</div><div class="conf" role="group" aria-labelledby="cl">';
+  CONF.forEach(function(c,k){h+='<button type="button" data-conf="'+k+'" aria-pressed="'+(st.conf[n]===k)+'"'+(st.done?" disabled":"")+'>'+c+'</button>';});
+  h+='</div></div>';
+  var miss=(st.ans[n]==null||st.conf[n]==null);
+  h+='<div class="qnav"><button type="button" id="qp"'+(n===0?" disabled":"")+'>이전 문제</button>';
+  if(n<Q.length-1) h+='<button type="button" class="primary" id="qn">다음 문제</button>';
+  else h+='<button type="button" class="primary" id="qs">'+(st.done?"결과 다시 보기":"제출하고 결과 보기")+'</button>';
+  if(st.done) h+='<button type="button" id="qr">처음부터 다시 풀기</button>';
+  h+='<span class="hint" id="qh">'+(miss&&!st.done?"답과 확신도를 모두 골라야 다음으로 넘어갑니다.":"")+'</span></div>';
+  h+='</div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-opt]").forEach(function(b){b.onclick=function(){st.ans[n]=+b.dataset.opt;save();renderQuiz();};});
+  el.querySelectorAll("[data-conf]").forEach(function(b){b.onclick=function(){st.conf[n]=+b.dataset.conf;save();renderQuiz();};});
+  el.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){st.i=+b.dataset.go;save();renderQuiz();};});
+  var qp=document.getElementById("qp"); if(qp) qp.onclick=function(){st.i--;save();renderQuiz();};
+  var qn=document.getElementById("qn"); if(qn) qn.onclick=function(){ if(!st.done&&miss){return;} st.i++;save();renderQuiz();};
+  var qs=document.getElementById("qs"); if(qs) qs.onclick=function(){
+    if(!st.done){
+      var left=[];Q.forEach(function(_,k){if(st.ans[k]==null||st.conf[k]==null)left.push(k+1);});
+      if(left.length){document.getElementById("qh").textContent="아직 끝내지 않은 문항: "+left.join(", ");return;}
+      st.done=true;save();try{document.dispatchEvent(new CustomEvent("quizsubmit",{detail:{ans:Q.map(function(q,k){return st.ans[k]===q.a?1:0;}),conf:Q.map(function(q,k){return st.conf[k];})}}));}catch(e){}
+    }
+    goSlide("result");
+  };
+  var qr=document.getElementById("qr"); if(qr) qr.onclick=function(){st={i:0,ans:{},conf:{},done:false};save();renderQuiz();};
+}
+
+function cat(k){ var ok=st.ans[k]===Q[k].a, c=st.conf[k];
+  if(!ok&&c===0) return "mis"; if(!ok) return "unl"; if(c!==0) return "uns"; return "mas"; }
+
+function renderResult(){
+  var el=document.getElementById("resultIn");
+  if(!st.done){
+    el.innerHTML='<div class="eyebrow">결과와 오답 심화</div><h2>퀴즈를 먼저 제출하세요</h2><p class="lead">30문항에 답과 확신도를 모두 고르고 제출하면 여기에 결과와 오답 카드가 나타납니다.</p><div class="qnav"><button type="button" class="primary" onclick="goSlide(\'quiz\')">퀴즈로 가기</button></div>';
+    return;
+  }
+  var cnt={mis:0,unl:0,uns:0,mas:0}, score=0, byT={}, byL={};
+  Q.forEach(function(q,k){var c=cat(k);cnt[c]++; var ok=st.ans[k]===q.a; if(ok)score++;
+    byT[q.t]=byT[q.t]||[0,0]; byT[q.t][1]++; if(ok)byT[q.t][0]++;
+    byL[q.lo]=byL[q.lo]||[0,0]; byL[q.lo][1]++; if(ok)byL[q.lo][0]++;});
+  var h='<div class="eyebrow">결과와 오답 심화</div>';
+  h+='<h2>'+score+' / '+Q.length+'점 · 정답률 '+Math.round(score/Q.length*100)+'%</h2>';
+  h+='<div class="tiles">';
+  h+='<div class="tile mis"><div class="v">'+cnt.mis+'</div><div class="l">오개념 · 확신했는데 틀림 (1순위)</div></div>';
+  h+='<div class="tile unl"><div class="v">'+cnt.unl+'</div><div class="l">미학습 · 애매·모름 + 틀림 (2순위)</div></div>';
+  h+='<div class="tile uns"><div class="v">'+cnt.uns+'</div><div class="l">불안정 지식 · 애매·모름 + 맞음 (3순위)</div></div>';
+  h+='<div class="tile mas"><div class="v">'+cnt.mas+'</div><div class="l">숙달 · 확신하고 맞음</div></div>';
+  h+='</div>';
+  h+='<div class="grid2"><div class="card"><h3>학습목표별 정답률</h3><div class="bars">';
+  ["LO1","LO2","LO3","LO4","LO5","LO6","중재 선택"].forEach(function(l){var v=byL[l]||[0,0];var p=v[1]?Math.round(v[0]/v[1]*100):0;
+    h+='<div class="brow"><b>'+l+'</b><div class="btrack"><i style="width:'+p+'%"></i></div><span>'+v[0]+'/'+v[1]+'</span></div>';});
+  h+='</div></div><div class="card"><h3>문항 유형별 정답률</h3><div class="bars">';
+  ["mem","int","sol","cas"].forEach(function(t){var v=byT[t];var p=Math.round(v[0]/v[1]*100);
+    h+='<div class="brow"><b>'+TYPES[t].replace("형","")+'</b><div class="btrack"><i style="width:'+p+'%"></i></div><span>'+v[0]+'/'+v[1]+'</span></div>';});
+  h+='</div></div></div>';
+
+  var order=[]; Q.forEach(function(_,k){var c=cat(k); if(c!=="mas") order.push(k);});
+  var rank={mis:0,unl:1,uns:2}; order.sort(function(a,b){return rank[cat(a)]-rank[cat(b)]||a-b;});
+  h+='<h3 style="margin-top:.4em">오답·보완 카드 ('+order.length+'개, 우선순위 순)</h3>';
+  if(!order.length) h+='<p>모든 문항을 확신하고 맞혔습니다. 과정을 마쳤습니다.</p>';
+  order.forEach(function(k){
+    var q=Q[k], c=cat(k), mine=st.ans[k];
+    var lab={mis:["오개념","mis",""],unl:["미학습","unl"," p2"],uns:["불안정 지식","uns"," p3"]}[c];
+    h+='<article class="wcard'+lab[2]+'"><h4><span class="pill '+lab[1]+'">'+lab[0]+'</span> 문제 '+(k+1)+' · '+q.lo+' · '+TYPES[q.t]+' · 내 확신도: '+CONF[st.conf[k]]+'</h4>';
+    h+='<p class="qstem" style="font-size:.95em">'+esc(q.s)+'</p>';
+    h+='<div class="row"><b>정답</b><span>'+NUM[q.a]+' '+esc(q.o[q.a])+(mine!==q.a?' <span style="color:var(--muscle)">(내 답: '+NUM[mine]+')</span>':'')+'</span></div>';
+    h+='<div class="row"><b>보기별 해설</b><ul class="k why">';
+    q.o.forEach(function(o,j){h+='<li class="'+(j===q.a?"ans":(j===mine?"mine":""))+'">'+NUM[j]+' '+esc(q.w[j])+'</li>';});
+    h+='</ul></div>';
+    h+='<div class="row"><b>핵심 개념</b><span class="key" style="padding:.4em .7em">'+esc(q.c)+'</span></div>';
+    h+='<div class="row"><b>근거</b><span>'+q.ev.map(function(e){return '<span class="badge">'+esc(e[0])+'</span> <a href="'+e[2]+'" target="_blank" rel="noopener">'+esc(e[1])+'</a>';}).join("<br>")+'</span></div>';
+    h+='<div class="row"><b>사진·영상</b><span class="media"><a href="'+q.v[1]+'" target="_blank" rel="noopener">영상: '+esc(q.v[0])+'</a><a class="doc" href="#" data-back="'+LOSLIDE[q.lo]+'">강의 슬라이드로 돌아가기 ('+q.lo+')</a></span></div>';
+    h+='<details class="sim"><summary>다시 풀기: 유사 문항</summary><p class="qstem" style="font-size:.95em;margin:.5em 0">'+esc(q.sim.s)+'</p><ol style="margin:0;padding-left:1.3em">';
+    q.sim.o.forEach(function(o,j){h+='<li>'+esc(o)+'</li>';});
+    h+='</ol><details style="margin-top:.4em"><summary>정답 보기</summary><p>'+NUM[q.sim.a]+' '+esc(q.sim.o[q.sim.a])+'. '+esc(q.sim.e)+'</p></details></details>';
+    h+='</article>';
+  });
+  h+='<div class="qnav"><button type="button" onclick="goSlide(\'quiz\')">문항 다시 보기</button><button type="button" id="rr">처음부터 다시 풀기</button></div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-back]").forEach(function(a){a.onclick=function(e){e.preventDefault();goSlide(a.dataset.back);};});
+  document.getElementById("rr").onclick=function(){st={i:0,ans:{},conf:{},done:false};save();renderQuiz();goSlide("quiz");};
+}
+
+renderQuiz();
+var m=location.hash.match(/^#slide-(\d+)$/);
+slides[0].classList.add("on");
+show(m?+m[1]-1:0,false);
+})();
+</script>
+<!--CRJS--><script>(function(){
+var mm=document.getElementById("mm");if(mm){[].forEach.call(mm.querySelectorAll("button"),function(b){b.addEventListener("click",function(){var k=b.dataset.k;
+ if(!k||b.classList.contains("on")){mm.classList.remove("f");[].forEach.call(mm.querySelectorAll(".mmb"),function(x){x.classList.remove("on")});return}
+ mm.classList.add("f");[].forEach.call(mm.querySelectorAll(".mmb"),function(x){x.classList.toggle("on",x===b)});});});}
+var out=document.getElementById("pbOut");if(!out)return;
+var U={4:"BjbT6i1iibn1FSgCjcVfcs",5:"9udc3Bk2HpQe17ydT16wKq",6:"YDkjMgYBPQT7cFzqipV2SL",7:"VzkAA5vSXZthqxKGdvnqFB",8:"VtakTs8RgRSs4eKso6pyD5"};
+function L(c,t){return ' <a href="https://claude.ai/artifact/'+U[c]+'" target="_blank" rel="noopener">'+(t||c+"장")+' ↗</a>'}
+var boxes=[].slice.call(document.querySelectorAll(".pbq input"));
+function draw(){var on={};boxes.forEach(function(b){on[b.dataset.c]=b.checked});
+ var p1=[],p2=[];
+ var edu=on.fear?"<b>통증신경과학교육</b>: 아픔 ≠ 손상, 움직임은 안전하다는 것을 환자 언어로 설명"+L(8,"8장 LO3"):"<b>교육·안심</b>: 근막통증의 경과와 자기관리, 활동 유지"+L(8,"8장 LO3");
+ (on.irr?p1:p2).push(edu);
+ if(on.irr){p1.push("<b>통증 조절 먼저</b>: 통증유발점 압박·자가 압박·가동술을 짧게, 운동의 창을 여는 용도"+L(5));
+   p1.push("<b>가벼운 활동 유지</b>: 통증 0–2(안전)~3–5(허용) 범위, 낮은 강도의 등척성·저부하부터"+L(6,"6장 LO6"));}
+ if(on.fear) p2.push("<b>단계적 노출</b>: 두려움 위계를 만들고 덜 무서운 동작부터 연습"+L(8,"8장 LO2"));
+ if(on.rom) p2.push("<b>스트레칭</b>: 정적 30초 × 2회, 근육별 주 5–10분, 주 5일 이상"+L(4));
+ if(on.str) p2.push("<b>근력·근지구력</b>: 지구력 40–60% 1RM 15–20회 → 근력 8–12RM(RIR 2–3), 주 2–3회, 다음 날 반응을 보고 양 → 빈도 → 강도 순으로 하나씩 증량"+L(6));
+ if(on.mc) p2.push("<b>안정화</b>: 인지(고립 활성·CCFT) → 연합 → 자동(기능 동작) 단계로"+L(7));
+ if(on.fx) p2.push("<b>기능훈련</b>: PSFS 목표 동작을 쪼개 연습, 복귀 기준 검사(Y-균형·근력 대칭)"+L(8,"8장 LO1·LO4"));
+ if(!on.rom&&!on.str&&!on.mc&&!on.fx) p2.push("<b>일반 운동</b>: 환자가 즐기고 꾸준히 할 수 있는 운동(운동 종류보다 지속이 중요)"+L(6));
+ if(on.irr&&p2.length) p2.push("<b>진행 기준</b>: 자극 민감도가 내려가면 위 운동의 부하를 올린다");
+ var h='<h4>처방 묶음</h4>';
+ if(on.irr){h+='<h5>1단계 · 처음 1–2주</h5><ol>'+p1.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ol><h5>2단계 · 민감도가 내려가면</h5>';}
+ h+='<ol>'+p2.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ol>';
+ h+='<p class="re"><b>재평가 (2–4주)</b>: NPRS(의미 있는 변화 2점), 압통역치(MDC 이상), NDI·ODI, PSFS. 좋아지지 않으면 3장 알고리즘으로 돌아가 원인을 다시 점검하거나 의뢰한다.</p>';
+ if(!boxes.some(function(b){return b.checked})) h='<h4>처방 묶음</h4><p>왼쪽에서 환자에게 해당하는 항목을 모두 고르면 단계별 처방이 여기에 만들어집니다.</p>'+h.replace('<h4>처방 묶음</h4>','');
+ out.innerHTML=h;}
+boxes.forEach(function(b){b.addEventListener("change",draw)});draw();
+})();</script><!--/CRJS--><!--EXTRAS-->
+<script>window.CH_NO=8;</script>
+<div id="xs" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xsT">
+ <div class="xbox">
+  <div class="xhd"><b id="xsT">검색</b><button type="button" class="xclose" data-close="xs" aria-label="닫기">✕</button></div>
+  <input id="xsq" type="search" placeholder="예: 통증유발점, 등세모근, 스트레칭 용량" autocomplete="off" aria-label="검색어">
+  <div class="xtabs" id="xsTabs" hidden><button type="button" data-scope="here" aria-pressed="true">이 강의안</button><button type="button" data-scope="all" aria-pressed="false">과정 전체(1–8장)</button></div>
+  <p class="xhint" id="xsHint">단어 여러 개를 띄어 쓰면 모두 들어간 슬라이드만 찾습니다. 구용어·영문(예: 승모근, hamstring)도 6판 용어로 함께 찾습니다. 단축키: / 또는 Ctrl+K</p>
+  <ol id="xsR" class="xres"></ol>
+ </div>
+</div>
+<div id="xl" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xlT">
+ <div class="xbox">
+  <div class="xhd"><b id="xlT">내 YouTube 영상 추가</b><button type="button" class="xclose" data-close="xl" aria-label="닫기">✕</button></div>
+  <label class="xf">YouTube 주소<input id="xlU" type="url" placeholder="https://www.youtube.com/watch?v=… 또는 https://youtu.be/…"></label>
+  <label class="xf">제목<input id="xlN" type="text" maxlength="80" placeholder="예: 위등세모근 촉진 시범(교수 촬영)"></label>
+  <label class="xf">붙일 슬라이드<select id="xlS"></select></label>
+  <p class="xhint">추가한 영상은 해당 슬라이드 아래 '교수님이 추가한 영상'에 나타나며, 이 강의안을 여는 모든 수강생에게 보입니다. 영상 파일은 먼저 YouTube에 올린 뒤(일부 공개도 가능) 주소를 붙여 넣으세요.</p>
+  <p class="xmsg" id="xlM" role="status"></p>
+  <div class="xact"><button type="button" id="xlSave" class="xprimary">추가</button></div>
+ </div>
+</div>
+<div id="xp" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xpT">
+ <div class="xbox">
+  <div class="xhd"><b id="xpT">내 사진 추가</b><button type="button" class="xclose" data-close="xp" aria-label="닫기">✕</button></div>
+  <label class="xf">사진 파일(여러 장 가능)<input id="xpF" type="file" accept="image/*" multiple></label>
+  <div id="xpPrev"></div>
+  <label class="xf">설명(선택)<input id="xpN" type="text" maxlength="80" placeholder="예: 위등세모근 집게 촉진 — 엄지와 검지로 근육 배를 잡는다"></label>
+  <label class="xf">붙일 슬라이드<select id="xpS"></select></label>
+  <p class="xhint">사진은 긴 변 2000px로 줄여 올립니다. 올린 사진은 해당 슬라이드 아래 '교수님이 올린 사진'에 나타나며, 이 강의안을 여는 모든 수강생에게 보입니다. 환자 사진은 동의를 받고, 얼굴 등 알아볼 수 있는 부분은 가려 주세요.</p>
+  <p class="xmsg" id="xpM" role="status"></p>
+  <div class="xact"><button type="button" id="xpSave" class="xprimary">올리기</button></div>
+ </div>
+</div>
+<div id="xv" class="xv" hidden role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+ <button type="button" class="xclose" id="xvX" aria-label="닫기">✕</button>
+ <button type="button" class="xnav xprev" id="xvP" aria-label="이전 사진">‹</button>
+ <img id="xvI" alt="">
+ <p id="xvC"></p>
+ <button type="button" class="xnav xnext" id="xvN" aria-label="다음 사진">›</button>
+</div>
+<div id="xa" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xaT">
+ <div class="xbox wide">
+  <div class="xhd"><b id="xaT">수업 분석 (교수 전용)</b><button type="button" class="xclose" data-close="xa" aria-label="닫기">✕</button></div>
+  <div id="xaB"><p class="xhint">불러오는 중…</p></div>
+ </div>
+</div>
+<script>@@C:xtools.js@@</script>
+<!--/EXTRAS-->
+<!--STUDY--><style>@@C:notes.css@@</style>
+<script>@@C:notes.js@@</script><!--/STUDY-->
+<script type="application/json" id="lkData">@@C:glossary.json@@</script>
+<!--LOOKUP--><style>@@C:lookup.css@@</style>
+<script>@@C:lookup.js@@</script><!--/LOOKUP-->
+<script>window.STUDY_CFG={app:"ch8",mount:"header.bar",toc:"#toc",parentStore:true};</script>
+<!--EDIT: 내용 수정 v2 — 설정은 window.STUDY_CFG={app,slides,activeClass,mount,toc,goTo,parentStore,editable,editSkip}--><style>@@C:edit.css@@</style>
+<script>@@C:edit.js@@</script><!--/EDIT-->
+<script>@@C:links.js@@</script><script>@@C:a11y.js@@</script>
+</body>
+</html>

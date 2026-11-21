@@ -1,0 +1,98 @@
+{
+ "_설명": "국가시험 영역 태그(초안). 물리치료사 국가시험 과목(물리치료 기초·진단평가·중재)에 맞춘 이 과목용 세부 영역. 교수님이 '퀴즈 편집'에서 문항별로 바꿀 수 있다. q에 문항 id(예: ch3-12)를 넣으면 학습목표 기준보다 우선한다.",
+ "areas": {
+  "B-PHY": {
+   "s": "물리치료 기초",
+   "n": "통증 생리·병태"
+  },
+  "B-KIN": {
+   "s": "물리치료 기초",
+   "n": "운동학·근육 기능"
+  },
+  "D-MSK": {
+   "s": "물리치료 진단평가",
+   "n": "근골격계 평가(촉진·측정·검사)"
+  },
+  "D-PAIN": {
+   "s": "물리치료 진단평가",
+   "n": "통증·기능·심리사회 평가"
+  },
+  "D-DIF": {
+   "s": "물리치료 진단평가",
+   "n": "감별진단·적신호·임상추론"
+  },
+  "I-MAN": {
+   "s": "물리치료 중재",
+   "n": "스트레칭·도수치료"
+  },
+  "I-EX": {
+   "s": "물리치료 중재",
+   "n": "운동치료(근력·안정화·기능)"
+  },
+  "I-INT": {
+   "s": "물리치료 중재",
+   "n": "통증교육·통합 중재·자기관리"
+  }
+ },
+ "lo": {
+  "ch1:LO1": "B-PHY",
+  "ch1:LO2": "B-PHY",
+  "ch1:LO3": "B-PHY",
+  "ch1:LO4": "B-PHY",
+  "ch1:LO5": "B-PHY",
+  "ch1:LO6": "D-PAIN",
+  "ch2:LO1": "B-PHY",
+  "ch2:LO2": "B-PHY",
+  "ch2:LO3": "B-PHY",
+  "ch2:LO4": "B-KIN",
+  "ch2:LO5": "B-PHY",
+  "ch2:LO6": "D-PAIN",
+  "ch3:LO1": "D-MSK",
+  "ch3:LO2": "D-MSK",
+  "ch3:LO3": "D-MSK",
+  "ch3:LO4": "D-MSK",
+  "ch3:LO5": "D-PAIN",
+  "ch3:LO6": "D-DIF",
+  "ch3:임상추론": "D-DIF",
+  "ch4:LO1": "I-MAN",
+  "ch4:LO2": "I-MAN",
+  "ch4:LO3": "I-MAN",
+  "ch4:LO4": "I-MAN",
+  "ch4:LO5": "I-MAN",
+  "ch4:LO6": "I-MAN",
+  "ch5:LO1": "I-MAN",
+  "ch5:LO2": "I-MAN",
+  "ch5:LO3": "I-MAN",
+  "ch5:LO4": "I-MAN",
+  "ch5:LO5": "I-MAN",
+  "ch5:LO6": "I-MAN",
+  "ch6:LO1": "I-EX",
+  "ch6:LO2": "I-EX",
+  "ch6:LO3": "I-EX",
+  "ch6:LO4": "I-EX",
+  "ch6:LO5": "I-EX",
+  "ch6:LO6": "I-EX",
+  "ch7:LO1": "B-KIN",
+  "ch7:LO2": "B-KIN",
+  "ch7:LO3": "B-KIN",
+  "ch7:LO4": "D-MSK",
+  "ch7:LO5": "I-EX",
+  "ch7:LO6": "I-EX",
+  "ch8:LO1": "I-EX",
+  "ch8:LO2": "I-INT",
+  "ch8:LO3": "I-INT",
+  "ch8:LO4": "D-PAIN",
+  "ch8:LO5": "I-INT",
+  "ch8:LO6": "I-INT",
+  "ch8:중재 선택": "I-INT",
+  "final:1장": "B-PHY",
+  "final:2장": "B-PHY",
+  "final:3장": "D-MSK",
+  "final:4장": "I-MAN",
+  "final:5장": "I-MAN",
+  "final:6장": "I-EX",
+  "final:7장": "I-EX",
+  "final:8장": "I-INT"
+ },
+ "q": {}
+}
