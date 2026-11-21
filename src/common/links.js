@@ -1,0 +1,4 @@
+(function(){var MAP={"B876jmdYSmZv92Py2DJuw7": "ch1", "VFsZonVxNj3BA8QGaYBDTy": "ch2", "3T7seCRUiufUe9SZxQ6but": "ch3", "BjbT6i1iibn1FSgCjcVfcs": "ch4", "9udc3Bk2HpQe17ydT16wKq": "ch5", "YDkjMgYBPQT7cFzqipV2SL": "ch6", "VzkAA5vSXZthqxKGdvnqFB": "ch7", "VtakTs8RgRSs4eKso6pyD5": "ch8", "BewLFoXgXPvBuJX7MxN5kS": "final", "J92F6QmMP5HnFDebazPdYQ": "finder"};
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var m=a.href.match(/claude\.ai\/artifact\/([A-Za-z0-9]+)(?:#slide-(\d+))?/);if(!m||!MAP[m[1]])return;e.preventDefault();e.stopPropagation();parent.postMessage({app:"mp",open:MAP[m[1]],slide:m[2]?+m[2]:0},"*");},true);
+window.addEventListener("message",function(e){ if(e.source!==window.parent&&e.source!==window) return; var d=e.data;if(!d||d.app!=="mp"||!d.slide)return;var t=document.getElementById("toc");if(t){t.value=String(d.slide-1);t.dispatchEvent(new Event("change"));}});
+})();

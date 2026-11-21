@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html data-mod="ch5" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5장 도수치료</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>@@C:deck.css@@</style>
+</head>
+<body>
+<header class="bar">
+  <h1><span class="chap">5장</span> 도수치료</h1>
+  <span class="spacer"></span>
+  <label for="toc" class="qlabel" style="font-size:13px">목차</label>
+  <select id="toc" aria-label="슬라이드 목차"></select>
+  <button id="srchBtn" class="xbtn" type="button" aria-label="슬라이드 검색">검색</button><button id="myVidBtn" class="xbtn" type="button" hidden>＋ 내 영상</button><button id="myPicBtn" class="xbtn" type="button" hidden>＋ 내 사진</button><button id="anaBtn" class="xbtn" type="button" hidden>수업 분석</button><button id="noteBtn" type="button" aria-pressed="false">발표자 노트</button>
+</header>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<main class="stage" id="stage">
+
+<!-- 1 표지 -->
+<section class="slide" data-title="표지" data-group="도입">
+ <div class="in">
+  <div class="eyebrow">근육 기원 통증의 원인·증상·중재 · 5장</div>
+  <div class="cols">
+   <div style="display:flex;flex-direction:column;gap:1em">
+    <h2 style="font-size:2.6em">손이 하는 일은<br>무엇을 바꾸는가?</h2>
+    <p class="lead">도수치료는 '뼈를 맞추고 유착을 끊는' 기술일까요? 이 장에서는 연부조직 기법과 관절·신경 기법을 나누어 익히고, 손의 자극이 신경계를 통해 통증을 바꾸는 과정과 근거, 안전을 다룹니다.</p>
+    <div class="media"><a href="https://www.youtube.com/watch?v=iHdOAhl0Y_Y" target="_blank" rel="noopener">도입 영상: 도수치료 기전</a></div>
+   </div>
+   <div data-anat='{"view":"back","hl":["trapezius_u","infraspinatus","ql","erector"],"deep":["ql"],"marks":[[120,112],[124,158],[134,286]],"labels":[[120,112,"압박이완",-85,150],[124,158,"근막이완·IASTM",-85,200],[146,240,"관절가동술(척추)",385,230],[134,286,"근육에너지기법",385,300]],"label":"뒤에서 본 인체에 도수치료 기법을 적용하는 부위를 표시한 도해","viewBox":"-90 0 480 400"}'></div>
+  </div>
+  <div class="src"><span>강의 구성: 학습목표 6 → 인포그래픽 → 핵심 강의 18장 → 퀴즈 20문항 → 오답 심화</span></div>
+ </div>
+ <div class="note">국내 법적 범위: 도수교정(고속 저진폭)은 근거·금기 소개 수준으로 다루고, 실습은 학과 기준을 따릅니다.</div>
+</section>
+
+<!-- 2 학습목표 -->
+<section class="slide" data-title="학습목표" data-group="도입">
+ <div class="in">
+  <div class="eyebrow">학습목표</div>
+  <h2>이 장을 마치면 할 수 있는 것</h2>
+  <div class="los">
+   <div class="lo-card"><b>LO1</b><span class="verb">분류한다</span><span>도수치료 기법을 연부조직 기법과 관절·신경 기법으로, 관절가동술을 등급(I–V)으로 분류할 수 있다.</span></div>
+   <div class="lo-card"><b>LO2</b><span class="verb">설명한다</span><span>도수치료의 통증 감소 기전(말초·척수·척수상위, 맥락 요인)을 설명할 수 있다.</span></div>
+   <div class="lo-card"><b>LO3</b><span class="verb">적용한다</span><span>통증유발점 압박이완, 근막이완술, 위치이완술, IASTM, 근육에너지기법을 적용할 수 있다.</span></div>
+   <div class="lo-card"><b>LO4</b><span class="verb">선택한다</span><span>관절가동술(Maitland·Mulligan)과 신경가동술을 상황에 맞게 선택할 수 있다.</span></div>
+   <div class="lo-card"><b>LO5</b><span class="verb">해석한다</span><span>목·허리 통증 임상진료지침의 도수치료 권고와 운동 병행 근거를 해석할 수 있다.</span></div>
+   <div class="lo-card"><b>LO6</b><span class="verb">평가한다</span><span>도수치료의 금기·주의사항(목 혈관 병리 선별 포함)을 평가할 수 있다.</span></div>
+  </div>
+  <div class="src"><span>2장 연결: 악순환 고리의 '국소 순환 개선'·'지속 수축 해소'·'통증 조절' 지점을 겨냥</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 3 인포그래픽 -->
+<section class="slide" data-title="인포그래픽: 한 장 요약" data-group="도입">
+ <div class="in" style="gap:.6em">
+  <div class="eyebrow">인포그래픽 · 학습 지도</div>
+  <h2 style="font-size:1.6em">손이 닿는 깊이별 기법과 신경계 효과</h2>
+  <svg class="fig" viewBox="0 0 960 400" role="img" aria-label="피부, 근막, 근육, 관절, 신경 깊이별로 기법을 배치하고 오른쪽에 말초, 척수, 척수상위 신경계 효과를 표시한 인포그래픽" style="flex:1;min-height:0">
+   <g font-size="14">
+    <rect x="20" y="20" width="560" height="62" fill="#f4dccd" stroke="#c89b82"/><text x="36" y="56" font-weight="700" fill="#6b3b22">피부·피하</text><text x="200" y="56" fill="var(--ink)">IASTM · 근막이완술(표층)</text>
+    <rect x="20" y="82" width="560" height="62" fill="#efe6d4" stroke="#9c8f6a"/><text x="36" y="118" font-weight="700" fill="#5d5232">근막</text><text x="200" y="118" fill="var(--ink)">근막이완술 · 등허리근막 기법</text>
+    <rect x="20" y="144" width="560" height="78" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="36" y="188" font-weight="700" fill="var(--muscle)">근육</text><text x="200" y="178" fill="var(--ink)">통증유발점 압박이완 · 위치이완술</text><text x="200" y="200" fill="var(--ink)">근육에너지기법 · 마사지·심부마찰</text>
+    <rect x="20" y="222" width="560" height="78" fill="#e9edf2" stroke="#8a99ad"/><text x="36" y="266" font-weight="700" fill="#3c4b60">관절</text><text x="200" y="256" fill="var(--ink)">관절가동술(Maitland·Kaltenborn)</text><text x="200" y="278" fill="var(--ink)">동작가동술(Mulligan) · 도수교정</text>
+    <rect x="20" y="300" width="560" height="62" fill="var(--nerve-soft)" stroke="var(--nerve)"/><text x="36" y="336" font-weight="700" fill="var(--nerve)">신경</text><text x="200" y="336" fill="var(--ink)">신경가동술(미끄럼·긴장)</text>
+   </g>
+   <g font-size="14" text-anchor="middle">
+    <path d="M590 190 H640" stroke="var(--muscle)" stroke-width="3"/><polygon points="640,183 654,190 640,197" fill="var(--muscle)"/>
+    <rect x="660" y="30" width="280" height="70" rx="12" fill="var(--paper)" stroke="var(--line)"/><text x="800" y="60" font-weight="700" fill="var(--ink)">말초</text><text x="800" y="84" fill="var(--ink)">염증 매개물질·조직 민감도</text>
+    <rect x="660" y="120" width="280" height="70" rx="12" fill="var(--paper)" stroke="var(--line)"/><text x="800" y="150" font-weight="700" fill="var(--ink)">척수</text><text x="800" y="174" fill="var(--ink)">뒤뿔 억제·시간적 합산↓</text>
+    <rect x="660" y="210" width="280" height="70" rx="12" fill="var(--paper)" stroke="var(--line)"/><text x="800" y="240" font-weight="700" fill="var(--ink)">척수상위</text><text x="800" y="264" fill="var(--ink)">하행 억제·기대·맥락</text>
+    <rect x="660" y="300" width="280" height="62" rx="12" fill="var(--ok-soft)" stroke="var(--ok)"/><text x="800" y="337" font-weight="700" fill="var(--ok)">→ 운동할 수 있는 창을 연다</text>
+   </g>
+  </svg>
+  <div class="src"><span class="badge">모델</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/" target="_blank" rel="noopener">Bialosky 2009</a><a href="https://pubmed.ncbi.nlm.nih.gov/29034802/" target="_blank" rel="noopener">Bialosky 2018</a><span class="badge">CPG</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241" target="_blank" rel="noopener">요통 지침 2021</a><a href="https://scholars.duke.edu/individual/pub1266147" target="_blank" rel="noopener">목통증 지침 2017</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO1 -->
+<section class="slide" data-title="LO1-1 두 묶음 분류" data-group="LO1" id="lo1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>분류</div>
+  <h2>연부조직 기법과 관절·신경 기법</h2>
+  <div class="grid2">
+   <div class="card" style="border-color:var(--muscle)"><h3 style="color:var(--muscle)">연부조직 기법</h3><ul class="k"><li>마사지·심부마찰</li><li>통증유발점 압박이완(허혈성 압박)</li><li>근막이완술</li><li>위치이완술(strain-counterstrain)</li><li>기구보조 연부조직가동술(IASTM)</li><li>근육에너지기법</li></ul></div>
+   <div class="card" style="border-color:var(--nerve)"><h3 style="color:var(--nerve)">관절·신경 기법</h3><ul class="k"><li>관절가동술: Maitland 진동, Kaltenborn 견인·미끄럼</li><li>동작가동술: Mulligan(MWM, SNAG)</li><li>도수교정: 고속 저진폭(근거·금기 소개 수준)</li><li>신경가동술: 미끄럼, 긴장</li></ul></div>
+  </div>
+  <div class="key">관절 기법의 정의: 관절을 정상 범위까지(가동술) 또는 정상 범위 너머로(도수교정) 수동으로 움직여 가동범위를 늘리고 통증을 줄인다.</div>
+  <div class="src"><span class="badge">모델</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/" target="_blank" rel="noopener">Bialosky JE 등. Man Ther 2009;14:531–8 (기법 분류표)</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO1-2 Maitland 등급" data-group="LO1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>관절가동술 등급</div>
+  <h2>진폭과 위치로 나누는 다섯 등급</h2>
+  <svg class="fig" viewBox="0 0 960 250" role="img" aria-label="관절 가동범위 막대 위에 Maitland 1~5등급의 진폭과 위치를 표시한 도식" style="max-height:52%">
+   <line x1="60" y1="200" x2="900" y2="200" stroke="var(--ink)" stroke-width="2"/>
+   <text x="60" y="225" font-size="13" fill="var(--muted)">시작 위치</text><text x="760" y="225" font-size="13" fill="var(--muscle)" font-weight="700">저항(제한점)</text>
+   <line x1="780" y1="40" x2="780" y2="205" stroke="var(--muscle)" stroke-dasharray="5 4"/>
+   <g font-size="14" font-weight="700">
+    <rect x="70" y="160" width="90" height="22" rx="6" fill="var(--nerve-soft)" stroke="var(--nerve)"/><text x="170" y="176" fill="var(--nerve)">I: 작은 진폭, 시작 부분</text>
+    <rect x="160" y="125" width="520" height="22" rx="6" fill="var(--nerve-soft)" stroke="var(--nerve)"/><text x="690" y="141" fill="var(--nerve)">II: 큰 진폭, 저항 전까지</text>
+    <rect x="300" y="90" width="480" height="22" rx="6" fill="var(--warn-soft)" stroke="var(--warn)"/><text x="300" y="84" fill="var(--warn)">III: 큰 진폭, 저항까지</text>
+    <rect x="700" y="55" width="80" height="22" rx="6" fill="var(--muscle-soft)" stroke="var(--muscle)"/><text x="590" y="70" fill="var(--muscle)">IV: 작은 진폭, 저항 끝</text>
+    <rect x="780" y="20" width="30" height="22" rx="6" fill="#c0002a"/><text x="820" y="36" fill="#c0002a">V: 고속 저진폭(도수교정)</text>
+   </g>
+  </svg>
+  <div class="grid2">
+   <div class="card"><h3>I–II 등급</h3><p>통증이 우세할 때. 저항에 닿지 않아 통증 조절 목적.</p></div>
+   <div class="card"><h3>III–IV 등급</h3><p>강직(뻣뻣함)이 우세할 때. 저항까지 들어가 가동범위 향상 목적.</p></div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=tP2vKocCFdk" target="_blank" rel="noopener">영상: Maitland 등급</a></div>
+  <div class="src"><span>등급 정의: Maitland 관절가동술 교과서 표준</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO1-3 기법 고르기" data-group="LO1">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO1</span>임상 추론</div>
+  <h2>평가 소견이 기법을 고른다</h2>
+  <div class="tw"><table class="t">
+   <tr><th>평가 소견(3장)</th><th>우선 고려 기법</th></tr>
+   <tr><td>긴장띠·과민점, 평소 통증 재현</td><td>통증유발점 압박이완, 위치이완술, 이어서 스트레칭</td></tr>
+   <tr><td>근막 미끄러짐 감소, 넓은 부위 뻣뻣함</td><td>근막이완술, IASTM</td></tr>
+   <tr><td>근육 길이 제한 + 수축 조절 가능</td><td>근육에너지기법</td></tr>
+   <tr><td>관절 놀이 감소, 끝범위 강직</td><td>관절가동술 III–IV, 동작가동술</td></tr>
+   <tr><td>통증 우세, 작은 움직임에도 민감</td><td>관절가동술 I–II, 부드러운 연부조직 기법</td></tr>
+   <tr><td>신경 긴장 검사 양성, 신경 기계민감도</td><td>신경가동술(미끄럼부터)</td></tr>
+  </table></div>
+  <div class="key">한 환자에게 여러 묶음이 함께 필요할 수 있다. 기법을 고른 뒤에는 반드시 운동으로 이어 간다.</div>
+  <div class="src"><span>3장 평가 → 5장 기법 연결표(교과서·임상 추론)</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO2 -->
+<section class="slide" data-title="LO2-1 신경생리 모델" data-group="LO2" id="lo2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>기전</div>
+  <h2>기계적 자극 → 신경계 반응의 연쇄</h2>
+  <svg class="fig" viewBox="0 0 960 230" role="img" aria-label="도수치료의 기계적 자극이 말초, 척수, 척수상위 신경계 반응을 거쳐 임상 결과로 이어지는 모델" style="max-height:48%">
+   <g font-size="15" text-anchor="middle">
+    <rect x="10" y="70" width="170" height="90" rx="14" fill="var(--muscle-soft)" stroke="var(--muscle)" stroke-width="2"/><text x="95" y="108" font-weight="700" fill="var(--muscle)">기계적 자극</text><text x="95" y="134" fill="var(--ink)">손의 힘</text>
+    <rect x="230" y="10" width="200" height="60" rx="12" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/><text x="330" y="46" fill="var(--ink)">말초: 염증 매개물질 변화</text>
+    <rect x="230" y="85" width="200" height="60" rx="12" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/><text x="330" y="121" fill="var(--ink)">척수: 뒤뿔 억제</text>
+    <rect x="230" y="160" width="200" height="60" rx="12" fill="var(--paper)" stroke="var(--line)" stroke-width="2"/><text x="330" y="196" fill="var(--ink)">척수상위: 하행 억제</text>
+    <rect x="480" y="160" width="220" height="60" rx="12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="2"/><text x="590" y="186" fill="var(--ink)">맥락: 기대·관계·환경</text><text x="590" y="208" font-size="12" fill="var(--muted)">(2018 개정 모델)</text>
+    <rect x="760" y="70" width="190" height="90" rx="14" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="2"/><text x="855" y="108" font-weight="700" fill="var(--ok)">임상 결과</text><text x="855" y="134" fill="var(--ink)">통증↓ · 움직임↑</text>
+   </g>
+   <g stroke="var(--muted)" stroke-width="2" fill="none"><path d="M180 115 L228 40"/><path d="M180 115 L228 115"/><path d="M180 115 L228 190"/><path d="M430 40 L758 105"/><path d="M430 115 L758 115"/><path d="M430 190 L758 125"/><path d="M700 190 L758 135"/></g>
+  </svg>
+  <div class="key">모델의 핵심: 손의 기계적 힘이 말초·중추 신경계 반응의 연쇄를 시작하고, 그 반응이 임상 결과를 만든다.</div>
+  <div class="src"><span class="badge">모델</span><a href="https://chiro.org/Subluxation/The_Mechanisms_of_Manual_Therapy.shtml" target="_blank" rel="noopener">Bialosky 2009</a><a href="https://www.scribd.com/document/703781482/Mechanisms-of-Manual-Therapy" target="_blank" rel="noopener">Bialosky 등. JOSPT 2018;48:8–18</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO2-2 흔한 오해" data-group="LO2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>환자 설명</div>
+  <h2>"뼈를 맞췄다", "유착을 끊었다"는 설명을 버린다</h2>
+  <div class="grid2">
+   <div class="card" style="border-color:var(--warn)"><h3 style="color:var(--warn)">근거와 맞지 않는 설명</h3><ul class="k"><li>"척추뼈가 제자리로 들어갔어요"</li><li>"근막 유착을 손으로 끊었어요"</li><li>"정확히 그 마디만 움직였어요"</li></ul></div>
+   <div class="card" style="border-color:var(--ok)"><h3 style="color:var(--ok)">근거에 맞는 설명</h3><ul class="k"><li>"신경계가 이 부위를 덜 위협적으로 느끼게 돕는 자극이에요"</li><li>"통증이 줄어든 지금이 움직임을 연습할 기회예요"</li><li>"효과를 유지하려면 운동이 함께 가야 해요"</li></ul></div>
+  </div>
+  <div class="key">구조를 '고쳤다'는 설명은 의존과 공포(다시 빠질까 봐)를 키운다. 3장 LO6, 2장 LO4(자세 설명)와 같은 원칙이다.</div>
+  <div class="src"><span class="badge">교육 자료</span><a href="https://book.physiotutors.com/?p=2797" target="_blank" rel="noopener">Physiotutors: How Manipulations Work</a><span class="badge">모델</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/" target="_blank" rel="noopener">Bialosky 2009</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO2-3 효과 크기의 현실" data-group="LO2">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO2</span>비판적 읽기</div>
+  <h2>도수치료 효과는 대개 작고 짧다, 그래서 운동과 묶는다</h2>
+  <div class="grid3">
+   <div class="card"><h3>작은 효과 크기</h3><p>도수치료 연구의 효과 크기는 대체로 작고, 단일 기전으로 설명하기 어렵다.</p></div>
+   <div class="card"><h3>맥락 요인</h3><p>환자, 치료자, 환경 요인이 결과에 함께 작용한다.</p></div>
+   <div class="card"><h3>창을 연다</h3><p>즉시 통증 감소와 가동범위 증가를 운동·기능훈련으로 이어 간다.</p></div>
+  </div>
+  <div class="key">회기 구성 예: 평가 → 도수치료 10분 → 즉시 재평가(가동범위·통증) → 같은 회기 운동 20분 → 가정운동.</div>
+  <div class="src"><span class="badge">모델</span><a href="https://www.scribd.com/document/703781482/Mechanisms-of-Manual-Therapy" target="_blank" rel="noopener">Bialosky 2018</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO3 -->
+<section class="slide" data-title="LO3-1 통증유발점 압박이완" data-group="LO3" id="lo3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>허혈성 압박</div>
+  <h2>통증유발점 압박이완: 즉시·단기 효과가 확인되었다</h2>
+  <div class="cols">
+   <div data-anat='{"view":"back","hl":["trapezius_u"],"marks":[[120,112]],"labels":[[120,112,"엄지로 서서히 압박",-85,170]],"label":"위등세모근 통증유발점에 압박이완을 적용하는 위치","viewBox":"-90 20 480 230"}'></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ol class="k" style="padding-left:1.2em"><li>통증유발점에 압력을 서서히 올린다.</li><li>압박감이나 통증이 처음 느껴지는 지점에서 유지한다.</li><li>불편감이 줄면 조금 더 깊이 들어간다(압박이완).</li><li>보통 30–90초, 2–3회 반복 후 스트레칭으로 잇는다.</li></ol>
+    <div class="key">목통증 15편(725명) 메타분석: 거짓·무처치보다 통증, 압통역치, 가동범위가 즉시·단기에 더 좋아졌다. 통증은 건침이 압박보다 더 크게 줄였다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=dvRpJ8aSpEU" target="_blank" rel="noopener">영상: 허혈성 압박</a></div>
+  <div class="src"><span class="badge g">SR/MA</span><a href="https://www.epistemonikos.org/en/documents/96c81df7f8166c4cb59461a06a2f71211033811a" target="_blank" rel="noopener">Xu A 등. J Back Musculoskelet Rehabil 2023;36:783–98</a><a href="https://pubmed.ncbi.nlm.nih.gov/36050701/" target="_blank" rel="noopener">Lu W 등. Chiropr Man Therap 2022;30:34</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO3-2 근막이완술·IASTM" data-group="LO3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>근막·피하</div>
+  <h2>근막이완술과 기구보조 연부조직가동술(IASTM)</h2>
+  <div class="cols">
+   <div data-anat='{"view":"back","hl":["tlf","erector"],"labels":[[134,290,"근막이완: 지속적 저부하 신장",-85,300],[146,200,"IASTM: 근육결을 따라 긁기",385,190]],"label":"등허리근막과 척주세움근에 근막이완술과 IASTM을 적용하는 부위","viewBox":"-90 120 480 260"}'></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>IASTM은 단단한 기구로 연부조직을 다루는 기법으로, Cyriax의 가로마찰 마사지에서 유래했다.</li><li>기전으로는 피부·근육·관절낭의 기계민감 신경을 자극하는 신경조절 효과가 제시된다.</li><li>2025년 메타분석: 환자보고 기능은 작은 효과(SMD 0.40)로 개선되었으나 확실성은 낮았다.</li></ul>
+    <div class="key">IASTM은 '흉터를 부순다'보다 '감각 입력으로 통증·움직임을 조절한다'로 설명한다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=0mxkYhC1K6U" target="_blank" rel="noopener">영상: IASTM 시연</a><a href="https://www.youtube.com/watch?v=6kJsaI5iGIY" target="_blank" rel="noopener">영상: 근막이완술</a></div>
+  <div class="src"><span class="badge g">SR</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6709755" target="_blank" rel="noopener">Cheatham 등. J Athl Train 2019;54:808–21</a><span class="badge g">SR/MA</span><a href="https://biomedcentral-bmcmusculoskeletdisord.publicaciones.saludcastillayleon.es/articles/10.1186/s12891-025-08492-4" target="_blank" rel="noopener">Tang S 등. BMC Musculoskelet Disord 2025;26:257</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO3-3 위치이완술·근육에너지기법" data-group="LO3">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO3</span>간접·능동 기법</div>
+  <h2>편안한 자세로 풀거나, 환자의 수축으로 늘린다</h2>
+  <div class="grid2">
+   <div class="card"><h3>위치이완술(strain-counterstrain)</h3><ol class="k" style="padding-left:1.2em"><li>압통점을 찾아 손가락으로 모니터한다.</li><li>압통이 크게 줄어드는 '편안한 자세'로 수동 위치시킨다.</li><li>약 90초 유지 후 천천히 중립으로 돌아온다.</li></ol><p class="qlabel">근거: 대조 조건보다 압통점 촉진 통증을 줄였다(메타분석).</p></div>
+   <div class="card"><h3>근육에너지기법(MET)</h3><ol class="k" style="padding-left:1.2em"><li>제한 장벽에서 환자가 가벼운 등척성 수축(최대의 20–30%)</li><li>수 초 뒤 이완, 새 장벽까지 이동</li><li>3–5회 반복</li></ol><p class="qlabel">근거: 급·만성 요통, 만성 목통증, 만성 가쪽위관절융기염의 통증과 가동범위 제한에 효과. 통증유발점에는 다른 기법이 더 알맞았다.</p></div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=N1eJGcR6POE" target="_blank" rel="noopener">영상: 위치이완술</a><a href="https://www.youtube.com/watch?v=PAt5lUTdQZU" target="_blank" rel="noopener">영상: 허리네모근 MET</a></div>
+  <div class="src"><span class="badge g">SR/MA</span><a href="https://search.pedro.org.au/search-results/record-detail/39239" target="_blank" rel="noopener">Wong CK 등. J Bodyw Mov Ther 2014;18:165–73</a><span class="badge g">SR</span><a href="https://doaj.org/article/e8510fe7791b457e9e0c921e15762bc6" target="_blank" rel="noopener">Thomas E 등. Chiropr Man Therap 2019;27:35</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO4 -->
+<section class="slide" data-title="LO4-1 동작가동술 MWM" data-group="LO4" id="lo4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>Mulligan</div>
+  <h2>동작가동술: 미끄럼을 유지한 채 아픈 동작을 한다</h2>
+  <div class="cols">
+   <div data-anat='{"view":"front","hl":["forearm_f"],"marks":[[70,250]],"labels":[[70,250,"팔꿈치 가쪽 미끄럼 유지 + 주먹 쥐기",-25,300]],"label":"팔꿈치 동작가동술 적용 위치","viewBox":"-30 120 360 260"}'></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>가쪽위관절융기 통증 198명 무작위 대조시험: 동작가동술 + 운동 8회기, 스테로이드 주사, 지켜보기를 비교했다.</li><li>물리치료는 단기에 지켜보기보다 우수했지만 장기에는 차이가 뚜렷하지 않았다.</li><li>주사는 단기에만 효과가 있었고 장기 결과는 나빴다. 물리치료군은 추가 치료가 덜 필요했다.</li></ul>
+    <div class="key">원칙: 통증 없는 미끄럼 방향을 찾고, 그 미끄럼을 유지하며 아팠던 동작을 반복한다.</div>
+   </div>
+  </div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=UpZKU677pqQ" target="_blank" rel="noopener">영상: 팔꿈치 MWM</a><a href="https://www.youtube.com/watch?v=OSesm7E2DcM" target="_blank" rel="noopener">영상: 발목 MWM</a></div>
+  <div class="src"><span class="badge g">RCT</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1633781" target="_blank" rel="noopener">Bisset L 등. BMJ 2006;333:939 (사설 요약)</a><a href="https://ebm.bmj.com/content/ebmed/12/2/37.full.pdf" target="_blank" rel="noopener">Vicenzino·Bisset 해설</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO4-2 척추·말단 가동술" data-group="LO4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>관절가동술 적용</div>
+  <h2>부위별 대표 가동술</h2>
+  <div class="tw"><table class="t">
+   <tr><th>부위</th><th>대표 기법</th><th>목표</th></tr>
+   <tr><td>목</td><td>뒤-앞 중심·측면 가동, SNAG</td><td>돌림·폄 제한, 통증</td></tr>
+   <tr><td>등뼈</td><td>뒤-앞 가동, (도수교정)</td><td>목통증 동반 등뼈 강직</td></tr>
+   <tr><td>허리</td><td>뒤-앞 가동, 옆누운 돌림</td><td>급성 요통 통증·장애</td></tr>
+   <tr><td>어깨</td><td>위팔어깨관절 아래·뒤 미끄럼</td><td>올림·안쪽돌림 제한</td></tr>
+   <tr><td>팔꿈치</td><td>가쪽 미끄럼 MWM</td><td>주먹 쥘 때 통증</td></tr>
+   <tr><td>엉덩관절</td><td>긴 축 견인, 뒤쪽 미끄럼</td><td>굽힘·안쪽돌림 제한</td></tr>
+   <tr><td>발목</td><td>목말뼈 뒤쪽 미끄럼, 체중부하 MWM</td><td>발등굽힘 제한</td></tr>
+  </table></div>
+  <div class="key">근막 통증 환자에서 관절가동술은 '관절 제한이 함께 있을 때' 추가한다. 근육 소견만 있으면 연부조직 기법이 먼저다.</div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=xR_Tl-L2Tpg" target="_blank" rel="noopener">영상: 목 뒤-앞 가동</a><a href="https://www.youtube.com/watch?v=45pWdlggTd0" target="_blank" rel="noopener">영상: 목말뼈 뒤쪽 미끄럼</a></div>
+  <div class="src"><span>기법 목록: 관절가동술 교과서 표준. 권고 수준은 LO5 참고.</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO4-3 신경가동술" data-group="LO4">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO4</span>신경가동술</div>
+  <h2>신경 기계민감도가 있을 때, 미끄럼부터</h2>
+  <div class="grid2">
+   <div class="card"><h3>미끄럼(slider)</h3><p>한쪽 끝을 늘리면 다른 쪽을 느슨하게 해 신경을 왕복시킨다. 민감할 때 먼저 쓴다.</p></div>
+   <div class="card"><h3>긴장(tensioner)</h3><p>양쪽 끝을 함께 늘려 신경 긴장을 높인다. 민감도가 줄면 단계적으로 쓴다.</p></div>
+  </div>
+  <ul class="k"><li>40편을 포함한 체계적 고찰(근거 수준 1a)은 신경병증 요소가 있는 근골격계 질환에서 신경가동술의 효과를 분석했다.</li><li>척추 기원 다리 통증에서 통증과 장애를 줄인다는 고찰들이 있다.</li></ul>
+  <div class="key">근막 통증만 있고 신경 긴장 검사가 음성이면 신경가동술의 우선순위는 낮다. 3장의 감별이 기법 선택을 정한다.</div>
+  <div class="media"><a href="https://www.youtube.com/watch?v=p7EDrqm5U78" target="_blank" rel="noopener">영상: 궁둥신경 미끄럼·긴장</a><a href="https://www.youtube.com/watch?v=8-DlxcZJue8" target="_blank" rel="noopener">영상: 정중신경 미끄럼</a></div>
+  <div class="src"><span class="badge g">SR/MA</span><a href="https://pubmed.ncbi.nlm.nih.gov/28704626/" target="_blank" rel="noopener">Basson A 등. JOSPT 2017;47:593–615</a><a href="https://distantreader.org/stacks/journals/sajp/sajp-1627.htm" target="_blank" rel="noopener">Murape 등. S Afr J Physiother 2022</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO5 -->
+<section class="slide" data-title="LO5-1 요통 지침" data-group="LO5" id="lo5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>임상진료지침</div>
+  <h2>요통 지침(2021): 급성 요통에 관절가동술을 '써야 한다'</h2>
+  <div class="tw"><table class="t">
+   <tr><th>대상</th><th>권고</th><th>등급</th></tr>
+   <tr><td>급성 요통</td><td>통증·장애를 줄이기 위해 도수교정 또는 비도수교정 관절가동술을 써야 한다</td><td>A</td></tr>
+   <tr><td>다리 통증 동반 만성 요통</td><td>도수교정 또는 비도수교정 관절가동술을 쓸 수 있다</td><td>—</td></tr>
+   <tr><td>만성 요통</td><td>근력·지구력, 다면적 운동, 특정 몸통근 활성, 유산소, 수중 운동 등 운동을 써야 한다</td><td>A</td></tr>
+   <tr><td>다리 통증 동반 만성 요통</td><td>다른 중재에 더해도 이득이 없어 기계 견인은 쓰지 말아야 한다</td><td>—</td></tr>
+  </table></div>
+  <div class="key">도수치료는 급성 요통에서 강하게 권고되고, 만성 요통에서는 운동이 중심이다.</div>
+  <div class="src"><span class="badge">CPG</span><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241" target="_blank" rel="noopener">George SZ 등. JOSPT 2021;51(11):CPG1–60 요약</a><a href="https://www.orthopt.org/uploads/content_files/files/jospt.2021.0304.pdf" target="_blank" rel="noopener">원문 PDF</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO5-2 목통증 지침" data-group="LO5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>임상진료지침</div>
+  <h2>목통증 지침(2017): 도수치료 + 운동의 다면적 접근</h2>
+  <div class="grid2">
+   <div class="card"><h3>급성, 움직임 제한형</h3><ul class="k"><li>흉추 도수교정</li><li>목 가동술 또는 도수교정</li><li>목 가동범위·스트레칭·등척성 운동</li></ul></div>
+   <div class="card"><h3>만성 목통증</h3><ul class="k"><li>가동술·도수교정 + 운동 + 간헐적 기계 견인의 다면적 접근</li><li>도수 중재, 격려 중심 교육, 인지행동 개념을 쓴 운동</li></ul></div>
+  </div>
+  <div class="key">두 지침의 공통 메시지: 도수치료는 단독이 아니라 운동·교육과 함께 쓴다.</div>
+  <div class="media"><a class="doc" href="https://orthopt.org/uploads/content_files/files/1.%20Neck%20Pain%20_%20Revision%202017.pdf" target="_blank" rel="noopener">목통증 지침 2017 한국어 번역본</a></div>
+  <div class="src"><span class="badge">CPG</span><a href="https://physicaltherapyfirst.com/?p=11458" target="_blank" rel="noopener">Blanpied 2017 요약</a><a href="https://www.orthopt.org/uploads/content_files/files/Neck%20Pain%20Revision%20Decision%20Tree%202017%20-%20Ortho%20Section.pdf" target="_blank" rel="noopener">결정 트리</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO5-3 근막통증 근거 종합" data-group="LO5">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO5</span>근거 종합</div>
+  <h2>근막 통증에서 기법별 근거 한눈에</h2>
+  <div class="tw"><table class="t">
+   <tr><th>기법</th><th>주된 근거</th><th>효과 요약</th><th>확실성</th></tr>
+   <tr><td>허혈성 압박</td><td>메타분석 2편(2022, 2023)</td><td>통증·압통역치·가동범위 즉시·단기 개선</td><td><span class="badge g">중간</span></td></tr>
+   <tr><td>위치이완술</td><td>메타분석(2014)</td><td>압통점 통증 감소</td><td><span class="badge w">낮음–중간</span></td></tr>
+   <tr><td>근육에너지기법</td><td>체계적 고찰(2019)</td><td>요통·목통증·팔꿈치 통증과 가동범위, 통증유발점엔 다른 기법 우선</td><td><span class="badge w">중간</span></td></tr>
+   <tr><td>IASTM</td><td>메타분석(2025)</td><td>기능 작은 개선</td><td><span class="badge w">낮음</span></td></tr>
+   <tr><td>관절가동술</td><td>요통·목통증 지침</td><td>급성 요통 강력 권고, 목통증 다면적 접근</td><td><span class="badge g">높음(요통 A)</span></td></tr>
+   <tr><td>신경가동술</td><td>메타분석(2017)</td><td>신경 요소가 있을 때 통증·장애 감소</td><td><span class="badge g">중간</span></td></tr>
+  </table></div>
+  <div class="src"><span>각 행의 출처는 LO3–LO5 슬라이드 참고. 확실성 표시는 강의용 요약.</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- LO6 -->
+<section class="slide" data-title="LO6-1 금기와 주의" data-group="LO6" id="lo6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>안전</div>
+  <h2>도수교정의 금기와 주의사항</h2>
+  <div class="grid3">
+   <div class="card" style="border-color:#c0002a"><h3 style="color:#c0002a">금기</h3><ul class="k"><li>척추 적신호(골절·종양·감염·마미증후군)</li><li>목 혈관 병리 의심</li><li>위목뼈 불안정(류마티스관절염, 다운증후군 등)</li><li>진행하는 신경 결손</li></ul></div>
+   <div class="card" style="border-color:var(--warn)"><h3 style="color:var(--warn)">주의</h3><ul class="k"><li>골다공증, 장기 스테로이드</li><li>항응고제 복용</li><li>관절 과가동성</li><li>심한 통증·공포</li></ul></div>
+   <div class="card" style="border-color:var(--ok)"><h3 style="color:var(--ok)">대안</h3><ul class="k"><li>낮은 등급(I–II) 가동술</li><li>부드러운 연부조직 기법</li><li>능동 운동</li></ul></div>
+  </div>
+  <div class="key">국내에서는 도수교정의 시행 범위를 학과·기관 기준에 따라 확인한다. 이 강의는 근거와 금기 소개 수준으로 다룬다.</div>
+  <div class="src"><span class="badge w">IFOMPT</span><a href="https://www.ifompt.org/site/ifompt/International%20Framework%20for%20Red%20Flags%20for%20Potential%20Serious%20Spinal%20Pathologies%20master%20copy%20.pdf" target="_blank" rel="noopener">척추 적신호 프레임워크 2020</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO6-2 목 혈관 선별" data-group="LO6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>목 부위</div>
+  <h2>목 도수치료 전에 혈관 병리를 먼저 묻는다</h2>
+  <div class="cols">
+   <div data-anat='{"view":"front","hl":["scm"],"labels":[[146,90,"목 앞·옆 혈관 주행",385,110]],"label":"목 앞쪽 혈관 주행 부위","viewBox":"-90 0 480 200"}'></div>
+   <div style="display:flex;flex-direction:column;gap:.8em">
+    <ul class="k"><li>IFOMPT 경부 프레임워크는 근골격계 중재 전에 목 혈관 병리 가능성을 평가하도록 돕는다.</li><li>목 혈관 병리는 드물지만 목통증·두통으로 위장해 물리치료사를 찾아올 수 있다.</li><li>위험과 이득을 따져 중재를 고르는 공동 의사결정을 강조한다.</li></ul>
+    <div class="key">질문 예: 처음 겪는 극심한 두통, 어지럼, 복시, 구음장애, 삼킴 곤란, 실조, 얼굴 감각 이상, 최근 목 외상.</div>
+   </div>
+  </div>
+  <div class="src"><span class="badge w">IFOMPT</span><a href="https://experts.mcmaster.ca/scholarly-works/2687869" target="_blank" rel="noopener">Rushton 2023</a><a href="https://www.ifompt.org/site/ifompt/IFOMPT%20cervical%20framework%20final%202020%20Add%202023.pdf" target="_blank" rel="noopener">IFOMPT 경부 프레임워크 원문</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="LO6-3 이상 반응 대응" data-group="LO6">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">LO6</span>대응</div>
+  <h2>치료 중·후 이상 반응이 생기면</h2>
+  <div class="tw"><table class="t">
+   <tr><th>반응</th><th>예</th><th>대응</th></tr>
+   <tr><td>흔한 경미 반응</td><td>치료 부위 뻐근함, 일시적 통증 증가(24–48시간)</td><td>미리 설명, 강도 조절, 다음 회기 재평가</td></tr>
+   <tr><td>신경 증상</td><td>새로 생긴 저림·근력약화</td><td>중단, 신경학적 재평가, 필요 시 의뢰</td></tr>
+   <tr><td style="color:#c0002a;font-weight:700">응급 신호</td><td>어지럼·복시·구음장애·삼킴 곤란·실조·의식 저하</td><td style="color:#c0002a;font-weight:700">즉시 중단, 응급 의뢰, 기록</td></tr>
+  </table></div>
+  <div class="key">동의서와 기록: 기법·강도·환자 반응을 회기마다 남긴다.</div>
+  <div class="src"><span class="badge w">IFOMPT</span><a href="https://experts.mcmaster.ca/scholarly-works/2687869" target="_blank" rel="noopener">Rushton 2023</a></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 정리 -->
+
+<section class="slide" data-title="근육 영상 1/2: 목·어깨·팔꿈치·손·허리·몸통" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>5장에 나온 근육</div>
+  <h2>목·어깨·팔꿈치·손·허리·몸통 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>위등세모근</b><small>Upper trapezius</small><p>어깨뼈 올림·위쪽돌림, 목 폄·가쪽굽힘. 목·어깨 근육통의 대표 근육</p><div class="media"><a href="https://www.youtube.com/watch?v=SjBceqTrVaE" target="_blank" rel="noopener">영상 1: 해부학I 승모근 – 기시·정지·기능·촉진</a><a href="https://www.youtube.com/watch?v=GXcJdGM56sE" target="_blank" rel="noopener">영상 2: 승모근 기능해부학의 이해(카데바)</a></div></div><div class="mcard"><b>목빗근</b><small>Sternocleidomastoid</small><p>양쪽: 목 굽힘, 한쪽: 같은쪽 가쪽굽힘·반대쪽 돌림. 머리 쪽 연관통</p><div class="media"><a href="https://www.youtube.com/watch?v=I2eFKEqH5Ic" target="_blank" rel="noopener">영상 1: [해부학-근육학] 목빗근(흉쇄유돌근)</a><a href="https://www.youtube.com/watch?v=OQA2faL2H5A" target="_blank" rel="noopener">영상 2: 이해 쏙쏙 해부학 – 흉쇄유돌근</a></div></div><div class="mcard"><b>가시아래근</b><small>Infraspinatus</small><p>돌림근띠. 위팔 가쪽돌림·위팔어깨관절 안정, 어깨 앞쪽 연관통</p><div class="media"><a href="https://www.youtube.com/watch?v=oLuEqmsq8wI" target="_blank" rel="noopener">영상 1: 회전근개: 극하근의 기능해부(카데바)</a><a href="https://www.youtube.com/watch?v=6Fwm12r40z8" target="_blank" rel="noopener">영상 2: 극하근의 비밀: 힘과 안정성</a></div></div><div class="mcard"><b>아래팔 굽힘근</b><small>Forearm flexors</small><p>안쪽위관절융기 공통 기시. 손목·손가락 굽힘</p><div class="media"><a href="https://www.youtube.com/watch?v=8ArRLtFfDwo" target="_blank" rel="noopener">영상 1: 아래팔 앞쪽 근육 – 노쪽손목굽힘근 등 6개</a><a href="https://www.youtube.com/watch?v=x1R-cG58KHQ" target="_blank" rel="noopener">영상 2: [해부학-근육학] 깊은손가락굽힘근</a></div></div><div class="mcard"><b>척주세움근</b><small>Erector spinae</small><p>척주 폄·가쪽굽힘. 몸통 폄 지구력의 주동근</p><div class="media"><a href="https://www.youtube.com/watch?v=zUJ49aMcho8" target="_blank" rel="noopener">영상 1: 척추근육1 – 척주세움근(엉덩갈비근·가장긴근·가시근) VR</a><a href="https://www.youtube.com/watch?v=8nypWdQDW7k" target="_blank" rel="noopener">영상 2: 필라테스 기능해부학 2. 척추기립근</a></div></div><div class="mcard"><b>허리네모근</b><small>Quadratus lumborum</small><p>몸통 가쪽굽힘·골반 올림. 허리·엉덩이 연관통</p><div class="media"><a href="https://www.youtube.com/watch?v=gXW8EZK32wI" target="_blank" rel="noopener">영상 1: 요방형근의 해부학과 기능, 촉진법 – 근육학 마스터</a><a href="https://www.youtube.com/watch?v=1u-Tb2heBWU" target="_blank" rel="noopener">영상 2: 요방형근 해부학적 위치(허리네모근)</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근육 영상 2/2: 허리·몸통" data-group="근육 영상">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">근육</span>5장에 나온 근육</div>
+  <h2>허리·몸통 — 근육별 영상 2개</h2>
+  <p class="mnote">한국어 영상 2개로 위치·이는곳·닿는곳·작용을 확인한 뒤 본문으로 돌아가세요. 영상마다 구용어(예: 승모근)와 6판 용어(등세모근)가 섞여 있을 수 있습니다.</p>
+  <div class="mlib"><div class="mcard"><b>등허리근막</b><small>Thoracolumbar fascia</small><p>넓은등근·큰볼기근·배가로근의 힘을 전달하는 근막</p><div class="media"><a href="https://www.youtube.com/watch?v=HolT2T4pVi8" target="_blank" rel="noopener">영상 1: 근막이란 무엇인가(힐링무브)</a><a href="https://www.youtube.com/watch?v=ZOCkyT_go_4" target="_blank" rel="noopener">영상 2: 척추기립근·흉요근막 자가 근막이완</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 1/3: 목·어깨" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>5장에 나온 근육의 근막통증</div>
+  <h2 class="th">목·어깨 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>위등세모근</b><small>Upper trapezius</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["trapezius_u"], "marks": [[118, 110]], "ref": [[137, 82, 7, 13], [126, 54, 8, 10], [124, 34, 8, 9]], "viewBox": "78 9 100 133", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>위등세모근 중간, 어깨 위 자유모서리(수직 섬유)</dd><dt>연관통</dt><dd>목 뒤가쪽 → 귀 뒤·관자놀이·턱각(긴장형 두통 양상)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=vgA34wdmNqo" target="_blank" rel="noopener">TrP 영상: 해부학II 승모근 – 기능해부학과 통증유발점</a><a class="doc" href="https://learnmuscles.com/glossary/trapezius-trigger-point/" target="_blank" rel="noopener">그림: 등세모근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>목빗근</b><small>Sternocleidomastoid</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["scm"], "marks": [[143, 90], [141, 106]], "ref": [[150, 24, 13, 6], [135, 44, 8, 6], [131, 60, 7, 7], [123, 50, 5, 8]], "viewBox": "79 2 100 128", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>복장갈래·빗장갈래를 따라 여러 곳</dd><dt>연관통</dt><dd>복장갈래: 정수리·뒤통수·눈 주위·뺨 / 빗장갈래: 이마·귀 깊은 곳, 어지럼</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=sa4298zZQn0" target="_blank" rel="noopener">TrP 영상: 두통·관자놀이·눈 통증과 목빗근(흉쇄유돌근)</a><a class="doc" href="https://learnmuscles.com/glossary/sternocleidomastoid-trigger-point/" target="_blank" rel="noopener">그림: 목빗근 TrP·연관통 그림</a></div></div><div class="mcard tcard"><b>가시아래근</b><small>Infraspinatus</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["infraspinatus"], "marks": [[124, 158]], "ref": [], "viewBox": "56 106 100 110", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div><div class="tf"><div data-anat='{"view": "front", "hl": [], "marks": [], "ref": [[88, 134, 12, 14], [80, 190, 8, 24], [70, 286, 6, 20], [62, 370, 5, 12]], "viewBox": "41 104 115 294", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>가시아래오목 안쪽·가쪽</dd><dt>연관통</dt><dd>어깨 앞쪽 깊은 곳(어깨관절 앞) → 위팔 앞가쪽·아래팔 노쪽·손(뒤로 손 돌리기 통증)</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=zGn6vlm4SNk" target="_blank" rel="noopener">TrP 영상: 극상근·극하근·소원근·대원근 트리거포인트 촉진·허혈성 압박</a><a class="doc" href="https://learnmuscles.com/glossary/infraspinatus-trigger-point/" target="_blank" rel="noopener">그림: 가시아래근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 2/3: 팔꿈치·손·허리·몸통" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>5장에 나온 근육의 근막통증</div>
+  <h2 class="th">팔꿈치·손·허리·몸통 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>아래팔 굽힘근</b><small>Forearm flexors</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "front", "hl": ["forearm_f"], "marks": [[82, 268]], "ref": [[72, 338, 8, 6], [62, 375, 6, 12]], "viewBox": "40 232 116 171", "scapula": false, "dim": false, "label": "앞에서 본 통증유발점과 연관통 도해"}'></div><span>앞</span></div></div><dl><dt>통증유발점</dt><dd>안쪽위관절융기 아래 근육 배(노쪽·자쪽손목굽힘근)</dd><dt>연관통</dt><dd>손목 앞쪽(손바닥 쪽) 노쪽·자쪽 → 손가락</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=d-vA7i3F5mU&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): The Wrist Flexor Trigger Points (Dr. Perry)</a><a class="doc" href="https://learnmuscles.com/glossary/flexor-carpi-radialis-trigger-point/" target="_blank" rel="noopener">그림: 노쪽손목굽힘근 TrP 그림</a></div></div><div class="mcard tcard"><b>척주세움근</b><small>Erector spinae</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["erector"], "marks": [[142, 205], [142, 282]], "ref": [[138, 302, 10, 12], [130, 342, 12, 14]], "viewBox": "66 154 100 218", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>등·허리 엉덩갈비근, 가장긴근 배</dd><dt>연관통</dt><dd>엉덩갈비근: 허리 아래·엉치·엉덩이 / 가장긴근: 엉덩이·엉치엉덩관절 부위</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=zBA6FKFf0OE" target="_blank" rel="noopener">TrP 영상: 척주기립근 – 연관통·TTP·치료 테크닉(PT LOG)</a><a class="doc" href="https://learnmuscles.com/glossary/iliocostalis-and-longissimus-trigger-point/" target="_blank" rel="noopener">그림: 엉덩갈비근·가장긴근 TrP 그림</a></div></div><div class="mcard tcard"><b>허리네모근</b><small>Quadratus lumborum</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["ql"], "deep": ["ql"], "marks": [[134, 280], [140, 296]], "ref": [[138, 334, 8, 8], [122, 372, 10, 8], [116, 300, 12, 6], [98, 352, 6, 8]], "viewBox": "62 252 100 144", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>열두째 갈비뼈 아래·엉덩뼈능선 위 가쪽 깊은 곳</dd><dt>연관통</dt><dd>엉치엉덩관절·엉덩이 아래 → 엉덩뼈능선·큰돌기 부위·아랫배·샅</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=DVaaOFSHaTQ" target="_blank" rel="noopener">TrP 영상: [트리거포인트 오디오북] 요방형근 완전 해부</a><a class="doc" href="https://learnmuscles.com/glossary/quadratus-lumborum-ql-trigger-point/" target="_blank" rel="noopener">그림: 허리네모근 TrP·연관통 그림</a></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+<section class="slide" data-title="근막통증·TrP 3/3: 허리·몸통" data-group="근막통증·TrP">
+ <div class="in">
+  <div class="eyebrow"><span class="lo">TrP</span>5장에 나온 근육의 근막통증</div>
+  <h2 class="th">허리·몸통 — 통증유발점과 연관통</h2>
+  <p class="mnote">⊕ 통증유발점 · 붉은 점 영역 연관통(Travell &amp; Simons 요약, 한쪽만 표시). 개인차가 크고 촉진 신뢰도는 제한적입니다(3장 LO3).</p>
+  <div class="mlib tlib"><div class="mcard tcard"><b>등허리근막</b><small>Thoracolumbar fascia</small><div class="tbody"><div class="tfig"><div class="tf"><div data-anat='{"view": "back", "hl": ["tlf"], "marks": [], "ref": [], "viewBox": "66 235 100 110", "scapula": false, "dim": false, "label": "뒤에서 본 통증유발점과 연관통 도해"}'></div><span>뒤</span></div></div><dl><dt>통증유발점</dt><dd>근막 자체는 통증유발점 대상이 아님 — 부착 근육(넓은등근·큰볼기근·배가로근)의 TrP를 확인</dd><dt>연관통</dt><dd>허리 국소 통증·뻣뻣함; 근막의 감각신경 분포와 미끄러짐 저하가 요통과 관련</dd></dl></div><div class="media"><a href="https://www.youtube.com/watch?v=dvy36qP26-0&amp;hl=ko&amp;cc_lang_pref=ko&amp;cc_load_policy=1" title="영어 영상입니다. 한국어 자막: 영상 아래 ⚙ 설정 → 자막 → 자동 번역 → 한국어 (모바일 앱: ⋮ → 자막 → 자동 번역)" target="_blank" rel="noopener">TrP 영상(영어 · 한국어 자막): Thoracolumbar fascia biomechanics</a><span class="noimg">표준 연관통 그림 없음</span></div></div></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<section class="slide" data-title="정리" data-group="정리">
+ <div class="in">
+  <div class="eyebrow">정리</div>
+  <h2>5장 핵심 여섯 문장</h2>
+  <div class="los">
+   <div class="lo-card"><b>LO1</b><span>연부조직 기법과 관절·신경 기법. 통증 우세는 I–II, 강직 우세는 III–IV.</span></div>
+   <div class="lo-card"><b>LO2</b><span>손의 힘은 신경계 반응의 연쇄를 시작한다. 뼈를 맞추거나 유착을 끊는 게 아니다.</span></div>
+   <div class="lo-card"><b>LO3</b><span>허혈성 압박은 통증·압통역치·가동범위를 즉시·단기에 개선한다.</span></div>
+   <div class="lo-card"><b>LO4</b><span>동작가동술은 미끄럼을 유지하며 아픈 동작을. 신경가동술은 미끄럼부터.</span></div>
+   <div class="lo-card"><b>LO5</b><span>급성 요통엔 관절가동술(A), 목통증엔 도수치료 + 운동의 다면적 접근.</span></div>
+   <div class="lo-card"><b>LO6</b><span>적신호와 목 혈관 병리를 먼저 거르고, 응급 신호엔 즉시 중단·의뢰.</span></div>
+  </div>
+  <p class="hand"><a class="fdl" href="https://claude.ai/artifact/P4JyzFpYrL5b1nczbKmhQ2" target="_blank" rel="noopener">→ 학생용 핵심 유인물(5장 탭, PDF 내려받기)</a></p>
+  <div class="src"><span>다음: 퀴즈 20문항(암기 4 · 해석 6 · 해결 6 · 사례 4)</span></div>
+ </div>
+ <div class="note"></div>
+</section>
+
+<!-- 퀴즈 -->
+<section class="slide" data-title="퀴즈 20문항" data-group="퀴즈" id="quiz">
+ <div class="in" id="quizIn"></div>
+ <div class="note"></div>
+</section>
+
+<!-- 결과 -->
+<section class="slide" data-title="결과와 오답 심화" data-group="퀴즈" id="result">
+ <div class="in" id="resultIn"></div>
+ <div class="note"></div>
+</section>
+
+</main>
+
+<nav class="nav" aria-label="슬라이드 이동">
+ <button id="prev" type="button">← 이전</button>
+ <span class="count" id="count">1 / 1</span>
+ <button id="next" type="button">다음 →</button>
+</nav>
+
+<script>@@C:anat.js@@</script>
+<script>
+(function(){
+"use strict";
+var slides=[].slice.call(document.querySelectorAll(".slide"));
+var cur=0;
+var toc=document.getElementById("toc");
+slides.forEach(function(s,i){
+  var o=document.createElement("option");
+  o.value=i; o.textContent=(i+1)+". "+(s.dataset.title.indexOf(s.dataset.group)===0||s.dataset.group===s.dataset.title?"":"["+s.dataset.group+"] ")+s.dataset.title;
+  toc.appendChild(o);
+});
+function idxOf(id){for(var i=0;i<slides.length;i++){if(slides[i].id===id)return i;}return -1;}
+function show(i,push){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[cur].classList.remove("on");
+  cur=i; slides[cur].classList.add("on");
+  document.getElementById("count").textContent=(cur+1)+" / "+slides.length;
+  document.getElementById("prev").disabled=cur===0;
+  document.getElementById("next").disabled=cur===slides.length-1;
+  document.getElementById("prog").style.width=((cur+1)/slides.length*100)+"%";
+  toc.value=cur;
+  if(push!==false){try{history.replaceState(null,"","#slide-"+(cur+1));}catch(e){}}
+  var st=document.getElementById("stage"); st.scrollTop=0; slides[cur].scrollTop=0;
+  if(slides[cur].id==="result") renderResult();
+}
+window.goSlide=function(id){var i=idxOf(id); if(i>=0) show(i);};
+document.getElementById("prev").onclick=function(){show(cur-1)};
+document.getElementById("next").onclick=function(){show(cur+1)};
+toc.onchange=function(){show(+toc.value)};
+document.getElementById("noteBtn").onclick=function(){
+  var on=document.body.classList.toggle("notes"); this.setAttribute("aria-pressed",on);
+};
+document.addEventListener("keydown",function(e){
+  var t=e.target.tagName; if(t==="SELECT"||t==="INPUT"||t==="TEXTAREA")return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"){show(cur+1);e.preventDefault();}
+  if(e.key==="ArrowLeft"||e.key==="PageUp"){show(cur-1);e.preventDefault();}
+});
+var tx=null,ty=null;
+document.getElementById("stage").addEventListener("touchstart",function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.getElementById("stage").addEventListener("touchend",function(e){
+  if(tx===null)return; var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ if(slides[cur].id!=="quiz") show(cur+(dx<0?1:-1)); }
+  tx=ty=null;
+},{passive:true});
+window.addEventListener("hashchange",function(){var m=location.hash.match(/^#slide-(\d+)$/); if(m) show(+m[1]-1,false);});
+
+/* ===== 퀴즈 데이터 ===== */
+var TYPES={mem:"암기형",int:"해석형",sol:"해결형",cas:"사례형"};
+var LOSLIDE={LO1:"lo1",LO2:"lo2",LO3:"lo3",LO4:"lo4",LO5:"lo5",LO6:"lo6"};
+var Q=[
+{t:"mem",lo:"LO1",s:"Maitland 관절가동술 IV등급의 정의로 옳은 것은?",
+ o:["시작 부분에서 작은 진폭","저항 전까지 큰 진폭","저항까지 큰 진폭","저항 끝(제한점)에서 작은 진폭","고속 저진폭 추력"],a:3,
+ w:["I등급이다.","II등급이다.","III등급이다.","IV등급은 제한점에서 작은 진폭으로 움직인다.","V등급(도수교정)이다."],
+ c:"I 작고 시작 · II 크고 저항 전 · III 크고 저항까지 · IV 작고 저항 끝 · V 추력.",
+ ev:[["교과서","Maitland 등급","https://www.youtube.com/watch?v=tP2vKocCFdk"]],
+ v:["Maitland 등급","https://www.youtube.com/watch?v=tP2vKocCFdk"],
+ sim:{s:"통증이 우세한 급성 관절에 주로 쓰는 등급은?",o:["I–II","III–IV","V","IV만","등급 없음"],a:0,e:"I–II는 저항에 닿지 않아 통증 조절에 쓴다."}},
+{t:"mem",lo:"LO2",s:"Bialosky(2009)의 도수치료 기전 모델의 핵심으로 옳은 것은?",
+ o:["도수치료는 척추뼈를 제자리로 돌려놓는다","기계적 자극이 말초·중추 신경계 반응의 연쇄를 시작하고 그 반응이 임상 결과를 만든다","유착을 물리적으로 끊는 것이 유일한 기전이다","효과는 전적으로 위약이다","근육 길이가 영구히 늘어난다"],a:1,
+ w:["근거와 맞지 않는 설명이다.","모델의 핵심 문장이다.","단일 기계적 기전으로 설명하지 않는다.","맥락 요인은 일부이며 전부가 아니다.","도수치료 기전이 아니다."],
+ c:"기계적 자극 → 신경생리 반응 연쇄 → 임상 결과.",
+ ev:[["모델","Bialosky 2009","https://chiro.org/Subluxation/The_Mechanisms_of_Manual_Therapy.shtml"]],
+ v:["도수치료 기전","https://www.youtube.com/watch?v=s7CIuWcRU6U"],
+ sim:{s:"2018년 개정 모델이 더 강조한 요인은?",o:["환자·치료자·환경 등 맥락 요인","관절 소리","치료 시간만","장비 가격","날씨"],a:0,e:"개정 모델은 환자, 치료자, 환경 요인을 함께 고려한다."}},
+{t:"mem",lo:"LO5",s:"미국물리치료사협회 요통 지침(2021)에서 급성 요통에 대한 관절가동술 권고는?",
+ o:["쓰지 말아야 한다","도수교정 또는 비도수교정 관절가동술을 써야 한다(A)","근거 없음","수술 후에만 쓴다","기계 견인으로 대체한다"],a:1,
+ w:["권고와 반대이다.","급성 요통에 A등급으로 권고되었다.","근거 등급이 높다.","대상이 다르다.","견인은 다리 통증 동반 만성 요통에서 쓰지 말라고 했다."],
+ c:"급성 요통 = 관절가동술 A등급.",
+ ev:[["CPG","George 등 2021","https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241"]],
+ v:["요통 지침 요약","https://www.youtube.com/watch?v=uayzsk1MrXg"],
+ sim:{s:"같은 지침에서 다리 통증 동반 만성 요통에 쓰지 말라고 한 것은?",o:["운동","기계 견인","교육","관절가동술","유산소"],a:1,e:"다른 중재에 더해도 이득이 없어 기계 견인은 쓰지 말라고 했다."}},
+{t:"mem",lo:"LO1",s:"위치이완술(strain-counterstrain)의 설명으로 옳은 것은?",
+ o:["압통점을 모니터하며 압통이 줄어드는 편안한 자세로 수동 위치시켜 유지하는 간접 기법","관절을 고속으로 추력하는 기법","환자의 최대 수축 후 강하게 늘리는 기법","단단한 기구로 피부를 긁는 기법","신경을 양쪽에서 늘리는 기법"],a:0,
+ w:["위치이완술의 정의이다.","도수교정이다.","PNF·근육에너지기법에 가깝다.","IASTM이다.","신경 긴장 기법이다."],
+ c:"위치이완술 = 압통점 + 편안한 자세 유지(간접).",
+ ev:[["SR/MA","Wong 등 2014","https://search.pedro.org.au/search-results/record-detail/39239"]],
+ v:["위치이완술","https://www.youtube.com/watch?v=N1eJGcR6POE"],
+ sim:{s:"IASTM의 유래로 제시된 기법은?",o:["Cyriax 가로마찰 마사지","Maitland 가동술","Mulligan MWM","PNF","도수교정"],a:0,e:"IASTM은 Cyriax의 가로마찰 마사지에서 유래했다."}},
+{t:"int",lo:"LO3",s:"목통증 15편(725명) 메타분석에서 허혈성 압박은 거짓·무처치보다 통증·압통역치·가동범위를 즉시·단기에 더 개선했고, 통증은 건침이 더 크게 줄였다. 가장 적절한 해석은?",
+ o:["허혈성 압박은 효과가 없다","허혈성 압박은 즉시·단기 효과가 있으며, 장기 효과와 다른 중재 대비 우위는 별도로 판단해야 한다","허혈성 압박이 모든 중재보다 우월하다","장기 효과가 확실하다","가동범위에는 효과가 없다"],a:1,
+ w:["대조군보다 개선되었다.","즉시·단기 효과가 확인되었고 건침보다 통증 감소는 작았다.","건침이 통증에서 더 컸다.","결과는 즉시·단기에 관한 것이다.","가동범위도 개선되었다."],
+ c:"허혈성 압박 = 즉시·단기 효과.",
+ ev:[["SR/MA","Xu 등 2023","https://www.epistemonikos.org/en/documents/96c81df7f8166c4cb59461a06a2f71211033811a"]],
+ v:["허혈성 압박","https://www.youtube.com/watch?v=dvRpJ8aSpEU"],
+ sim:{s:"Lu 2022 메타분석에서 유의한 차이를 보인 지표는?",o:["압통역치","혈압","체중","시력","폐활량"],a:0,e:"11편 427명에서 압통역치의 유의한 차이가 나타났다."}},
+{t:"int",lo:"LO4",s:"가쪽위관절융기 통증 198명 시험에서 동작가동술+운동은 단기에 지켜보기보다 우수했지만 장기 차이는 뚜렷하지 않았고, 스테로이드 주사는 단기에만 좋고 장기 결과가 나빴다. 가장 적절한 해석은?",
+ o:["주사가 최선의 장기 치료이다","물리치료는 단기 회복을 앞당기고 추가 치료 필요를 줄이며, 주사의 단기 효과는 장기 결과와 맞바꿀 수 있다","물리치료는 효과가 없다","지켜보기는 해롭다","모든 치료의 장기 결과가 같다"],a:1,
+ w:["장기 결과가 나빴다.","결과 요약과 임상 의미이다.","단기에 우수했다.","장기에 주사보다 나았다.","주사군의 장기 결과가 나빴다."],
+ c:"MWM+운동: 단기 우수, 추가 치료 필요↓.",
+ ev:[["RCT","Bisset 등 2006","https://pmc.ncbi.nlm.nih.gov/articles/PMC1633781"]],
+ v:["팔꿈치 MWM","https://www.youtube.com/watch?v=UpZKU677pqQ"],
+ sim:{s:"이 시험의 물리치료 회기 수는?",o:["2회","4회","8회","20회","40회"],a:2,e:"동작가동술과 운동으로 구성된 8회기였다."}},
+{t:"int",lo:"LO3",s:"근육에너지기법 체계적 고찰(2019)은 요통·목통증·만성 가쪽위관절융기염과 가동범위 제한에는 효과가 있지만 통증유발점에는 다른 기법이 더 알맞다고 했다. 임상 해석으로 가장 적절한 것은?",
+ o:["통증유발점에는 근육에너지기법만 쓴다","가동범위 제한에는 근육에너지기법, 통증유발점에는 압박이완 등을 우선 고려한다","근육에너지기법은 모든 경우 금기이다","근육에너지기법은 요통에 효과가 없다","통증유발점은 치료하지 않는다"],a:1,
+ w:["다른 기법이 더 알맞다고 했다.","기법을 목적에 맞게 고른다.","금기라는 근거는 없다.","요통에 효과가 있었다.","치료 대상이다."],
+ c:"MET = 가동범위 제한·요통·목통증, 통증유발점엔 다른 기법.",
+ ev:[["SR","Thomas 등 2019","https://doaj.org/article/e8510fe7791b457e9e0c921e15762bc6"]],
+ v:["근육에너지기법","https://www.youtube.com/watch?v=F54EwTeIAso"],
+ sim:{s:"근육에너지기법에서 환자 수축 강도로 흔히 쓰는 수준은?",o:["최대의 20–30%","최대의 100%","수축 없음","폭발적 수축","최대의 200%"],a:0,e:"제한 장벽에서 가벼운(약 20–30%) 등척성 수축을 쓴다."}},
+{t:"int",lo:"LO2",s:"IASTM 직후 환자의 통증이 줄었지만 조직 구조 변화는 측정되지 않았다. 이 결과를 가장 잘 설명하는 것은?",
+ o:["흉터 조직을 완전히 부쉈다","피부·근육의 기계민감 신경을 자극한 신경조절 효과일 수 있다","근육이 새로 생겼다","관절이 제자리로 들어갔다","측정 오류이다"],a:1,
+ w:["근거가 부족한 설명이다.","IASTM의 기전으로 신경조절 효과가 제시된다.","근거가 없다.","관절 기법이 아니다.","설명 가능한 결과이다."],
+ c:"IASTM = 감각 입력을 통한 신경조절.",
+ ev:[["SR","Parker 저널 IASTM 고찰","https://journal.parker.edu/article/78057-the-efficacy-of-instrument-assisted-soft-tissue-mobilization-for-musculoskeletal-pain-a-systematic-review"],["SR/MA","Tang 2025","https://biomedcentral-bmcmusculoskeletdisord.publicaciones.saludcastillayleon.es/articles/10.1186/s12891-025-08492-4"]],
+ v:["IASTM","https://www.youtube.com/watch?v=0mxkYhC1K6U"],
+ sim:{s:"2025년 IASTM 메타분석의 환자보고 기능 결과는?",o:["큰 효과, 높은 확실성","작은 효과(SMD 0.40), 낮은 확실성","효과 없음","악화","측정 안 함"],a:1,e:"기능은 작은 효과로 개선되었으나 확실성은 낮았다."}},
+{t:"int",lo:"LO2",s:"환자가 도수치료 직후 \"뼈가 제자리로 들어가서 이제 괜찮아요\"라고 말한다. 근거에 맞는 해석과 설명은?",
+ o:["맞습니다, 다시 빠지면 또 오세요","통증 감소는 주로 신경계 반응에 의한 것이라 지금 움직임을 연습하고 운동으로 유지하는 것이 중요합니다","뼈가 계속 빠지므로 보조기를 차세요","운동은 필요 없습니다","도수치료는 효과가 없습니다"],a:1,
+ w:["구조적 설명은 의존과 공포를 키운다.","신경생리 기전에 맞는 설명과 운동 연결이다.","근거가 없다.","운동 병행이 지침의 메시지이다.","즉시 효과는 있었다."],
+ c:"구조를 고쳤다는 설명 ✕ → 신경계 반응 + 운동.",
+ ev:[["교육 자료","Physiotutors","https://book.physiotutors.com/?p=2797"],["모델","Bialosky 2009","https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/"]],
+ v:["도수치료 환자 교육","https://www.youtube.com/watch?v=TRVYL4v-1gA"],
+ sim:{s:"Physiotutors가 정리한 도수치료가 하지 않는 일은?",o:["유착을 끊거나 척추뼈를 제자리에 넣는 것","통증을 줄이는 것","움직임을 늘리는 것","신경계 반응을 일으키는 것","운동할 창을 여는 것"],a:0,e:"도수치료는 유착을 끊거나 척추뼈를 제자리에 넣는 기계적 변화를 일으키지 않는다."}},
+{t:"int",lo:"LO4",s:"신경가동술 체계적 고찰(근거 수준 1a)은 신경병증 요소가 있는 근골격계 질환을 대상으로 했다. 신경 긴장 검사가 음성인 위등세모근 근막통증 환자에게 적용할 때의 해석은?",
+ o:["모든 근막통증의 1차 치료이다","신경 요소가 없으면 우선순위가 낮고 연부조직 기법이 먼저이다","근막통증에는 금기이다","신경 긴장 검사는 의미 없다","긴장 기법부터 강하게 쓴다"],a:1,
+ w:["대상 질환이 다르다.","근거의 대상과 평가 소견을 맞춘다.","금기라는 근거는 없다.","선택 기준이 된다.","민감할 땐 미끄럼부터 쓴다."],
+ c:"신경가동술은 신경 요소가 있을 때.",
+ ev:[["SR/MA","Basson 등 2017","https://pubmed.ncbi.nlm.nih.gov/28704626/"]],
+ v:["신경가동술","https://www.youtube.com/watch?v=yVCismCj2Wo"],
+ sim:{s:"신경 민감도가 높을 때 먼저 쓰는 신경가동술은?",o:["미끄럼(slider)","긴장(tensioner)","추력","견인","진동"],a:0,e:"한쪽을 늘리면 다른 쪽을 느슨하게 하는 미끄럼부터 쓴다."}},
+{t:"sol",lo:"LO3",s:"위등세모근 활성 통증유발점에 허혈성 압박(압박이완)을 적용하는 방법으로 가장 알맞은 것은?",
+ o:["최대 힘으로 1초간 강하게 누른다","압력을 서서히 올려 처음 압박감·통증이 느껴지는 지점에서 유지하고, 불편감이 줄면 조금 더 깊이 들어간다","피부를 빠르게 문지른다","관절을 추력한다","전혀 누르지 않고 지켜본다"],a:1,
+ w:["강한 순간 압박은 방어 수축을 부른다.","압박이완의 표준 절차이다.","다른 기법이다.","관절 기법이다.","치료가 아니다."],
+ c:"서서히 → 첫 저항에서 유지 → 풀리면 더 깊이.",
+ ev:[["SR/MA","Lu 2022","https://pmc.ncbi.nlm.nih.gov/articles/PMC9434898"]],
+ v:["압박이완 시연","https://www.youtube.com/watch?v=lbPPNwhdBv4"],
+ sim:{s:"압박이완 뒤 이어서 하면 좋은 것은?",o:["해당 근육 스트레칭과 운동","장기 안정","보조기 착용","냉동 치료만","아무것도 안 함"],a:0,e:"늘어난 범위를 스트레칭과 운동으로 이어 간다."}},
+{t:"sol",lo:"LO4",s:"급성 어깨 통증 환자가 작은 움직임에도 아파하며, 관절 놀이 검사에서 저항보다 통증이 먼저 나타난다. 관절가동술 선택으로 가장 알맞은 것은?",
+ o:["IV등급 지속 진동","I–II등급 부드러운 진동","V등급 추력","III등급 강한 진동","가동술 금지"],a:1,
+ w:["강직 우세일 때 쓴다.","통증 우세에는 저항에 닿지 않는 I–II등급을 쓴다.","급성 통증에 부적합하다.","강직 우세일 때 쓴다.","금기 소견이 없다."],
+ c:"통증 우세 = I–II, 강직 우세 = III–IV.",
+ ev:[["교과서","Maitland 등급","https://www.youtube.com/watch?v=tP2vKocCFdk"]],
+ v:["어깨 가동술","https://www.youtube.com/watch?v=w8H3Xb9kZ0c"],
+ sim:{s:"뻣뻣함이 주된 문제인 동결 단계 어깨에 주로 쓰는 등급은?",o:["I","II","III–IV","V","없음"],a:2,e:"강직 우세에는 저항까지 들어가는 III–IV등급을 쓴다."}},
+{t:"sol",lo:"LO6",s:"목통증 환자에게 목 도수치료를 계획하기 전 가장 먼저 해야 할 일은?",
+ o:["바로 추력을 시행한다","IFOMPT 경부 프레임워크에 따라 혈관 병리 가능성을 문진하고 위험·이득을 평가한다","영상검사를 반드시 찍는다","치료 후 문진한다","환자 나이만 확인한다"],a:1,
+ w:["선별 없이 시행하면 위험하다.","프레임워크는 중재 전 평가를 권한다.","모든 환자에게 필요하지 않다.","순서가 틀렸다.","정보가 부족하다."],
+ c:"목 도수치료 전 혈관 병리 선별.",
+ ev:[["IFOMPT","Rushton 2023","https://experts.mcmaster.ca/scholarly-works/2687869"]],
+ v:["목 혈관 선별","https://www.youtube.com/watch?v=6HiF8Li1nA4"],
+ sim:{s:"목 도수교정의 금기에 해당하는 것은?",o:["위목뼈 불안정 의심","가벼운 근육 뻐근함","운동 후 피로","일시적 긴장","좋은 기분"],a:0,e:"위목뼈 불안정은 금기이다."}},
+{t:"sol",lo:"LO5",s:"만성 목통증 환자의 치료 계획으로 지침에 가장 맞는 것은?",
+ o:["도수치료만 매주 반복한다","가동술·도수교정과 운동(필요 시 간헐적 견인)을 결합한 다면적 접근","운동만, 교육 없이","완전 휴식","수술 의뢰"],a:1,
+ w:["단독 도수치료는 권고 방식이 아니다.","만성 목통증 지침의 다면적 접근이다.","교육과 도수 중재도 포함된다.","근거가 없다.","적응증이 아니다."],
+ c:"만성 목통증 = 도수치료 + 운동 + 교육.",
+ ev:[["CPG","Blanpied 2017","https://physicaltherapyfirst.com/?p=11458"]],
+ v:["목통증 다면적 치료","https://www.youtube.com/watch?v=mgqvn7KoA1A"],
+ sim:{s:"목통증 지침의 급성 움직임 제한형 권고에 포함된 도수 기법은?",o:["흉추 도수교정","손목 견인","무릎 가동술","발목 MWM","턱관절 추력"],a:0,e:"흉추 도수교정과 목 가동술·도수교정이 포함된다."}},
+{t:"sol",lo:"LO4",s:"주먹을 쥘 때 팔꿈치 바깥이 아픈 환자에게 Mulligan 동작가동술을 적용하는 방법으로 가장 알맞은 것은?",
+ o:["팔꿈치에 추력을 가한다","통증 없는 가쪽 미끄럼을 유지한 채 주먹 쥐기를 반복한다","아픈 동작을 금지한다","손목만 고정한다","통증이 생길 때까지 강하게 미끄럼"],a:1,
+ w:["MWM이 아니다.","통증 없는 미끄럼 유지 + 아픈 동작 반복이 MWM의 원리이다.","원리와 반대이다.","MWM이 아니다.","MWM은 통증 없이 해야 한다."],
+ c:"MWM = 통증 없는 미끄럼 유지 + 아픈 동작.",
+ ev:[["RCT","Bisset 2006","https://ebm.bmj.com/content/ebmed/12/2/37.full.pdf"]],
+ v:["팔꿈치 가쪽 미끄럼 MWM","https://www.youtube.com/watch?v=UpZKU677pqQ"],
+ sim:{s:"Bisset 시험에서 주로 쓴 팔꿈치 MWM 기법은?",o:["가쪽 미끄럼","고속 추력","견인만","안쪽 돌림","냉각"],a:0,e:"팔꿈치 가쪽 미끄럼과 노위팔관절 뒤-앞 미끄럼을 주로 썼다."}},
+{t:"sol",lo:"LO6",s:"75세 여성, 골다공증과 장기 스테로이드 복용 병력이 있고 등 통증이 있다. 도수치료 선택으로 가장 알맞은 것은?",
+ o:["등뼈 고속 추력","강한 회전 도수교정","추력은 피하고 부드러운 연부조직 기법·낮은 등급 가동술과 능동 운동","치료 거부","최대 압력 압박"],a:2,
+ w:["골절 위험이 있다.","골절 위험이 있다.","골다공증·스테로이드는 주의 대상이므로 강도를 낮추고 운동을 중심으로 한다.","도울 방법이 있다.","과도한 압력은 위험하다."],
+ c:"골다공증·스테로이드 = 추력 피하고 저강도.",
+ ev:[["IFOMPT","척추 적신호 2020","https://www.ifompt.org/site/ifompt/International%20Framework%20for%20Red%20Flags%20for%20Potential%20Serious%20Spinal%20Pathologies%20master%20copy%20.pdf"]],
+ v:["골다공증 환자 운동","https://www.youtube.com/watch?v=qraveMSLoxE"],
+ sim:{s:"이 환자가 최근 갑자기 극심한 등 통증을 호소하면 의심할 것은?",o:["척추 압박 골절","근육 피로","DOMS","정상 반응","수면 부족"],a:0,e:"골다공증·스테로이드 병력에서 갑작스러운 통증은 압박 골절을 의심한다."}},
+{t:"cas",lo:"LO3",s:"33세 사무직. 오른쪽 목·관자 통증 8주.\n· 위등세모근에 활성 통증유발점, 누르면 두통 재현.\n· 목 왼쪽 옆굽힘 범위가 줄어 있다.\n· 적신호·혈관 병리 의심 소견 없음.\n한 회기 구성으로 가장 알맞은 것은?",
+ o:["목 추력만 시행","위등세모근 압박이완 → 즉시 재평가 → 위등세모근 스트레칭과 목·어깨뼈 근력운동 → 가정운동","2주 휴식 후 재방문","진통제만 권유","운동만 하고 도수치료는 금지"],a:1,
+ w:["근육 소견 중심 환자에게 관절 추력만 하는 것은 맞지 않는다.","연부조직 기법 → 재평가 → 운동 연결의 표준 회기이다.","휴식은 근거가 없다.","범위 밖이며 근거 기반이 아니다.","도수치료를 함께 쓸 수 있다."],
+ c:"압박이완 → 재평가 → 스트레칭·근력 → 가정운동.",
+ ev:[["SR/MA","Xu 2023","https://www.epistemonikos.org/en/documents/96c81df7f8166c4cb59461a06a2f71211033811a"],["CPG","Blanpied 2017","https://physicaltherapyfirst.com/?p=11458"]],
+ v:["목통증 치료 회기","https://www.youtube.com/watch?v=lx6_andCap4"],
+ sim:{s:"압박이완 직후 반드시 할 일은?",o:["즉시 재평가(가동범위·통증)","귀가","보조기 착용","영상검사","아무것도"],a:0,e:"효과를 재평가해 다음 단계(운동)를 정한다."}},
+{t:"cas",lo:"LO5",s:"41세 남성. 무거운 상자를 든 뒤 2주째 급성 요통.\n· 다리 증상 없음, 적신호 없음.\n· 허리 뒤-앞 움직임 검사에서 통증과 강직.\n· 움직이면 다칠까 걱정한다.\n지침에 가장 맞는 계획은?",
+ o:["침상 안정 2주","관절가동술(도수교정 또는 비도수교정) + 활동 유지 교육 + 점진적 운동","기계 견인","영상검사 후 결정","수술 의뢰"],a:1,
+ w:["근거가 없고 회피를 강화한다.","급성 요통 A등급 권고와 교육·운동 병행이다.","이 상황의 권고가 아니다.","적신호가 없으면 필요 없다.","적응증이 아니다."],
+ c:"급성 요통 = 관절가동술 + 교육 + 운동.",
+ ev:[["CPG","George 2021","https://pmc.ncbi.nlm.nih.gov/articles/PMC10508241"]],
+ v:["급성 요통 치료","https://www.youtube.com/watch?v=7mwlSKCmcYE"],
+ sim:{s:"이 환자에게 함께 줄 교육의 핵심은?",o:["통증이 곧 손상은 아니며 활동을 유지한다","절대 굽히지 마라","완전 안정","보조기 상시 착용","수술이 필요하다"],a:0,e:"공포-회피를 줄이고 활동을 유지하게 한다(1·2장 LO6)."}},
+{t:"cas",lo:"LO6",s:"52세 여성. 목 뒤-앞 가동술 직후 갑자기 어지럼, 물체가 둘로 보임, 말이 어눌해짐을 호소한다.\n가장 적절한 대응은?",
+ o:["잠시 누워 쉬게 하고 치료를 계속한다","즉시 치료를 중단하고 응급 의뢰하며 기록한다","다음 회기에 강도를 낮춘다","목 스트레칭을 시킨다","물을 마시게 하고 귀가시킨다"],a:1,
+ w:["응급 신호이다.","혈관 병리 의심 응급 신호에 맞는 대응이다.","지연은 위험하다.","위험하다.","위험하다."],
+ c:"어지럼·복시·구음장애 = 즉시 중단·응급 의뢰.",
+ ev:[["IFOMPT","Rushton 2023","https://experts.mcmaster.ca/scholarly-works/2687869"]],
+ v:["도수치료 응급 대응","https://www.youtube.com/watch?v=jkERbHenSss"],
+ sim:{s:"도수치료 후 흔한 경미 반응은?",o:["24–48시간 치료 부위 뻐근함","복시","구음장애","의식 저하","실조"],a:0,e:"일시적 뻐근함은 흔한 경미 반응이다."}},
+{t:"cas",lo:"LO1",s:"46세 남성. 허리·엉덩이 통증이 오른쪽 다리 뒤로 퍼진다.\n· 허리네모근 통증유발점: 누르면 엉덩이 통증 재현.\n· 허리 4–5번 분절 관절 놀이 감소.\n· 슬럼프 검사 양성(신경 기계민감도).\n기법 조합으로 가장 알맞은 것은?",
+ o:["관절 추력 하나만","허리네모근 압박이완(연부조직) + 분절 관절가동술(관절) + 신경 미끄럼(신경)","운동만","신경 긴장 기법만 강하게","치료 불가"],a:1,
+ w:["소견 셋 중 하나만 다룬다.","세 묶음의 소견에 각각 맞는 기법을 조합한다.","도수치료를 함께 쓸 수 있다.","민감할 땐 미끄럼부터 쓴다.","치료 가능하다."],
+ c:"소견별 묶음: 근육 → 연부조직, 관절 → 가동술, 신경 → 신경가동술.",
+ ev:[["모델","Bialosky 2009 분류","https://pmc.ncbi.nlm.nih.gov/articles/PMC2775050/"],["SR/MA","Basson 2017","https://pubmed.ncbi.nlm.nih.gov/28704626/"]],
+ v:["요통 도수치료 조합","https://www.youtube.com/watch?v=fLlomEgJLYo"],
+ sim:{s:"슬럼프 검사가 평가하는 것은?",o:["신경 기계민감도","근력","혈압","관절 안정성","폐 기능"],a:0,e:"슬럼프 검사는 신경 조직의 기계민감도를 평가한다."}}
+];
+
+/* 정답 위치를 ①–⑤에 고르게 배치(고정 순서, 매번 같음) */
+(function(){
+  var TA=[3,0,2,4,1,2,4,0,3,1,0,3,1,4,2,4,2,0,1,3];
+  var TS=[3,4,0,2,1,0,2,4,3,1,2,0,4,1,3,1,4,0,2,3];
+  function place(opts,ans,target,extra){
+    var idx=[];for(var i=0;i<opts.length;i++) if(i!==ans) idx.push(i);
+    target=Math.min(target,opts.length-1); idx.splice(target,0,ans);
+    return idx;
+  }
+  Q.forEach(function(q,k){
+    var p=place(q.o,q.a,TA[k]);
+    q.o=p.map(function(i){return q.o[i];}); q.w=p.map(function(i){return q.w[i];}); q.a=p.indexOf(q.a);
+    var ps=place(q.sim.o,q.sim.a,TS[k]);
+    q.sim.o=ps.map(function(i){return q.sim.o[i];}); q.sim.a=ps.indexOf(q.sim.a);
+  });
+})();
+
+window.QUIZ_META=Q.map(function(q){return {t:q.t,lo:q.lo,s:q.s};});
+document.addEventListener("quizgoto",function(e){var k=+e.detail;if(k>=0&&k<Q.length){st.i=k;save();renderQuiz();}});
+/* ===== 퀴즈 상태 ===== */
+var KEY="ch5-quiz-v1";
+var st={i:0,ans:{},conf:{},done:false};
+try{var saved=JSON.parse(localStorage.getItem(KEY)||"null"); if(saved&&saved.ans) st=saved;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+var CONF=["확신한다","애매하다","모르겠다"];
+var NUM=["①","②","③","④","⑤"];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+function renderQuiz(){
+  var el=document.getElementById("quizIn");
+  var q=Q[st.i], n=st.i;
+  var answered=Object.keys(st.ans).filter(function(k){return st.conf[k]!=null;}).length;
+  var h='<div class="eyebrow">퀴즈 · 20문항<span class="lo">'+q.lo+'</span><span style="color:var(--muted)">'+TYPES[q.t]+'</span></div>';
+  h+='<div class="qwrap">';
+  h+='<div class="qhead"><b style="color:var(--ink)">문제 '+(n+1)+' / '+Q.length+'</b><span>응답 완료 '+answered+'개</span></div>';
+  h+='<div class="dots" role="group" aria-label="문항 바로가기">';
+  Q.forEach(function(_,k){h+='<button type="button" data-go="'+k+'" class="'+((st.ans[k]!=null&&st.conf[k]!=null)?"done ":"")+(k===n?"cur":"")+'" aria-label="문제 '+(k+1)+'">'+(k+1)+'</button>';});
+  h+='</div>';
+  h+='<p class="qstem">'+esc(q.s)+'</p><div class="opts" role="group" aria-label="보기">';
+  q.o.forEach(function(o,k){h+='<button type="button" class="opt" data-opt="'+k+'" aria-pressed="'+(st.ans[n]===k)+'"'+(st.done?" disabled":"")+'><span class="n">'+NUM[k]+'</span><span>'+esc(o)+'</span></button>';});
+  h+='</div><div><div class="qlabel" id="cl">이 답에 대한 확신도</div><div class="conf" role="group" aria-labelledby="cl">';
+  CONF.forEach(function(c,k){h+='<button type="button" data-conf="'+k+'" aria-pressed="'+(st.conf[n]===k)+'"'+(st.done?" disabled":"")+'>'+c+'</button>';});
+  h+='</div></div>';
+  var miss=(st.ans[n]==null||st.conf[n]==null);
+  h+='<div class="qnav"><button type="button" id="qp"'+(n===0?" disabled":"")+'>이전 문제</button>';
+  if(n<Q.length-1) h+='<button type="button" class="primary" id="qn">다음 문제</button>';
+  else h+='<button type="button" class="primary" id="qs">'+(st.done?"결과 다시 보기":"제출하고 결과 보기")+'</button>';
+  if(st.done) h+='<button type="button" id="qr">처음부터 다시 풀기</button>';
+  h+='<span class="hint" id="qh">'+(miss&&!st.done?"답과 확신도를 모두 골라야 다음으로 넘어갑니다.":"")+'</span></div>';
+  h+='</div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-opt]").forEach(function(b){b.onclick=function(){st.ans[n]=+b.dataset.opt;save();renderQuiz();};});
+  el.querySelectorAll("[data-conf]").forEach(function(b){b.onclick=function(){st.conf[n]=+b.dataset.conf;save();renderQuiz();};});
+  el.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){st.i=+b.dataset.go;save();renderQuiz();};});
+  var qp=document.getElementById("qp"); if(qp) qp.onclick=function(){st.i--;save();renderQuiz();};
+  var qn=document.getElementById("qn"); if(qn) qn.onclick=function(){ if(!st.done&&miss){return;} st.i++;save();renderQuiz();};
+  var qs=document.getElementById("qs"); if(qs) qs.onclick=function(){
+    if(!st.done){
+      var left=[];Q.forEach(function(_,k){if(st.ans[k]==null||st.conf[k]==null)left.push(k+1);});
+      if(left.length){document.getElementById("qh").textContent="아직 끝내지 않은 문항: "+left.join(", ");return;}
+      st.done=true;save();try{document.dispatchEvent(new CustomEvent("quizsubmit",{detail:{ans:Q.map(function(q,k){return st.ans[k]===q.a?1:0;}),conf:Q.map(function(q,k){return st.conf[k];})}}));}catch(e){}
+    }
+    goSlide("result");
+  };
+  var qr=document.getElementById("qr"); if(qr) qr.onclick=function(){st={i:0,ans:{},conf:{},done:false};save();renderQuiz();};
+}
+
+function cat(k){ var ok=st.ans[k]===Q[k].a, c=st.conf[k];
+  if(!ok&&c===0) return "mis"; if(!ok) return "unl"; if(c!==0) return "uns"; return "mas"; }
+
+function renderResult(){
+  var el=document.getElementById("resultIn");
+  if(!st.done){
+    el.innerHTML='<div class="eyebrow">결과와 오답 심화</div><h2>퀴즈를 먼저 제출하세요</h2><p class="lead">20문항에 답과 확신도를 모두 고르고 제출하면 여기에 결과와 오답 카드가 나타납니다.</p><div class="qnav"><button type="button" class="primary" onclick="goSlide(\'quiz\')">퀴즈로 가기</button></div>';
+    return;
+  }
+  var cnt={mis:0,unl:0,uns:0,mas:0}, score=0, byT={}, byL={};
+  Q.forEach(function(q,k){var c=cat(k);cnt[c]++; var ok=st.ans[k]===q.a; if(ok)score++;
+    byT[q.t]=byT[q.t]||[0,0]; byT[q.t][1]++; if(ok)byT[q.t][0]++;
+    byL[q.lo]=byL[q.lo]||[0,0]; byL[q.lo][1]++; if(ok)byL[q.lo][0]++;});
+  var h='<div class="eyebrow">결과와 오답 심화</div>';
+  h+='<h2>'+score+' / '+Q.length+'점 · 정답률 '+Math.round(score/Q.length*100)+'%</h2>';
+  h+='<div class="tiles">';
+  h+='<div class="tile mis"><div class="v">'+cnt.mis+'</div><div class="l">오개념 · 확신했는데 틀림 (1순위)</div></div>';
+  h+='<div class="tile unl"><div class="v">'+cnt.unl+'</div><div class="l">미학습 · 애매·모름 + 틀림 (2순위)</div></div>';
+  h+='<div class="tile uns"><div class="v">'+cnt.uns+'</div><div class="l">불안정 지식 · 애매·모름 + 맞음 (3순위)</div></div>';
+  h+='<div class="tile mas"><div class="v">'+cnt.mas+'</div><div class="l">숙달 · 확신하고 맞음</div></div>';
+  h+='</div>';
+  h+='<div class="grid2"><div class="card"><h3>학습목표별 정답률</h3><div class="bars">';
+  ["LO1","LO2","LO3","LO4","LO5","LO6"].forEach(function(l){var v=byL[l]||[0,0];var p=v[1]?Math.round(v[0]/v[1]*100):0;
+    h+='<div class="brow"><b>'+l+'</b><div class="btrack"><i style="width:'+p+'%"></i></div><span>'+v[0]+'/'+v[1]+'</span></div>';});
+  h+='</div></div><div class="card"><h3>문항 유형별 정답률</h3><div class="bars">';
+  ["mem","int","sol","cas"].forEach(function(t){var v=byT[t];var p=Math.round(v[0]/v[1]*100);
+    h+='<div class="brow"><b>'+TYPES[t].replace("형","")+'</b><div class="btrack"><i style="width:'+p+'%"></i></div><span>'+v[0]+'/'+v[1]+'</span></div>';});
+  h+='</div></div></div>';
+
+  var order=[]; Q.forEach(function(_,k){var c=cat(k); if(c!=="mas") order.push(k);});
+  var rank={mis:0,unl:1,uns:2}; order.sort(function(a,b){return rank[cat(a)]-rank[cat(b)]||a-b;});
+  h+='<h3 style="margin-top:.4em">오답·보완 카드 ('+order.length+'개, 우선순위 순)</h3>';
+  if(!order.length) h+='<p>모든 문항을 확신하고 맞혔습니다. 6장으로 넘어가도 좋습니다.</p>';
+  order.forEach(function(k){
+    var q=Q[k], c=cat(k), mine=st.ans[k];
+    var lab={mis:["오개념","mis",""],unl:["미학습","unl"," p2"],uns:["불안정 지식","uns"," p3"]}[c];
+    h+='<article class="wcard'+lab[2]+'"><h4><span class="pill '+lab[1]+'">'+lab[0]+'</span> 문제 '+(k+1)+' · '+q.lo+' · '+TYPES[q.t]+' · 내 확신도: '+CONF[st.conf[k]]+'</h4>';
+    h+='<p class="qstem" style="font-size:.95em">'+esc(q.s)+'</p>';
+    h+='<div class="row"><b>정답</b><span>'+NUM[q.a]+' '+esc(q.o[q.a])+(mine!==q.a?' <span style="color:var(--muscle)">(내 답: '+NUM[mine]+')</span>':'')+'</span></div>';
+    h+='<div class="row"><b>보기별 해설</b><ul class="k why">';
+    q.o.forEach(function(o,j){h+='<li class="'+(j===q.a?"ans":(j===mine?"mine":""))+'">'+NUM[j]+' '+esc(q.w[j])+'</li>';});
+    h+='</ul></div>';
+    h+='<div class="row"><b>핵심 개념</b><span class="key" style="padding:.4em .7em">'+esc(q.c)+'</span></div>';
+    h+='<div class="row"><b>근거</b><span>'+q.ev.map(function(e){return '<span class="badge">'+esc(e[0])+'</span> <a href="'+e[2]+'" target="_blank" rel="noopener">'+esc(e[1])+'</a>';}).join("<br>")+'</span></div>';
+    h+='<div class="row"><b>사진·영상</b><span class="media"><a href="'+q.v[1]+'" target="_blank" rel="noopener">영상: '+esc(q.v[0])+'</a><a class="doc" href="#" data-back="'+LOSLIDE[q.lo]+'">강의 슬라이드로 돌아가기 ('+q.lo+')</a></span></div>';
+    h+='<details class="sim"><summary>다시 풀기: 유사 문항</summary><p class="qstem" style="font-size:.95em;margin:.5em 0">'+esc(q.sim.s)+'</p><ol style="margin:0;padding-left:1.3em">';
+    q.sim.o.forEach(function(o,j){h+='<li>'+esc(o)+'</li>';});
+    h+='</ol><details style="margin-top:.4em"><summary>정답 보기</summary><p>'+NUM[q.sim.a]+' '+esc(q.sim.o[q.sim.a])+'. '+esc(q.sim.e)+'</p></details></details>';
+    h+='</article>';
+  });
+  h+='<div class="qnav"><button type="button" onclick="goSlide(\'quiz\')">문항 다시 보기</button><button type="button" id="rr">처음부터 다시 풀기</button></div>';
+  el.innerHTML=h;
+  el.querySelectorAll("[data-back]").forEach(function(a){a.onclick=function(e){e.preventDefault();goSlide(a.dataset.back);};});
+  document.getElementById("rr").onclick=function(){st={i:0,ans:{},conf:{},done:false};save();renderQuiz();goSlide("quiz");};
+}
+
+renderQuiz();
+var m=location.hash.match(/^#slide-(\d+)$/);
+slides[0].classList.add("on");
+show(m?+m[1]-1:0,false);
+})();
+</script>
+<!--EXTRAS-->
+<script>window.CH_NO=5;</script>
+<div id="xs" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xsT">
+ <div class="xbox">
+  <div class="xhd"><b id="xsT">검색</b><button type="button" class="xclose" data-close="xs" aria-label="닫기">✕</button></div>
+  <input id="xsq" type="search" placeholder="예: 통증유발점, 등세모근, 스트레칭 용량" autocomplete="off" aria-label="검색어">
+  <div class="xtabs" id="xsTabs" hidden><button type="button" data-scope="here" aria-pressed="true">이 강의안</button><button type="button" data-scope="all" aria-pressed="false">과정 전체(1–8장)</button></div>
+  <p class="xhint" id="xsHint">단어 여러 개를 띄어 쓰면 모두 들어간 슬라이드만 찾습니다. 구용어·영문(예: 승모근, hamstring)도 6판 용어로 함께 찾습니다. 단축키: / 또는 Ctrl+K</p>
+  <ol id="xsR" class="xres"></ol>
+ </div>
+</div>
+<div id="xl" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xlT">
+ <div class="xbox">
+  <div class="xhd"><b id="xlT">내 YouTube 영상 추가</b><button type="button" class="xclose" data-close="xl" aria-label="닫기">✕</button></div>
+  <label class="xf">YouTube 주소<input id="xlU" type="url" placeholder="https://www.youtube.com/watch?v=… 또는 https://youtu.be/…"></label>
+  <label class="xf">제목<input id="xlN" type="text" maxlength="80" placeholder="예: 위등세모근 촉진 시범(교수 촬영)"></label>
+  <label class="xf">붙일 슬라이드<select id="xlS"></select></label>
+  <p class="xhint">추가한 영상은 해당 슬라이드 아래 '교수님이 추가한 영상'에 나타나며, 이 강의안을 여는 모든 수강생에게 보입니다. 영상 파일은 먼저 YouTube에 올린 뒤(일부 공개도 가능) 주소를 붙여 넣으세요.</p>
+  <p class="xmsg" id="xlM" role="status"></p>
+  <div class="xact"><button type="button" id="xlSave" class="xprimary">추가</button></div>
+ </div>
+</div>
+<div id="xp" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xpT">
+ <div class="xbox">
+  <div class="xhd"><b id="xpT">내 사진 추가</b><button type="button" class="xclose" data-close="xp" aria-label="닫기">✕</button></div>
+  <label class="xf">사진 파일(여러 장 가능)<input id="xpF" type="file" accept="image/*" multiple></label>
+  <div id="xpPrev"></div>
+  <label class="xf">설명(선택)<input id="xpN" type="text" maxlength="80" placeholder="예: 위등세모근 집게 촉진 — 엄지와 검지로 근육 배를 잡는다"></label>
+  <label class="xf">붙일 슬라이드<select id="xpS"></select></label>
+  <p class="xhint">사진은 긴 변 2000px로 줄여 올립니다. 올린 사진은 해당 슬라이드 아래 '교수님이 올린 사진'에 나타나며, 이 강의안을 여는 모든 수강생에게 보입니다. 환자 사진은 동의를 받고, 얼굴 등 알아볼 수 있는 부분은 가려 주세요.</p>
+  <p class="xmsg" id="xpM" role="status"></p>
+  <div class="xact"><button type="button" id="xpSave" class="xprimary">올리기</button></div>
+ </div>
+</div>
+<div id="xv" class="xv" hidden role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+ <button type="button" class="xclose" id="xvX" aria-label="닫기">✕</button>
+ <button type="button" class="xnav xprev" id="xvP" aria-label="이전 사진">‹</button>
+ <img id="xvI" alt="">
+ <p id="xvC"></p>
+ <button type="button" class="xnav xnext" id="xvN" aria-label="다음 사진">›</button>
+</div>
+<div id="xa" class="xov" hidden role="dialog" aria-modal="true" aria-labelledby="xaT">
+ <div class="xbox wide">
+  <div class="xhd"><b id="xaT">수업 분석 (교수 전용)</b><button type="button" class="xclose" data-close="xa" aria-label="닫기">✕</button></div>
+  <div id="xaB"><p class="xhint">불러오는 중…</p></div>
+ </div>
+</div>
+<script>@@C:xtools.js@@</script>
+<!--/EXTRAS-->
+<!--STUDY--><style>@@C:notes.css@@</style>
+<script>@@C:notes.js@@</script><!--/STUDY-->
+<script type="application/json" id="lkData">@@C:glossary.json@@</script>
+<!--LOOKUP--><style>@@C:lookup.css@@</style>
+<script>@@C:lookup.js@@</script><!--/LOOKUP-->
+<script>window.STUDY_CFG={app:"ch5",mount:"header.bar",toc:"#toc",parentStore:true};</script>
+<!--EDIT: 내용 수정 v2 — 설정은 window.STUDY_CFG={app,slides,activeClass,mount,toc,goTo,parentStore,editable,editSkip}--><style>@@C:edit.css@@</style>
+<script>@@C:edit.js@@</script><!--/EDIT-->
+<script>@@C:links.js@@</script><script>@@C:a11y.js@@</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+(function(){
+var T={"ch1": "1장 근육 기원 통증의 이해", "ch2": "2장 원인과 병태생리", "ch3": "3장 증상·평가·감별진단", "ch4": "4장 근거기반 스트레칭", "ch5": "5장 도수치료", "ch6": "6장 근력·근지구력 운동", "ch7": "7장 안정화 운동", "ch8": "8장 기능훈련과 통합 중재", "final": "종합 · 총정리와 종합평가", "finder": "통증 원인 근육 찾기"}, frames={}, cur="home";
+function ours(e){ if(e.source===window) return true; for(var k in frames){ if(frames[k]&&frames[k].contentWindow===e.source) return true; } return false; }
+var PAGES={}, stage=document.getElementById("stage"), home=document.getElementById("home"), L=document.getElementById("loading");
+/* ---- 장 풀기: gzip(base64) → 글. 공통 코드(@@C:이름@@)는 한 번만 들어 있고 장을 열 때 채운다 ---- */
+var DEC={}, COMMON=null;
+function rawOf(id){ var el=document.getElementById(id); if(!el) return null; var b=atob(el.textContent.replace(/\s+/g,"")), u=new Uint8Array(b.length); for(var i=0;i<b.length;i++) u[i]=b.charCodeAt(i); return {u:u,enc:el.getAttribute("data-enc")||"b64"}; }
+function gunzipSync(u){ /* DecompressionStream이 없는 오래된 브라우저용 */ var f=u[3], p=10; if(f&4){ p+=2+(u[p]|(u[p+1]<<8)); } if(f&8){ while(u[p++]); } if(f&16){ while(u[p++]); } if(f&2) p+=2;
+  var n=u[u.length-4]|(u[u.length-3]<<8)|(u[u.length-2]<<16)|(u[u.length-1]<<24); var out=new Uint8Array(n>>>0); window.__inflate(u.subarray(p,u.length-8),out); return out; }
+function inflate(u){ if(typeof DecompressionStream==="function"){ try{ return new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream("gzip"))).arrayBuffer().then(function(b){ return new Uint8Array(b); }); }catch(e){} }
+  try{ return Promise.resolve(gunzipSync(u)); }catch(e){ return Promise.reject(e); } }
+function textOf(id){ var r=rawOf(id); if(!r) return Promise.reject(new Error("no "+id)); return (r.enc==="gz"?inflate(r.u):Promise.resolve(r.u)).then(function(u){ return new TextDecoder().decode(u); }); }
+function commonP(){ if(COMMON) return Promise.resolve(COMMON); if(!document.getElementById("m-common")) return Promise.resolve(COMMON={}); return textOf("m-common").then(function(t){ return COMMON=JSON.parse(t); }); }
+function fillCommon(html,c){ return html.replace(/@@C:([\w.-]+)@@/g,function(_,n){ return c[n]!=null?c[n]:""; }); }
+function decRaw(k){ if(DEC[k]) return DEC[k]; DEC[k]=Promise.all([textOf("m-"+k),commonP()]).then(function(v){ return fillCommon(v[0],v[1]); }); DEC[k].catch(function(){ delete DEC[k]; }); return DEC[k]; }
+function dec(k){ return decRaw(k).then(function(h){ return modHook(k,h); }); }
+function modHook(k,html){ return (window.MP_HOOKS||[]).reduce(function(h,fn){ try{ return fn(k,h)||h; }catch(e){ return h; } },html); }
+/* 장을 다시 압축(수정본 저장용). CompressionStream이 없으면 압축 없이 base64 */
+function packText(t){ var u=new TextEncoder().encode(t);
+  if(typeof CompressionStream==="function"){ try{ return new Response(new Blob([u]).stream().pipeThrough(new CompressionStream("gzip"))).arrayBuffer().then(function(b){ return {enc:"gz",b64:u8b64(new Uint8Array(b))}; }); }catch(e){} }
+  return Promise.resolve({enc:"b64",b64:u8b64(u)}); }
+function u8b64(u){ var out="", CH=0x8000; for(var i=0;i<u.length;i+=CH) out+=String.fromCharCode.apply(null,u.subarray(i,i+CH)); return btoa(out); }
+function setHash(k){ try{ if(k) history.replaceState(null,"","#"+k); else if(location.hash) history.replaceState(null,"",location.pathname+location.search); }catch(e){} }
+function show(k,slide,hl){
+  cur=k; try{localStorage.setItem("mp-last",k);}catch(e){}
+  [].forEach.call(document.querySelectorAll(".tab"),function(t){t.setAttribute("aria-current",t.dataset.m===k);});
+  home.hidden=(k!=="home"); document.getElementById("notesPage").hidden=(k!=="notes"); Object.keys(frames).forEach(function(f){frames[f].hidden=(f!==k);});
+  Object.keys(PAGES).forEach(function(p){ PAGES[p].el.hidden=(p!==k); });
+  document.title=(k==="home"?"근육 기원 통증 · 통합 웹앱":T[k]+" · 근육 기원 통증");
+  if(k==="home"){ setHash(""); if(window.MP&&MP.onHome) MP.onHome.forEach(function(fn){ try{ fn(); }catch(e){} }); return; }
+  if(k==="notes"){ document.title="내 노트 · 근육 기원 통증"; setHash("notes"); renderNotes(); return; }
+  if(PAGES[k]){ document.title=PAGES[k].title+" · 근육 기원 통증"; setHash(k); try{ PAGES[k].el.scrollTop=0; PAGES[k].render(slide); }catch(e){ PAGES[k].el.innerHTML='<div class="wrap"><p>화면을 그리지 못했습니다: '+esc(e&&e.message||e)+'</p></div>'; if(window.console) console.error(e); } return; }
+  setHash(k);
+  var f=frames[k];
+  if(!f){ L.hidden=false; f=document.createElement("iframe"); f.title=T[k]; f.setAttribute("allow","fullscreen"); frames[k]=f;
+    f.addEventListener("load",function(){ L.hidden=true; if(f._goto){ f.contentWindow.postMessage({app:"mp",slide:f._goto,hl:f._hl},"*"); f._goto=0; f._hl=null; } });
+    dec(k).then(function(h){ f.srcdoc=h; stage.appendChild(f); },function(){ L.textContent="이 장을 열지 못했습니다. 브라우저를 최신판으로 바꿔 보세요."; }); }
+  if(slide){ if(f.contentWindow&&f.contentDocument&&f.contentDocument.readyState==="complete") f.contentWindow.postMessage({app:"mp",slide:slide,hl:hl},"*"); else { f._goto=slide; f._hl=hl; } }
+  setTimeout(function(){ try{f.contentWindow.focus();}catch(e){} },50);
+}
+[].forEach.call(document.querySelectorAll("[data-m]"),function(b){b.onclick=function(){show(b.dataset.m);};});
+document.getElementById("homeBtn").onclick=function(){show("home");};
+window.addEventListener("message",function(e){ if(!ours(e)) return; var d=e.data; if(d&&d.app==="mp"&&d.open&&T[d.open]) show(d.open,d.slide||0,d.hl);});
+document.getElementById("fs").onclick=function(){var el=document.documentElement; if(document.fullscreenElement) document.exitFullscreen(); else if(el.requestFullscreen) el.requestFullscreen();};
+document.getElementById("newWin").onclick=function(){ if(cur==="home"||cur==="notes") return; var k=cur, w=window.open("","_blank"); if(!w) return; dec(k).then(function(h){ w.document.open(); w.document.write(h); w.document.close(); }); };
+/*NOTESJS*/
+var NOTES={}, LSOK=true, MODS=Object.keys(T);
+try{ localStorage.setItem("mp-t","1"); localStorage.removeItem("mp-t"); }catch(e){ LSOK=false; }
+MODS.forEach(function(m){ try{ var s=localStorage.getItem("mp-notes-v1:"+m); NOTES[m]=s?JSON.parse(s)||{}:{}; }catch(e){ NOTES[m]={}; } });
+function putNotes(m,obj){ NOTES[m]=obj||{}; try{ localStorage.setItem("mp-notes-v1:"+m,JSON.stringify(NOTES[m])); }catch(e){} }
+function pushNotes(m){ var f=frames[m]; if(f&&f.contentWindow) try{ f.contentWindow.postMessage({app:"mp",notesFor:m,notes:NOTES[m]||{}},"*"); }catch(e){} }
+window.addEventListener("message",function(e){ if(!ours(e)) return; var d=e.data; if(!d||d.app!=="mp") return;
+  if(d.notesGet&&T[d.notesGet]){ try{ e.source.postMessage({app:"mp",notesFor:d.notesGet,notes:NOTES[d.notesGet]||{}},"*"); }catch(x){} }
+  if(d.notesPut&&T[d.notesPut]){ putNotes(d.notesPut,d.notes); if(cur==="notes") renderNotes(); }
+});
+var npF="all";
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function items(m){ var o=NOTES[m]||{}; return Object.keys(o).map(function(k){ var d=o[k]; return {k:k,i:d.i||0,t:d.t||k,memo:d.memo||"",star:!!d.star,strokes:d.strokes||[],ts:d.ts||0}; }).filter(function(d){return d.memo||d.star||d.strokes.length;}).sort(function(a,b){return a.i-b.i;}); }
+var PAL={ink:"#172033",red:"#d62839",blue:"#1f5fa8",green:"#1f8a4c",hl:"rgba(255,214,0,.5)"};
+function headPts(x0,y0,x1,y1,w){ var a=Math.atan2(y1-y0,x1-x0), L=12+w*3, q=0.5; return [x1-L*Math.cos(a-q),y1-L*Math.sin(a-q),x1-L*Math.cos(a+q),y1-L*Math.sin(a+q)]; }
+function shapeSVG(st,col){ var p=st.p,x0=p[0],y0=p[1],x1=p[2],y1=p[3],a=' fill="none" stroke="'+col+'" stroke-width="'+st.w+'" stroke-linecap="round" stroke-linejoin="round"';
+  if(st.k==="rect") return '<rect x="'+Math.min(x0,x1)+'" y="'+Math.min(y0,y1)+'" width="'+Math.abs(x1-x0)+'" height="'+Math.abs(y1-y0)+'"'+a+'/>';
+  if(st.k==="ellipse") return '<ellipse cx="'+(x0+x1)/2+'" cy="'+(y0+y1)/2+'" rx="'+Math.abs(x1-x0)/2+'" ry="'+Math.abs(y1-y0)/2+'"'+a+'/>';
+  var d='M'+x0+' '+y0+'L'+x1+' '+y1; if(st.k==="arrow"){ var h=headPts(x0,y0,x1,y1,st.w); d+='M'+h[0]+' '+h[1]+'L'+x1+' '+y1+'L'+h[2]+' '+h[3]; } return '<path d="'+d+'"'+a+'/>'; }
+function svgOf(strokes){ if(!strokes.length) return ""; var minY=1e9,maxY=0,minX=1e9,maxX=0;
+  strokes.forEach(function(s){ for(var j=0;j<s.p.length;j+=2){ minX=Math.min(minX,s.p[j]);maxX=Math.max(maxX,s.p[j]);minY=Math.min(minY,s.p[j+1]);maxY=Math.max(maxY,s.p[j+1]); } });
+  var pad=20; minX=Math.max(0,minX-pad); minY=Math.max(0,minY-pad); var w=Math.max(120,maxX+pad-minX), h=Math.max(60,maxY+pad-minY);
+  var out=strokes.map(function(s){ if(s.k) return shapeSVG(s,PAL[s.c]||PAL.ink); var pts=[]; for(var j=0;j<s.p.length;j+=2) pts.push(s.p[j]+","+s.p[j+1]); if(pts.length===1) pts.push((s.p[0]+.1)+","+s.p[1]);
+    return '<polyline points="'+pts.join(" ")+'" fill="none" stroke="'+(PAL[s.c]||PAL.ink)+'" stroke-width="'+s.w+'" stroke-linecap="round" stroke-linejoin="round"/>'; }).join("");
+  return '<svg viewBox="'+minX+" "+minY+" "+w+" "+h+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="펜 필기">'+out+'</svg>'; }
+function renderNotes(){
+  var q=(document.getElementById("npQ").value||"").trim().toLowerCase(), body=document.getElementById("npBody");
+  var tot=0,st=0,mm=0,pp=0,chs=0,html="";
+  MODS.forEach(function(m){ var all=items(m); if(all.length) chs++; all.forEach(function(d){ tot++; if(d.star)st++; if(d.memo)mm++; if(d.strokes.length)pp++; });
+    var list=all.filter(function(d){ if(npF==="star"&&!d.star) return false; if(npF==="memo"&&!d.memo) return false; if(npF==="pen"&&!d.strokes.length) return false;
+      if(q&&(d.t+" "+d.memo).toLowerCase().indexOf(q)<0) return false; return true; });
+    if(!list.length) return;
+    html+='<section class="np-ch"><h2>'+esc(T[m])+' <small>'+list.length+'개</small></h2><div class="np-list">'+list.map(function(d){
+      return '<article class="np-item'+(d.star?" star":"")+'"><div class="t"><b>'+(m==="finder"?"":(d.i+1)+". ")+esc(d.t)+'</b><span>'+(d.star?"★ 중요 ":"")+(d.strokes.length?"✏️ "+d.strokes.length+"획":"")+'</span></div>'+
+        (d.memo?'<p class="memo">'+esc(d.memo)+'</p>':"")+svgOf(d.strokes)+
+        '<button class="go" type="button" data-m="'+m+'" data-i="'+d.i+'">이 슬라이드 열기 →</button></article>'; }).join("")+'</div></section>';
+  });
+  document.getElementById("npStats").innerHTML='<div class="np-stat"><b>'+tot+'</b><span>노트 남긴 슬라이드</span></div><div class="np-stat"><b>'+st+'</b><span>★ 중요 표시</span></div><div class="np-stat"><b>'+mm+'</b><span>메모</span></div><div class="np-stat"><b>'+pp+'</b><span>펜 필기</span></div><div class="np-stat"><b>'+chs+'</b><span>노트가 있는 장</span></div>';
+  if(!tot) html='<div class="np-empty"><b>아직 노트가 없습니다.</b><br>각 장 위쪽의 <b>✍ 내 필기</b> 버튼을 누르면 슬라이드 위에 펜·형광펜으로 쓰고, <b>📝 메모</b>로 글을 남기고, <b>☆ 중요</b> 표시를 할 수 있습니다. 남긴 노트는 이 화면에 장별로 모입니다.</div>';
+  else if(!html) html='<div class="np-empty">조건에 맞는 노트가 없습니다.</div>';
+  body.innerHTML=html;
+  var w=document.getElementById("npWarn"); w.hidden=LSOK; if(!LSOK) w.textContent="지금 화면은 브라우저 저장소를 쓸 수 없는 미리보기입니다. 노트는 이 창을 닫으면 사라지니, 끝나기 전에 ‘백업 내보내기’나 ‘노트 파일로 저장’을 누르세요. 파일을 내 컴퓨터에서 직접 열거나 웹 주소로 열면 자동 저장됩니다.";
+}
+function download(name,text,type){ var a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type:type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); }
+function stamp(){ var d=new Date(); function z(n){return (n<10?"0":"")+n;} return d.getFullYear()+z(d.getMonth()+1)+z(d.getDate())+"_"+z(d.getHours())+z(d.getMinutes()); }
+function exportHtml(){
+  var parts=MODS.map(function(m){ var l=items(m); if(!l.length) return ""; return '<h2>'+esc(T[m])+'</h2>'+l.map(function(d){ return '<div class="it'+(d.star?" s":"")+'"><h3>'+(m==="finder"?"":(d.i+1)+". ")+esc(d.t)+(d.star?' <em>★ 중요</em>':'')+'</h3>'+(d.memo?'<p>'+esc(d.memo)+'</p>':'')+svgOf(d.strokes)+'</div>'; }).join(""); }).join("");
+  var doc='<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>내 노트 · 근육 기원 통증</title><style>body{font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;max-width:820px;margin:24px auto;padding:0 16px;color:#172033;line-height:1.6}h1{font-size:1.5rem}h2{font-size:1.15rem;border-bottom:2px solid #172033;padding-bottom:4px;margin-top:28px}h3{font-size:1rem;margin:0 0 4px}h3 em{font-style:normal;color:#7a5600;font-size:.85rem}.it{border:1px solid #d5dbe3;border-radius:10px;padding:10px 12px;margin:10px 0;break-inside:avoid}.it.s{border-color:#e0a800}.it p{white-space:pre-wrap;margin:0 0 6px}svg{width:100%;max-height:220px;border:1px solid #e3e7ee;border-radius:8px;background:#fafbfc}.meta{color:#5a6578;font-size:.9rem}</style></head><body><h1>내 노트 · 근육 기원 통증</h1><p class="meta">저장한 날: '+new Date().toLocaleString("ko-KR")+' · 이름: ________________</p>'+(parts||"<p>노트가 없습니다.</p>")+'</body></html>';
+  download("내노트_근육기원통증_"+stamp()+".html",doc,"text/html");
+}
+document.getElementById("npSave").onclick=exportHtml;
+document.getElementById("npPrint").onclick=function(){ window.print(); };
+document.getElementById("npBackup").onclick=function(){ download("내노트_백업_"+stamp()+".json",JSON.stringify({app:"muscle-pain-notes",v:1,at:Date.now(),notes:NOTES}),"application/json"); };
+document.getElementById("npImport").onchange=function(){ var f=this.files&&this.files[0]; if(!f) return; var r=new FileReader(); var inp=this;
+  r.onload=function(){ try{ var o=JSON.parse(r.result); var src=o&&o.notes; if(!src||typeof src!=="object") throw 0; var n=0;
+      Object.keys(src).forEach(function(m){ if(!T[m]) return; var mine=NOTES[m]||{}; Object.keys(src[m]||{}).forEach(function(k){ var a=mine[k], b=src[m][k]; if(!a||(b.ts||0)>(a.ts||0)){ mine[k]=b; n++; } }); putNotes(m,mine); pushNotes(m); });
+      renderNotes(); flashNp("백업에서 "+n+"개 노트를 합쳤습니다"); }catch(e){ flashNp("백업 파일을 읽지 못했습니다"); } inp.value=""; };
+  r.readAsText(f); };
+var clrArm=0, clrB=document.getElementById("npClear");
+clrB.onclick=function(){ if(!clrArm){ clrArm=1; clrB.textContent="정말 모두 지울까요? 한 번 더 누르기"; setTimeout(function(){clrArm=0; clrB.textContent="모두 지우기";},3000); return; }
+  clrArm=0; clrB.textContent="모두 지우기"; MODS.forEach(function(m){ putNotes(m,{}); pushNotes(m); }); renderNotes(); flashNp("모든 노트를 지웠습니다"); };
+function flashNp(t){ var w=document.getElementById("npWarn"); w.hidden=false; w.textContent=t; clearTimeout(flashNp.t); flashNp.t=setTimeout(renderNotes,2600); }
+document.getElementById("npQ").addEventListener("input",renderNotes);
+[].forEach.call(document.querySelectorAll(".np-chip"),function(c){ c.onclick=function(){ npF=c.dataset.f; [].forEach.call(document.querySelectorAll(".np-chip"),function(x){x.setAttribute("aria-pressed",x===c);}); renderNotes(); }; });
+document.getElementById("npBody").addEventListener("click",function(e){ var g=e.target.closest(".go"); if(!g) return; var m=g.dataset.m, i=+g.dataset.i; show(m, m==="finder"?0:i+1); });
+/*/NOTESJS*/
+/*LOOKJS*/
+var LKIDX=null;
+function lkIndex(){ if(LKIDX) return LKIDX;
+  LKIDX=Promise.all(Object.keys(T).filter(function(m){ return m!=="finder"&&document.getElementById("m-"+m); }).map(function(m){
+    return decRaw(m).then(function(h){ var out=[]; try{ var doc=new DOMParser().parseFromString(h,"text/html");
+      [].forEach.call(doc.querySelectorAll("section.slide[data-title]"),function(s,i){ [].forEach.call(s.querySelectorAll("script,style"),function(n){n.remove();});
+        out.push({m:m,i:i,t:s.getAttribute("data-title"),x:(s.textContent||"").replace(/\s+/g," ").trim()}); }); }catch(e){} return out; },function(){ return []; }); }))
+    .then(function(a){ return [].concat.apply([],a); });
+  return LKIDX; }
+function lkEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+window.addEventListener("message",function(e){ if(!ours(e)) return; var d=e.data; if(!d||d.app!=="mp"||!d.lookup) return;
+  var terms=(d.lookup||[]).map(function(x){return String(x).toLowerCase();}).filter(Boolean), res=[];
+  var src=e.source; lkIndex().then(function(IDX){ IDX.forEach(function(r){ var lo=r.x.toLowerCase(), p=-1, w=""; terms.forEach(function(q){ var k=lo.indexOf(q); if(k>=0&&(p<0||k<p)){p=k;w=q;} });
+    if(p>=0){ var a=Math.max(0,p-26), b=Math.min(r.x.length,p+w.length+38);
+      res.push({m:r.m,chap:T[r.m].split(" ")[0],i:r.i,t:r.t,snip:(a>0?"…":"")+lkEsc(r.x.slice(a,p))+"<mark>"+lkEsc(r.x.slice(p,p+w.length))+"</mark>"+lkEsc(r.x.slice(p+w.length,b))+(b<r.x.length?"…":"")}); } });
+  try{ src.postMessage({app:"mp",lookupRes:res,q:d.q},"*"); }catch(x){} });
+});
+window.addEventListener("message",function(e){ if(!ours(e)) return; var d=e.data; if(!d||d.app!=="mp"||!d.courseGet) return; var src=e.source; window.MP.data("course-index").then(function(ix){ try{ src.postMessage({app:"mp",courseIdx:ix},"*"); }catch(x){} }); });
+/*/LOOKJS*/
+/*EDJS*/
+var EDITC={BLOCK:"H1,H2,H3,H4,H5,H6,P,LI,TD,TH,DT,DD,FIGCAPTION,BLOCKQUOTE,CAPTION,SUMMARY".split(","),INL:"DIV,SPAN,B,STRONG,EM,SMALL,A,LABEL".split(","),
+  NO:"svg,button,select,textarea,input,canvas,script,style,iframe,video,audio,[contenteditable=false],.st-mark,.myphotos,.mylinks,[data-noedit]",
+  norm:function(el){ return el.tagName+"|"+(el.textContent||"").replace(/\s+/g," ").trim(); },
+  hash:function(s){ var h=5381; for(var i=0;i<s.length;i++) h=((h<<5)+h+s.charCodeAt(i))|0; return (h>>>0).toString(36)+"_"+s.length; },
+  SVGNO:"svg.anat,[data-noedit],[contenteditable=false]",
+  isSvg:function(el){ return el.namespaceURI==="http://www.w3.org/2000/svg"; },
+  get:function(el){ return this.isSvg(el)?el.textContent:el.innerHTML; },
+  set:function(el,v){ if(this.isSvg(el)) el.textContent=v; else el.innerHTML=v; },
+  cands:function(root,skip){ var self=this, out=[];
+    var all=[].slice.call(root.querySelectorAll("*"));
+    all.forEach(function(el){ var t=el.tagName;
+      if(self.isSvg(el)){ if((t==="text"||t==="tspan")&&!el.querySelector("*")&&(el.textContent||"").trim()&&!el.closest(self.SVGNO)&&!(skip&&el.closest(skip))) out.push(el); return; }
+      if(self.BLOCK.indexOf(t)<0&&self.INL.indexOf(t)<0) return;
+      if(el.closest(self.NO)) return; if(skip&&el.closest(skip)) return;
+      if(el.querySelector("button,input,select,textarea,svg,canvas,iframe,video,img")) return;
+      var isNote=el.classList&&el.classList.contains("note");
+      if(isNote){ out.push(el); return; }
+      if(!(el.textContent||"").trim()) return;
+      if(self.INL.indexOf(t)>=0){ var direct=false; for(var n=el.firstChild;n;n=n.nextSibling){ if(n.nodeType===3&&n.nodeValue.trim()){ direct=true; break; } } if(!direct) return; }
+      out.push(el); });
+    return out.filter(function(el){ for(var p=el.parentElement;p&&p!==root;p=p.parentElement){ if(out.indexOf(p)>=0) return false; } return true; }); },
+  key:function(slide,i){ return slide.id||slide.getAttribute("data-title")||("s"+i); }
+};
+var EDITS={}, EDON=false;
+MODS.forEach(function(m){ try{ var s=localStorage.getItem("mp-edits-v1:"+m); EDITS[m]=s?JSON.parse(s)||{}:{}; }catch(e){ EDITS[m]={}; } });
+try{ EDON=localStorage.getItem("mp-edit-on")==="1"; }catch(e){}
+function edCount(m){ var o=EDITS[m]||{}, n=0; Object.keys(o).forEach(function(k){ n+=Object.keys(o[k]).length; }); return n; }
+function edTotal(){ return MODS.reduce(function(a,m){ return a+edCount(m); },0); }
+function edPut(m,o){ EDITS[m]=o||{}; try{ localStorage.setItem("mp-edits-v1:"+m,JSON.stringify(EDITS[m])); }catch(e){} edUI(); }
+function edPush(m){ var f=frames[m]; if(f&&f.contentWindow) try{ f.contentWindow.postMessage({app:"mp",editFor:m,edits:EDITS[m]||{},editOn:EDON},"*"); }catch(e){} }
+function edMsg(t){ var e=document.getElementById("edMsg"); if(!e) return; e.textContent=t; clearTimeout(edMsg.t); edMsg.t=setTimeout(edUI,3500); }
+function edUI(){ var t=document.getElementById("edToggle"); if(!t) return; t.setAttribute("aria-pressed",EDON); t.textContent=EDON?"수정 기능 끄기":"수정 기능 켜기";
+  var n=edTotal(), parts=MODS.filter(function(m){return edCount(m);}).map(function(m){return T[m].split(" ")[0]+" "+edCount(m);}); document.getElementById("edMsg").textContent=n?("고친 칸 "+n+"개 ("+parts.join(", ")+")"):(EDON?"켜짐 — 각 장의 ✏️ 수정 버튼을 누르세요":""); }
+window.addEventListener("message",function(e){ if(!ours(e)) return; var d=e.data; if(!d||d.app!=="mp") return;
+  if(d.editGet&&T[d.editGet]){ try{ e.source.postMessage({app:"mp",editFor:d.editGet,edits:EDITS[d.editGet]||{},editOn:EDON},"*"); }catch(x){} }
+  if(d.editPut&&T[d.editPut]) edPut(d.editPut,d.edits);
+  if(d.editBake) edBake();
+  if(d.editExport) edExport();
+  if(d.editImport) edImport(d.editImport);
+});
+function b64(s){ var u=new TextEncoder().encode(s), out="", CH=0x8000; for(var i=0;i<u.length;i+=CH) out+=String.fromCharCode.apply(null,u.subarray(i,i+CH)); return btoa(out); }
+function edApply(html,edits){ var doc=new DOMParser().parseFromString(html,"text/html"), ok=0, miss=0;
+  var ss=[].slice.call(doc.querySelectorAll("section.slide, .slide")); if(!ss.length) ss=[doc.querySelector("main")||doc.body];
+  var cells=[]; ss.forEach(function(s,si){ var sk=EDITC.key(s,si); EDITC.cands(s,"#quiz,.quiz,[data-noedit]").forEach(function(el,idx){ cells.push({el:el,sk:sk,idx:idx,o:EDITC.hash(EDITC.norm(el))}); }); });
+  Object.keys(edits).forEach(function(sk){ Object.keys(edits[sk]).forEach(function(idx){ var v=edits[sk][idx];
+    var c=cells.filter(function(x){return x.sk===sk&&String(x.idx)===String(idx)&&x.o===v.o;})[0]||cells.filter(function(x){return x.sk===sk&&x.o===v.o&&!x.used;})[0];
+    if(c){ c.el.innerHTML=v.h; c.used=1; ok++; } else miss++; }); });
+  return {html:(doc.doctype?"<!DOCTYPE html>\n":"")+doc.documentElement.outerHTML,ok:ok,miss:miss}; }
+window.MP_BAKERS=window.MP_BAKERS||[]; /* 다른 기능(퀴즈 편집 등)이 수정본에 함께 넣을 것: {count:fn, run:fn(root)} */
+function bakeExtra(){ return window.MP_BAKERS.reduce(function(n,b){ try{ return n+(b.count()||0); }catch(e){ return n; } },0); }
+function collapseCommon(html){ Object.keys(COMMON||{}).forEach(function(n){ var v=COMMON[n]; if(v&&v.length>300){ var i=html.indexOf(v); if(i>=0) html=html.slice(0,i)+"@@C:"+n+"@@"+html.slice(i+v.length); } }); return html; }
+function edBake(){ var extra=bakeExtra(); if(!edTotal()&&!extra){ show("home"); edMsg("아직 고친 칸이 없습니다"); return; }
+  edMsg("수정본을 만드는 중…");
+  var root=document.documentElement.cloneNode(true), ok=0, miss=0;
+  var jobs=MODS.filter(function(m){ return edCount(m); }).map(function(m){ return decRaw(m).then(function(h){ var r=edApply(h,EDITS[m]); ok+=r.ok; miss+=r.miss; return packText(collapseCommon(r.html)); }).then(function(p){ var el=root.querySelector("#m-"+m); el.textContent=p.b64; el.setAttribute("data-enc",p.enc); }); });
+  Promise.all(jobs).then(function(){ return Promise.all(window.MP_BAKERS.map(function(b){ try{ return b.run(root); }catch(e){} })); }).then(function(){
+  [].forEach.call(root.querySelectorAll("#stage iframe"),function(f){ f.remove(); });
+  [].forEach.call(root.querySelectorAll("#stage > section"),function(x){ x.setAttribute("hidden",""); });
+  var h=root.querySelector("#home"); if(h) h.removeAttribute("hidden"); var ld=root.querySelector("#loading"); if(ld) ld.setAttribute("hidden","");
+  [].forEach.call(root.querySelectorAll(".tab[aria-current]"),function(t){ t.removeAttribute("aria-current"); });
+  var a=root.querySelector("#edToggle"); if(a){ a.setAttribute("aria-pressed","false"); a.textContent="수정 기능 켜기"; } var em=root.querySelector("#edMsg"); if(em) em.textContent="";
+  var name="근육기원통증_웹앱_수정본_"+stamp()+".html";
+  download(name,"<!DOCTYPE html>\n"+root.outerHTML,"text/html");
+  show("home"); edMsg("‘"+name+"’을 만들었습니다 · 반영 "+ok+"칸"+(miss?" · 못 넣은 칸 "+miss+"개(자동으로 만들어지는 내용)":"")+(extra?" · 퀴즈·기타 수정 "+extra+"건":"")); },
+  function(e){ edMsg("수정본을 만들지 못했습니다: "+(e&&e.message||e)); }); }
+function edExport(){ var mods={}; MODS.forEach(function(m){ if(edCount(m)) mods[m]=EDITS[m]; }); download("수정내용_"+stamp()+".json",JSON.stringify({app:"edits",v:1,mods:mods}),"application/json"); edMsg("수정 내용을 내보냈습니다"); }
+function edImport(o){ var mods=(o&&o.mods)||{}, n=0; Object.keys(mods).forEach(function(m){ if(!T[m]) return; var mine=EDITS[m]||{}; Object.keys(mods[m]).forEach(function(sk){ mine[sk]=Object.assign(mine[sk]||{},mods[m][sk]); n+=Object.keys(mods[m][sk]).length; }); edPut(m,mine); edPush(m); }); edMsg("수정 "+n+"칸을 불러왔습니다"); }
+document.getElementById("edToggle").onclick=function(){ EDON=!EDON; try{ localStorage.setItem("mp-edit-on",EDON?"1":"0"); }catch(e){} Object.keys(frames).forEach(function(m){ try{ frames[m].contentWindow.postMessage({app:"mp",editOnly:EDON},"*"); }catch(e){} }); edUI(); };
+document.getElementById("edBake").onclick=edBake;
+document.getElementById("edExport").onclick=function(){ if(!edTotal()){ edMsg("아직 고친 칸이 없습니다"); return; } edExport(); };
+document.getElementById("edImport").onchange=function(){ var f=this.files&&this.files[0], inp=this; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ edImport(JSON.parse(r.result)); }catch(e){ edMsg("파일을 읽지 못했습니다"); } inp.value=""; }; r.readAsText(f); };
+var edArm=0, edC=document.getElementById("edClear");
+edC.onclick=function(){ if(!edTotal()){ edMsg("지울 수정이 없습니다"); return; } if(!edArm){ edArm=1; edC.textContent="정말 지울까요? 한 번 더"; setTimeout(function(){ edArm=0; edC.textContent="모든 수정 지우기"; },3000); return; }
+  edArm=0; edC.textContent="모든 수정 지우기"; MODS.forEach(function(m){ edPut(m,{}); edPush(m); }); edMsg("모든 수정을 지웠습니다(처음 글로 돌아감)"); };
+edUI();
+/*/EDJS*/
+/* 다른 기능 파일(features/*.js)이 쓰는 창구 */
+var DATA={};
+window.MP={T:T, MODS:MODS, frames:frames, show:show, cur:function(){ return cur; }, esc:esc, download:download, stamp:stamp,
+  notes:function(){ return NOTES; }, putNotes:putNotes, pushNotes:pushNotes, renderNotes:renderNotes, flashNp:flashNp, edMsg:edMsg,
+  textOf:textOf, dec:dec, decRaw:decRaw, EDITC:EDITC, edPut:edPut, edBake:edBake, packText:packText, u8b64:u8b64, lsok:LSOK, onHome:[], hooks:(window.MP_HOOKS=window.MP_HOOKS||[]),
+  data:function(n){ if(!DATA[n]) DATA[n]=textOf("d-"+n).then(JSON.parse); return DATA[n]; },
+  page:function(k,title,render){ var el=document.createElement("section"); el.id="pg-"+k; el.className="mp-page"; el.hidden=true; stage.insertBefore(el,document.getElementById("loading")); PAGES[k]={el:el,title:title,render:function(a){ render(el,a); }}; return el; },
+  start:function(){ var h=""; try{h=location.hash.slice(1);}catch(e){} show(T[h]||h==="notes"||PAGES[h]?h:"home"); }
+};
+})();
